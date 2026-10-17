@@ -5,14 +5,15 @@ const vm=require('node:vm');
 const path=require('node:path');
 const base=path.resolve(__dirname,'..');
 const training=require('../training.js');
+const dataRules=require('../data.js');
 const KEY='macropulse_pwa_v1';
 const legacy={settings:{cal:2100,p:150,c:200,f:70,goal:175},weight:200,weights:[{date:'2026-10-16',value:200}],meals:[{id:'meal1',date:'2026-10-16',name:'Existing meal',cal:400,p:30,c:40,f:12}],workouts:[{id:'work1',date:'2026-10-16',exercise:'Row',sets:3,reps:8,weight:20,duration:20,cal:0}],foods:[['Saved food','serving',100,10,10,2]],supplements:{'2026-10-16':[1]},unrelatedExtension:{keep:true}};
 function boot(raw){
-  const elements=new Map(),alerts=[];let saved=raw,captured,exported;
+  const elements=new Map(),alerts=[],storage=new Map([[KEY,raw]]);let captured,exported;
   const element=id=>{if(!elements.has(id))elements.set(id,{value:'',style:{},innerHTML:'',textContent:'',classList:{add(){},remove(){},toggle(){}},addEventListener(){},click(){},elements:{}});return elements.get(id)};
-  const context={document:{getElementById:element,querySelectorAll:()=>[],addEventListener(){},createElement:()=>element('download')},localStorage:{getItem:()=>saved,setItem:(key,value)=>{assert.equal(key,KEY);saved=value}},window:{MacroTraining:training,mountTraining:api=>(captured=api,{render(){}})},alert:m=>alerts.push(m),confirm:()=>true,Blob:class {constructor(parts){exported=parts.join('')}},URL:{createObjectURL:()=>'',revokeObjectURL(){}},setTimeout(){},navigator:{},location:{protocol:'http:'},console};
+  const context={document:{getElementById:element,querySelectorAll:()=>[],addEventListener(){},createElement:()=>element('download')},localStorage:{getItem:key=>storage.get(key)??null,setItem:(key,value)=>storage.set(key,value)},window:{MacroData:dataRules,MacroTraining:training,mountTraining:api=>(captured=api,{render(){}})},alert:m=>alerts.push(m),confirm:()=>true,Blob:class {constructor(parts){exported=parts.join('')}},URL:{createObjectURL:()=>'',revokeObjectURL(){}},setTimeout(){},navigator:{},location:{protocol:'http:'},console};
   vm.runInNewContext(fs.readFileSync(path.join(base,'app.js'),'utf8'),context);
-  return {api:()=>captured,element,alerts,read:()=>saved,export:()=>{element('exportBtn').onclick();return JSON.parse(exported)}};
+  return {api:()=>captured,element,alerts,externalWrite:raw=>storage.set(KEY,raw),read:()=>storage.get(KEY),export:()=>{element('exportBtn').onclick();return JSON.parse(exported)}};
 }
 test('equipment saves preserve legacy entries, storage key and unrelated fields',()=>{
   const app=boot(JSON.stringify(legacy)),state=app.api().getState();
@@ -36,4 +37,7 @@ test('unreadable saved data and malformed training backups are not overwritten',
   const good=boot(JSON.stringify(legacy));const raw=good.read();
   await good.element('importFile').onchange({target:{files:[{size:100,text:async()=>JSON.stringify({format:'MacroPulse',version:1,data:{...legacy,training:{equipment:[null]}}})}]}});
   assert.equal(good.read(),raw);
+});
+test('stale tabs cannot overwrite data saved by another tab',()=>{
+ const app=boot(JSON.stringify(legacy)),other=JSON.stringify({...legacy,weight:195});app.externalWrite(other);app.api().getState().weight=205;assert.equal(app.api().save(),false);assert.equal(app.read(),other);assert.match(app.alerts.at(-1),/Another tab/);
 });

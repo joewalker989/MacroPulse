@@ -1,5 +1,5 @@
-const CACHE='macropulse-v2-training';
-const ASSETS=['./','./index.html','./app.js','./training.js','./training-ui.js','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
+const CACHE='macropulse-v4-complete-2';
+const ASSETS=['./','./index.html','./app.js','./data.js','./upgrade.js','./upgrade-ui.js','./training.js','./training-ui.js','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));
 // Activate after existing tabs close so each tab uses one release.
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('macropulse-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));

@@ -13,10 +13,10 @@
       Array.isArray(x.weights)&&x.weights.every(w=>object(w)&&date(w.date)&&number(w.value))&&
       Array.isArray(x.foods)&&x.foods.every(f=>Array.isArray(f)&&text(f[0])&&text(f[1])&&[2,3,4,5].every(k=>number(f[k])))&&
       object(x.supplements)&&Object.entries(x.supplements).every(([d,a])=>date(d)&&Array.isArray(a)&&a.every(Number.isInteger))&&
-      (x.training===undefined||training.validState(x.training))&&(x.upgrade===undefined||validUpgrade(x.upgrade));
+      (x.training===undefined||training.validState(x.training))&&(x.upgrade===undefined||validUpgrade(x.upgrade,training));
     }catch{return false;}
   }
-  function validUpgrade(u){
+  function validUpgrade(u,training){
     if(!object(u)||u.version!==1)return false;
     const arrays=['water','habits','checks','measurements','feedback','schedule','mealPlan','grocery','reviews'];
     if(arrays.some(k=>!Array.isArray(u[k])||u[k].some(x=>!object(x))))return false;
@@ -26,7 +26,7 @@
       u.checks.every(x=>text(x.habitId)&&date(x.date))&&
       u.measurements.every(x=>text(x.id)&&date(x.date)&&number(x.waist)&&x.waist>0&&text(x.note))&&
       u.feedback.every(x=>text(x.workoutId)&&['easy','right','hard'].includes(x.rating))&&
-      u.schedule.every(x=>text(x.id)&&date(x.date)&&text(x.name)&&Number.isInteger(x.day)&&x.day>=0&&x.day<6&&['planned','done','skipped'].includes(x.status)&&number(x.readiness)&&x.readiness<=5)&&
+      u.schedule.every(x=>text(x.id)&&date(x.date)&&text(x.name)&&Number.isInteger(x.day)&&x.day>=0&&x.day<6&&['planned','done','skipped'].includes(x.status)&&number(x.readiness)&&x.readiness<=5&&(x.light===undefined||typeof x.light==='boolean')&&(x.session===undefined||(training&&training.validState({equipment:training.equipment,options:{days:3,minutes:30,goal:'general',core:true,cardio:false},routine:[x.session]}))))&&
       u.mealPlan.every(x=>text(x.id)&&date(x.date)&&text(x.name)&&Array.isArray(x.items)&&x.items.length>0&&x.items.every(f=>text(f.name)&&text(f.serving)&&number(f.qty)&&f.qty>0&&['cal','p','c','f'].every(k=>number(f[k]))))&&
       u.grocery.every(x=>text(x.id)&&text(x.name)&&text(x.serving)&&number(x.qty)&&typeof x.checked==='boolean')&&
       u.reviews.every(x=>text(x.id)&&date(x.date)&&text(x.exercise)&&text(x.note)&&Array.isArray(x.checks)&&x.checks.every(text));

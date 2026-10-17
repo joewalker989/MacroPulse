@@ -53,7 +53,7 @@
     try{
       if(!s||!Array.isArray(s.equipment)||s.equipment.length>100||s.equipment.some(x=>typeof x!=='string'||!x.trim()||x.length>60)||!Array.isArray(s.routine)||s.routine.length>6)return false;
       generate(s.options,s.equipment);
-      return s.routine.every(d=>typeof d.name==='string'&&d.name.length<=100&&Number.isFinite(d.estimatedMinutes)&&d.estimatedMinutes>0&&Array.isArray(d.exercises)&&d.exercises.length<=20&&d.exercises.every(x=>available(s.equipment).some(e=>e.id===x.exerciseId)&&Number.isInteger(x.sets)&&x.sets>0&&x.sets<=10&&Number.isInteger(x.reps)&&x.reps>0&&x.reps<=100&&Number.isFinite(x.rest)&&x.rest>=0&&x.rest<=600&&['minutes','reps'].includes(x.unit)));
+      return s.routine.every(d=>typeof d.name==='string'&&d.name.length<=100&&Number.isFinite(d.estimatedMinutes)&&d.estimatedMinutes>0&&Array.isArray(d.exercises)&&d.exercises.length<=20&&d.exercises.every(x=>available(s.equipment).some(e=>e.id===x.exerciseId)&&Number.isInteger(x.sets)&&x.sets>0&&x.sets<=10&&Number.isInteger(x.reps)&&x.reps>0&&x.reps<=100&&Number.isFinite(x.rest)&&x.rest>=0&&x.rest<=600&&['minutes','reps'].includes(x.unit)&&(x.superset===undefined||(typeof x.superset==='string'&&x.superset.length<=100))));
     }catch{return false;}
   }
   const api={equipment,library,available,generate,validState};

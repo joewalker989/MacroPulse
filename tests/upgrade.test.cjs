@@ -19,6 +19,7 @@ test('only recent hard ratings trigger recovery suggestions',()=>{
 test('plate solver handles standard, non-greedy, fractional and unreachable loads',()=>{
  assert.deepEqual(U.plates(135,45,[45,25,10,5,2.5]).perSide,[45]);assert.equal(U.plates(12,0,[4,3]).actual,12);assert.equal(U.plates(48,45,[2.5]).actual,45);
  assert.equal(U.plates(22.5,20,[1.25]).actual,22.5);assert.throws(()=>U.plates(20,45,[5]));assert.throws(()=>U.plates(100,45,[0]));
+ assert.equal(U.plates(3000,0,[0.01]).actual,3000);assert.throws(()=>U.plates(100,45,[0.001]));
 });
 test('meal scaling and grocery consolidation respect serving units and changed quantities',()=>{
  const f={name:'Rice',serving:'cup',qty:2,cal:200,p:4,c:44,f:1},plan=[{items:[f]},{items:[{...f,qty:.5},{...f,serving:'gram',qty:100}]}];

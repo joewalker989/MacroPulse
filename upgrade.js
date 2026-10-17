@@ -29,13 +29,14 @@
  }
  function plates(target,bar,denominations){
    if(![target,bar].every(x=>Number.isFinite(x)&&x>=0)||target<bar)throw Error('Target must be at least the bar weight.');
-   if(!denominations.length||denominations.some(x=>!Number.isFinite(x)||x<=0)||target>3000)throw Error('Enter positive plate sizes and a target up to 3000.');
+   if(!denominations.length||denominations.length>30||denominations.some(x=>!Number.isFinite(x)||x<0.01||Math.abs(x*100-Math.round(x*100))>1e-6)||target>3000)throw Error('Enter up to 30 positive plate sizes with at most two decimal places and a target up to 3000.');
    const sizes=[...new Set(denominations)].sort((a,b)=>b-a);
    // Integer hundredths + bounded dynamic programming finds non-greedy combinations.
-   const cap=Math.floor((target-bar)*50+1e-6),dp=new Array(cap+1);dp[0]=[];
-   for(let n=1;n<=cap;n++)for(const size of sizes){const q=Math.round(size*100);if(q>0&&q<=n&&dp[n-q]&&(!dp[n]||dp[n-q].length+1<dp[n].length))dp[n]=[...dp[n-q],size];}
-   let best=cap;while(best>0&&!dp[best])best--;
-   return {perSide:dp[best],actual:Math.round((bar+best/50)*100)/100,remainder:Math.round((target-bar-best/50)*100)/100};
+   const cap=Math.floor((target-bar)*50+1e-6),counts=new Int32Array(cap+1).fill(1e9),choice=new Int32Array(cap+1);counts[0]=0;
+   for(let n=1;n<=cap;n++)for(let i=0;i<sizes.length;i++){const q=Math.round(sizes[i]*100);if(q<=n&&counts[n-q]+1<counts[n]){counts[n]=counts[n-q]+1;choice[n]=i;}}
+   let best=cap;while(best>0&&counts[best]===1e9)best--;
+   const perSide=[];for(let n=best;n>0;){const size=sizes[choice[n]];perSide.push(size);n-=Math.round(size*100);}
+   return {perSide,actual:Math.round((bar+best/50)*100)/100,remainder:Math.round((target-bar-best/50)*100)/100};
  }
  function mealTotals(items){return items.reduce((t,f)=>{for(const k of ['cal','p','c','f'])t[k]+=f[k]*f.qty;return t},{cal:0,p:0,c:0,f:0});}
  function groceries(plan,existing=[]){
