@@ -2,7 +2,13 @@
 const {chromium}=require('playwright'),http=require('node:http'),fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..'),KEY='macropulse_pwa_v1';
 const legacy={settings:{cal:2100,p:150,c:200,f:70,goal:175},weight:200,weights:[{date:'2026-10-16',value:200}],meals:[{id:'m1',date:'2026-10-16',name:'Legacy meal',cal:400,p:30,c:40,f:12}],workouts:[{id:'w1',date:'2026-10-16',exercise:'Row',sets:3,reps:8,weight:20,duration:20,cal:0}],foods:[["Joe's food",'serving',100,10,10,2]],supplements:{'2026-10-16':[1]},extension:{keep:true}};
-const server=http.createServer((req,res)=>{let name=new URL(req.url,'http://localhost').pathname;if(name==='/')name='/index.html';const file=path.resolve(root,'.'+decodeURIComponent(name));if(!file.startsWith(root+path.sep)){res.writeHead(403);return res.end();}fs.readFile(file,(err,b)=>{res.writeHead(err?404:200,{'Content-Type':({'.html':'text/html','.js':'application/javascript','.png':'image/png','.webmanifest':'application/manifest+json'})[path.extname(file)]||'text/plain'});res.end(err?'missing':b);});});
+let serveLegacy=false;
+const legacyAssets={
+ '/index.html':'<!doctype html><html lang="en"><title>Legacy MacroPulse</title><h1>Legacy 3.1</h1><script src="app.js"></script></html>',
+ '/app.js':"navigator.serviceWorker.register('./sw.js');",
+ '/sw.js':"const C='macropulse-v1';self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(['./','./index.html','./app.js'])).then(()=>self.skipWaiting())));self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));"
+};
+const server=http.createServer((req,res)=>{let name=new URL(req.url,'http://localhost').pathname;if(name==='/')name='/index.html';const file=path.resolve(root,'.'+decodeURIComponent(name));if(!file.startsWith(root+path.sep)){res.writeHead(403);return res.end();}res.setHeader('Cache-Control','max-age=600');if(serveLegacy&&legacyAssets[name]){res.writeHead(200,{'Content-Type':name.endsWith('.js')?'application/javascript':'text/html'});return res.end(legacyAssets[name]);}fs.readFile(file,(err,b)=>{res.writeHead(err?404:200,{'Content-Type':({'.html':'text/html','.js':'application/javascript','.png':'image/png','.webmanifest':'application/manifest+json'})[path.extname(file)]||'text/plain'});res.end(err?'missing':b);});});
 (async()=>{
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;let browser,testPage;
  try{
@@ -29,11 +35,15 @@ const server=http.createServer((req,res)=>{let name=new URL(req.url,'http://loca
   const original=JSON.parse(JSON.stringify(await read()));const replacement={format:'MacroPulse',version:1,data:legacy};
   await page.locator('#importFile').setInputFiles({name:'legacy.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(replacement))});assert.deepEqual(await read(),legacy);assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key+'_recovery')),KEY),original);
   await click('⌂ Home');await page.reload();await page.evaluate(()=>navigator.serviceWorker.ready);await page.waitForFunction(()=>!!navigator.serviceWorker.controller);
-  const cacheNames=await page.evaluate(()=>caches.keys());assert.ok(cacheNames.some(x=>x==='macropulse-v4-complete-2'));
+  const cacheNames=await page.evaluate(()=>caches.keys());assert.ok(cacheNames.some(x=>x==='macropulse-v4-complete-3'));
   await context.setOffline(true);await page.reload();await page.getByRole('heading',{name:'Daily Fitness Command Center',exact:true}).waitFor();await click('+ 500 ml');assert.equal((await read()).upgrade.water.at(-1).ml,500);await context.setOffline(false);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);assert.deepEqual(errors,[]);
   await page.screenshot({path:path.join(root,'test-results','mobile-home.png'),fullPage:true});await context.close();
   const bad=await browser.newContext();await bad.addInitScript(key=>localStorage.setItem(key,'{corrupt'),KEY);const p=await bad.newPage();p.on('dialog',d=>d.dismiss());await p.goto(url);await p.getByRole('button',{name:'+ 250 ml',exact:true}).click();assert.equal(await p.evaluate(key=>localStorage.getItem(key),KEY),'{corrupt');await bad.close();
+  serveLegacy=true;const upgrading=await browser.newContext(),oldPage=await upgrading.newPage();testPage=oldPage;await oldPage.goto(url);await oldPage.getByRole('heading',{name:'Legacy 3.1',exact:true}).waitFor();await oldPage.waitForFunction(()=>!!navigator.serviceWorker.controller);await oldPage.evaluate(({key,data})=>localStorage.setItem(key,JSON.stringify(data)),{key:KEY,data:legacy});
+  serveLegacy=false;await oldPage.evaluate(async()=>{const r=await navigator.serviceWorker.ready;await r.update();});await oldPage.waitForFunction(async()=>!!(await navigator.serviceWorker.getRegistration()).waiting);await oldPage.close();
+  const upgradedPage=await upgrading.newPage();testPage=upgradedPage;await upgradedPage.goto(url);await upgradedPage.getByRole('heading',{name:'Daily Fitness Command Center',exact:true}).waitFor();assert.deepEqual(await upgradedPage.evaluate(key=>JSON.parse(localStorage.getItem(key)),KEY),legacy);await upgrading.close();
+  console.log('Passed 3.1-style service worker upgrade with stale HTTP assets and preserved app data.');
   console.log('Browser checks passed: legacy preservation, feature flows, backups, corrupt data protection, mobile layout and offline reload.');
  }catch(err){if(testPage&&!testPage.isClosed()){fs.mkdirSync(path.join(root,'test-results'),{recursive:true});await testPage.screenshot({path:path.join(root,'test-results','failure.png'),fullPage:true}).catch(()=>{});}throw err;}finally{if(browser)await browser.close();server.close();}
 })().catch(err=>{console.error(err);process.exitCode=1;server.close();});
