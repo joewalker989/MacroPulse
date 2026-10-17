@@ -45,6 +45,10 @@
    const summarize=(end)=>{const from=U.shift(end,-6),w=state.workouts.filter(x=>x.date>=from&&x.date<=end),m=state.meals.filter(x=>x.date>=from&&x.date<=end),logged=new Set(m.map(x=>x.date)).size;return {trainingDays:new Set(w.map(x=>x.date)).size,mealDays:logged,cal:logged?Math.round(m.reduce((s,x)=>s+x.cal,0)/logged):null,sets:w.reduce((s,x)=>s+x.sets,0)};};
    return {current:summarize(today),previous:summarize(U.shift(today,-7))};
  }
- const api={identify,muscleFor,muscles,trend,goalStatus,volume,predictor,replacements,programs,calendar,weekly};
+ function scale(food,qty){if(!food||!Number.isFinite(qty)||qty<=0||qty>100)throw Error('Choose a food and 0–100 servings.');return {name:`${food[0]} · ${qty} × ${food[1]}`,cal:food[2]*qty,p:food[3]*qty,c:food[4]*qty,f:food[5]*qty};}
+ function mealDraft(text,foods){const match=String(text).trim().match(/^(\d+(?:\.\d+)?) servings? of (.+)$/i);if(!match)throw Error('Say or type: 2 servings of Chicken Breast. Use an exact library name.');const food=foods.find(f=>f[0].toLowerCase()===match[2].trim().toLowerCase());if(!food)throw Error('Food not found. Add a custom food with nutrition first.');return scale(food,Number(match[1]));}
+ function nutritionQuality(state,date){const meals=state.meals.filter(m=>m.date===date),ids=new Set(meals.map(m=>m.id)),rows=(state.complete?.nutrients||[]).filter(n=>ids.has(n.mealId));const totals={};for(const k of ['fiber','sodium','calcium','iron']){const present=rows.filter(n=>n[k]!==undefined);totals[k]={value:present.reduce((s,n)=>s+n[k],0),covered:new Set(present.map(n=>n.mealId)).size};}return {meals:meals.length,totals,protein:meals.reduce((s,m)=>s+m.p,0),sources:[...new Set(rows.map(n=>n.source))]};}
+ function restaurantSearch(rows,query,max){return rows.filter(x=>(x.restaurant+' '+x.name).toLowerCase().includes(query.trim().toLowerCase())&&(!Number.isFinite(max)||x.cal<=max));}
+ const api={identify,muscleFor,muscles,trend,goalStatus,volume,predictor,replacements,programs,calendar,weekly,scale,mealDraft,nutritionQuality,restaurantSearch};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.MacroComplete=api;
 })(typeof window!=='undefined'?window:globalThis);
