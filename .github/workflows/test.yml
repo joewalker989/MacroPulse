@@ -9,7 +9,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node --check app.js && node --check data.js && node --check upgrade.js && node --check upgrade-ui.js && node --check training.js && node --check training-ui.js && node --check sw.js
+      - run: node --check complete.js && node --check complete-ui.js && node --check app.js && node --check data.js && node --check upgrade.js && node --check upgrade-ui.js && node --check training.js && node --check training-ui.js && node --check sw.js
       - run: npm test
       - run: npm ci
       - run: npx playwright install --with-deps chromium

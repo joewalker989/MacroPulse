@@ -17,3 +17,7 @@ This is a static application: no server, account, or subscription required. File
 Native iPhone Lock Screen widgets are NOT implemented; the app includes an in-app quick view and Home Screen links. Automated AI analysis, Apple Health, cloud sync and background notifications are not live.
 
 See FEATURE_STATUS.md for exact feature status, limits, migration behavior and tests. Run npm test with Node 22 or newer. Browser regression tests additionally need npm ci, npx playwright install chromium, and npm run test:browser.
+
+4.0.2 adds goals/milestones, an interactive muscle map, recorded training volume, consistency calendar, equipment/avoidance-based replacements, strength trend estimates, program library, confirmed meal drafts, sourced menu-item search, manual photo/serving estimates, sourced nutrient coverage, user templates, weekly review and accessibility preferences. Optional browser speech supports workouts and meal drafts where available; typed input works without it. Speech may use the browser provider's servers after explicit dictation/permission. Live restaurant search and automated food-photo recognition are NOT connected. Read FEATURE_STATUS.md before relying on any integration claim.
+
+Before the first save using these features, a separate local recovery copy is retained even for existing 4.0 users. Download it from Settings > Data Privacy Center > Download before feature expansion. Full backups include the optional new fields. Export before clearing browser data; no cloud copy exists.

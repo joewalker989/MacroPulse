@@ -1,5 +1,31 @@
 # MacroPulse Complete Upgrade — 4.0
 
+## Requested 15-feature expansion · 4.0.2
+
+| # | Requested capability | Actual implementation and limits |
+| --- | --- | --- |
+| 1 | Smart Goal Engine | Weight and weekly training-day goals, editable deadlines, 25/50/75/100% milestones and recorded weight trends. Deadline suggestions require three dates over seven days; changes require user edits. No automatic calorie prescriptions. |
+| 2 | Interactive muscle map | Keyboard and pointer controls for chest, back, quads, glutes and core; exercise cues and recorded volume. Schematic, not an anatomical diagnostic. |
+| 3 | Voice workout assistant | Opt-in browser speech fills a command field; explicitly apply sets/reps/rest commands, review a workout draft and confirm logging. Typed fallback always available. Speech API, permission, language and provider connectivity vary. Timer works in-page only. |
+| 4 | Consistency calendar | 35 local dates with actual workout entries, meals and planned sessions; no inferred inactivity. |
+| 5 | Smart replacement | Matches movement group and available equipment, excluding specific movements the user chooses to avoid. Existing routine substitution controls remain available. No injury diagnosis or medical suitability inference. |
+| 6 | Training volume | Seven-day primary-muscle sets, reps and sets × reps × added lb. Known exercise names only; unclassified count shown, cardio excluded and secondary muscles not double counted. |
+| 7 | Strength predictor | Epley estimated 1RM from comparable positive-load sets of 1–10 reps; three dates over seven days within 90 days. Trend projection capped at six months. No guaranteed milestone or safe lifting recommendation. |
+| 8 | Program library | Three offline equipment-adapted programs, session previews, explicit application, archive and restore of the previous equipment routine. No training log fabrication. |
+| 9 | Voice meal logging | Opt-in speech or typed `2 servings of Chicken Breast`, exact library lookup, macro preview and explicit confirmation. Unknown foods are rejected. No unrestricted natural-language nutrition inference. |
+| 10 | Restaurant finder | **Partial:** search locally saved, sourced menu items by restaurant/name and calorie ceiling; review serving/source/date and confirm logging. **Live restaurant discovery and database lookup are not connected.** They require a provider/API and possibly credentials, backend and location permission. |
+| 11 | Food photo logging | **Manual fallback:** temporary local image preview, user-selected food and estimated servings, calculated macro preview and confirmed logging. **Automatic image recognition/nutrition estimation is not connected.** AI vision requires a provider, secure backend/credentials, upload consent and accuracy validation. Photos are not uploaded or persisted. |
+| 12 | Nutrition quality | Logged protein and sourced fiber/sodium/calcium/iron totals, with per-nutrient coverage and source labels. Missing data is unknown; no deficiency claims. Users must transcribe reliable values themselves. No external nutrient database is connected; built-in food macros remain illustrative. |
+| 13 | Workout/meal templates | Save dated log snapshots; apply on a chosen date only after confirmation; delete templates without deleting history. Existing templates remain. Repeated application creates new entries and warns accordingly. |
+| 14 | Weekly review | Last seven days vs prior seven: training days, sets, meal logging, logged-day calorie averages, goal progress and rule-based next steps. No cloud AI. |
+| 15 | Accessibility/personalization | Larger text, high contrast, reduced motion, start page, visible keyboard focus, keyboard map, modal focus trap/Escape and inert background. Preferences persist in backups. Tested at a narrow mobile viewport; no claim of a formal accessibility audit. |
+
+All local features work offline after the current service worker is installed. Browser speech may need network access and may send audio to the browser provider only when the user starts dictation and grants permission. No native iOS app, WidgetKit extension, Apple Health connection, cloud account, backend or external credentials are supplied. Browser tests mock recognition results and permission errors; live microphone accuracy and iPhone hardware are not verified.
+
+The `complete` extension has its own schema version, remains optional on legacy data, and is included by existing exports/imports. Its first save retains an additional `macropulse_pwa_v1_before_complete` raw snapshot even when an older pre-upgrade snapshot exists. Settings → Data Privacy Center → Download before feature expansion exports it. Quota/write failures abort before primary data replacement; recoveries remain local until downloaded.
+
+## Previously shipped upgrade (preserved)
+
 All entries and features below work locally in the installable PWA unless a limitation is explicitly stated. No AI, cloud account, credentials or subscription is configured.
 
 | Approved feature | Shipped PWA behavior | Integration boundary |
