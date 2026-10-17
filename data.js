@@ -13,7 +13,7 @@
       Array.isArray(x.weights)&&x.weights.every(w=>object(w)&&date(w.date)&&number(w.value))&&
       Array.isArray(x.foods)&&x.foods.every(f=>Array.isArray(f)&&text(f[0])&&text(f[1])&&[2,3,4,5].every(k=>number(f[k])))&&
       object(x.supplements)&&Object.entries(x.supplements).every(([d,a])=>date(d)&&Array.isArray(a)&&a.every(Number.isInteger))&&
-      (x.training===undefined||training.validState(x.training))&&(x.upgrade===undefined||validUpgrade(x.upgrade,training));
+      (x.training===undefined||training.validState(x.training))&&(x.upgrade===undefined||validUpgrade(x.upgrade,training))&&(x.complete===undefined||validComplete(x.complete,training));
     }catch{return false;}
   }
   function validUpgrade(u,training){
@@ -32,6 +32,23 @@
       u.reviews.every(x=>text(x.id)&&date(x.date)&&text(x.exercise)&&text(x.note)&&Array.isArray(x.checks)&&x.checks.every(text));
   }
   function defaults(){return {version:1,waterGoal:2000,water:[],habits:[],checks:[],measurements:[],feedback:[],schedule:[],mealPlan:[],grocery:[],reviews:[]};}
+  function completeDefaults(){return {version:1,goals:[],limitations:[],mealTemplates:[],workoutTemplates:[],restaurants:[],nutrients:[],routineArchive:[],preferences:{largeText:false,highContrast:false,reducedMotion:false,startPage:'home'}};}
+  function validComplete(c,training){
+    try{
+      const named=x=>object(x)&&text(x.id)&&text(x.name)&&x.name.trim().length>0&&x.name.length<=120;
+      const macros=x=>object(x)&&['cal','p','c','f'].every(k=>number(x[k]));
+      const workout=x=>object(x)&&text(x.exercise)&&['sets','reps','weight','duration','cal'].every(k=>number(x[k]))&&x.sets>=1&&x.reps>=1&&x.duration>=1;
+      return object(c)&&c.version===1&&['goals','limitations','mealTemplates','workoutTemplates','restaurants','nutrients','routineArchive'].every(k=>Array.isArray(c[k]))&&
+        c.goals.every(x=>named(x)&&['weight','trainingDays'].includes(x.metric)&&number(x.baseline)&&number(x.target)&&date(x.start)&&date(x.due)&&x.due>x.start&&(x.metric!=='trainingDays'||(x.target>=1&&x.target<=7&&Number.isInteger(x.target))))&&
+        c.limitations.every(x=>text(x)&&training.library.some(e=>e.id===x))&&
+        c.mealTemplates.every(x=>named(x)&&x.items.length>0&&x.items.every(y=>text(y.name)&&macros(y)))&&
+        c.workoutTemplates.every(x=>named(x)&&x.entries.length>0&&x.entries.every(workout))&&
+        c.restaurants.every(x=>named(x)&&text(x.restaurant)&&text(x.serving)&&text(x.source)&&date(x.verified)&&macros(x))&&
+        c.nutrients.every(x=>object(x)&&text(x.id)&&text(x.mealId)&&text(x.source)&&x.source.trim()&&['fiber','sodium','calcium','iron'].some(k=>x[k]!==undefined)&&['fiber','sodium','calcium','iron'].every(k=>x[k]===undefined||number(x[k])))&&
+        c.routineArchive.every(x=>object(x)&&text(x.id)&&training.validState(x.training))&&
+        object(c.preferences)&&['largeText','highContrast','reducedMotion'].every(k=>typeof c.preferences[k]==='boolean')&&['home','food','fitness','stack','progress'].includes(c.preferences.startPage);
+    }catch{return false;}
+  }
   function write(storage,state,training,{replacing=false}={}){
     if(!valid(state,training))throw Error('Data validation failed. Existing saved data has been preserved.');
     const raw=storage.getItem(KEY), encoded=JSON.stringify(state);
@@ -42,6 +59,6 @@
     }
     storage.setItem(KEY,encoded);
   }
-  const api={KEY,RECOVERY,MIGRATION,valid,validUpgrade,defaults,write,date};
+  const api={KEY,RECOVERY,MIGRATION,valid,validUpgrade,defaults,completeDefaults,validComplete,write,date};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.MacroData=api;
 })(typeof window!=='undefined'?window:globalThis);
