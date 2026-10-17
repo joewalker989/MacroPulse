@@ -1,4 +1,4 @@
-const CACHE='macropulse-v4-complete-4';
+const CACHE='macropulse-v4-complete-5';
 const ASSETS=['./','./index.html','./app.js?v=4.0.1','./data.js?v=4.0.1','./upgrade.js?v=4.0.1','./upgrade-ui.js?v=4.0.1','./training.js?v=4.0.1','./training-ui.js?v=4.0.1','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS.map(url=>new Request(url,{cache:'reload'}))))));
 // Activate after existing tabs close so each tab uses one release.
