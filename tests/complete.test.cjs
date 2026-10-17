@@ -24,3 +24,4 @@ test('meal transcript accepts only exact library names and bounded servings; res
 test('nutrition totals exclude orphaned entries, distinguish missing and true zero, show coverage',()=>{
  const q=C.nutritionQuality({meals:[{id:'a',date:'2026-10-17',p:20},{id:'b',date:'2026-10-17',p:10}],complete:{nutrients:[{mealId:'a',source:'label',iron:0,fiber:3},{mealId:'deleted',source:'old',iron:100}]}},'2026-10-17');a.equal(q.totals.iron.value,0);a.equal(q.totals.iron.covered,1);a.equal(q.totals.calcium.covered,0);a.equal(q.protein,30);
 });
+test('workout commands are bounded and do not silently infer unsupported commands',()=>{a.deepEqual(C.workoutCommand('sets 3'),{action:'sets',value:3});a.deepEqual(C.workoutCommand('rest 60 seconds'),{action:'rest',value:60});a.deepEqual(C.workoutCommand('stop rest'),{action:'stop'});for(const s of ['sets 0','reps 1000','rest 601','save workout','three sets'])a.throws(()=>C.workoutCommand(s));});
