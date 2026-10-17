@@ -33,7 +33,7 @@ const server=http.createServer((req,res)=>{let name=new URL(req.url,'http://loca
   await click('▥ Progress');await page.getByLabel('Waist (inches)',{exact:true}).fill('38');await click('Save measurement');assert.equal((await read()).upgrade.measurements[0].waist,38);
   await click('Open settings');await open('Data Privacy Center');const downloadPromise=page.waitForEvent('download');await click('Export all app data');const dl=await downloadPromise,backup=JSON.parse(fs.readFileSync(await dl.path(),'utf8'));assert.deepEqual(backup.data,await read());
   const original=JSON.parse(JSON.stringify(await read()));const replacement={format:'MacroPulse',version:1,data:legacy};
-  await page.locator('#importFile').setInputFiles({name:'legacy.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(replacement))});assert.deepEqual(await read(),legacy);assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key+'_recovery')),KEY),original);
+  await page.locator('#importFile').setInputFiles({name:'legacy.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(replacement))});await page.locator('#modal').waitFor({state:'hidden'});assert.deepEqual(await read(),legacy);assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key+'_recovery')),KEY),original);
   await click('⌂ Home');await page.reload();await page.evaluate(()=>navigator.serviceWorker.ready);await page.waitForFunction(()=>!!navigator.serviceWorker.controller);
   const cacheNames=await page.evaluate(()=>caches.keys());assert.ok(cacheNames.some(x=>x==='macropulse-v4-complete-4'));
   await context.setOffline(true);await page.reload();await page.getByRole('heading',{name:'Daily Fitness Command Center',exact:true}).waitFor();await click('+ 500 ml');assert.equal((await read()).upgrade.water.at(-1).ml,500);await context.setOffline(false);
@@ -47,3 +47,4 @@ const server=http.createServer((req,res)=>{let name=new URL(req.url,'http://loca
   console.log('Browser checks passed: legacy preservation, feature flows, backups, corrupt data protection, mobile layout and offline reload.');
  }catch(err){if(testPage&&!testPage.isClosed()){fs.mkdirSync(path.join(root,'test-results'),{recursive:true});await testPage.screenshot({path:path.join(root,'test-results','failure.png'),fullPage:true}).catch(()=>{});}throw err;}finally{if(browser)await browser.close();server.close();}
 })().catch(err=>{console.error(err);process.exitCode=1;server.close();});
+
