@@ -14,8 +14,14 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run test:browser
+      - name: Verify deployed core on GitHub Pages
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: npm run test:core
+        env:
+          MACROPULSE_URL: https://joewalker989.github.io/MacroPulse/
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: browser-test-results
           path: test-results/
+
