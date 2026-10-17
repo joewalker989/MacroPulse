@@ -30,7 +30,7 @@ Includes the equipment/routine work from `codex/equipment-routines` (previously 
 - Does not write at startup. Invalid/corrupt data or a future upgrade schema blocks saves instead of overwriting the original raw value. Privacy Center can download it.
 - Before the first new-version save, retains the existing raw value in `macropulse_pwa_v1_before_upgrade`. Imports validate first, ask before replacement, then retain current raw data in `macropulse_pwa_v1_recovery` before writing. A recovery-write failure aborts the replacement.
 - Recovery copies use the same browser and are not independent backups. Export files regularly. A subsequent import replaces the pre-import recovery slot.
-- Service worker precaches all runtime files. An update waits until older tabs close; it does not erase localStorage. Close all MacroPulse tabs/windows and reopen online after deployment to activate a pending release.
+- Service worker precaches all runtime files using fresh network requests, bypassing stale browser HTTP assets. An update waits until older tabs close; it does not erase localStorage. Close all MacroPulse tabs/windows and reopen online after deployment to activate a pending release.
 - Changing equipment clears the original generated routine as before. Scheduled snapshots are preserved; viewing a session checks current equipment and asks for a new plan if required items are no longer available.
 - Marking a scheduled day complete does not fabricate exercise/calorie logs. Planned meals are explicitly logged once, on their chosen date. Removing a meal plan does not delete nutrition history.
 
@@ -38,6 +38,6 @@ Includes the equipment/routine work from `codex/equipment-routines` (previously 
 
 `npm test` runs legacy data round trips, malformed payloads, write failures, upgrade snapshots, routine combinations, streaks, readiness/recovery, warm-ups, plate loading, meal quantities, grocery grouping and transformation calculations.
 
-`npm ci && npx playwright install chromium && npm run test:browser` runs an isolated mobile-width Chromium scenario: legacy preservation, feature interactions, exports/import recovery, offline reload, corrupt-storage protection and layout overflow. GitHub Actions also installs Chromium dependencies and retains a mobile screenshot. These tests use synthetic records, never a person's browser storage.
+`npm ci && npx playwright install chromium && npm run test:browser` runs isolated Chromium scenarios: mobile feature interactions, legacy preservation, exports/import recovery, offline reload, corrupt-storage protection, layout overflow and an upgrade from a 3.1-style cache with stale HTTP assets. GitHub Actions also installs Chromium dependencies and retains a mobile screenshot. These tests use synthetic records, never a person's browser storage.
 
 Actual iPhone hardware, native WidgetKit behavior and external AI/cloud services are outside this test suite and are not claimed as live.
