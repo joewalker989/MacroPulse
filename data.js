@@ -1,7 +1,7 @@
 /* Storage compatibility: retain the original key, records and unknown extensions. */
 (function(root){
   'use strict';
-  const KEY='macropulse_pwa_v1', RECOVERY=KEY+'_recovery', MIGRATION=KEY+'_before_upgrade';
+  const KEY='macropulse_pwa_v1', RECOVERY=KEY+'_recovery', MIGRATION=KEY+'_before_upgrade', COMPLETE_MIGRATION=KEY+'_before_complete';
   const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
   const number=x=>typeof x==='number'&&Number.isFinite(x)&&x>=0;
   const text=x=>typeof x==='string';
@@ -56,9 +56,10 @@
     if(raw!==null){
       if(replacing)storage.setItem(RECOVERY,raw);
       else if(storage.getItem(MIGRATION)===null)storage.setItem(MIGRATION,raw);
+      if(state.complete!==undefined&&storage.getItem(COMPLETE_MIGRATION)===null)storage.setItem(COMPLETE_MIGRATION,raw);
     }
     storage.setItem(KEY,encoded);
   }
-  const api={KEY,RECOVERY,MIGRATION,valid,validUpgrade,defaults,completeDefaults,validComplete,write,date};
+  const api={KEY,RECOVERY,MIGRATION,COMPLETE_MIGRATION,valid,validUpgrade,defaults,completeDefaults,validComplete,write,date};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.MacroData=api;
 })(typeof window!=='undefined'?window:globalThis);
