@@ -1,3 +1,7 @@
+# MacroPulse 7.1 — latest shipped experience
+
+Daily targets/jug/hydration now share one panel. Live workouts have a persistent pause-aware clock, set ring, red Stop and original movement illustrations. Food includes 20 Douglasville chain menu links, 10 sourced offline nutrition snapshots and an editable visited-place directory. Stack includes benefits, evidence and cautions for every existing option. See RELEASE_7_1.md for shipped features, preservation, validation and boundaries. Exact home-based 20-mile filtering, full imported menus and live restaurant services are not verified/integrated.
+
 # MacroPulse 7.0 — 50 implemented additions
 
 Baseline: 332aecffa32c2c0249baff6e089b1b442ad63db8 (6.1). Existing functionality was inspected before choosing these additions; the numbered guide maps each addition to an actual control. No external-service placeholders count toward the 50.
