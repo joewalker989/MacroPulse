@@ -18,7 +18,7 @@ const server=http.createServer((req,res)=>{
   try{
     let url=process.env.MACROPULSE_URL;
     if(!url){await new Promise(r=>server.listen(0,'127.0.0.1',r));url='http://127.0.0.1:'+server.address().port+'/MacroPulse/';}
-    browser=await chromium.launch();
+    browser=await chromium.launch(process.env.MACROPULSE_BROWSER_CHANNEL?{channel:process.env.MACROPULSE_BROWSER_CHANNEL}:{});
     const context=await browser.newContext({viewport:{width:390,height:844},timezoneId:'America/New_York'});
     // Seed once; reloads must read the application's own persisted records.
     await context.addInitScript(({key,data})=>{if(localStorage.getItem(key)===null)localStorage.setItem(key,JSON.stringify(data));},{key:KEY,data:seed});

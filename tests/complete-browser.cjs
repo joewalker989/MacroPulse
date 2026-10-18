@@ -5,7 +5,7 @@ const legacy={settings:{cal:2000,p:150,c:200,f:65,goal:180},weight:200,weights:[
 const server=http.createServer((req,res)=>{const p=new URL(req.url,'http://localhost').pathname,file=path.resolve(root,'.'+(p==='/'?'/index.html':p));if(!file.startsWith(root+path.sep)){res.writeHead(403);return res.end();}fs.readFile(file,(e,b)=>{res.writeHead(e?404:200,{'Content-Type':file.endsWith('.js')?'application/javascript':file.endsWith('.html')?'text/html':'application/octet-stream'});res.end(e?'missing':b);});});
 (async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;let browser,page;
  try{
-  browser=await chromium.launch();const context=await browser.newContext({viewport:{width:390,height:844},timezoneId:'America/New_York'});
+  browser=await chromium.launch(process.env.MACROPULSE_BROWSER_CHANNEL?{channel:process.env.MACROPULSE_BROWSER_CHANNEL}:{});const context=await browser.newContext({viewport:{width:390,height:844},timezoneId:'America/New_York'});
   await context.addInitScript(({key,data})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(data));window.SpeechRecognition=undefined;window.webkitSpeechRecognition=undefined;},{key:KEY,data:legacy});
   page=await context.newPage();await page.clock.install({time:new Date('2026-10-17T16:00:00-04:00')});const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.type()==='confirm'?d.accept():d.dismiss());
   await page.goto(url);await page.locator('#personalReview').waitFor({state:'attached'});

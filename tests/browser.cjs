@@ -12,7 +12,7 @@ const server=http.createServer((req,res)=>{let name=new URL(req.url,'http://loca
 (async()=>{
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;let browser,testPage;
  try{
-  browser=await chromium.launch();const context=await browser.newContext({viewport:{width:390,height:844},timezoneId:'America/New_York'});
+  browser=await chromium.launch(process.env.MACROPULSE_BROWSER_CHANNEL?{channel:process.env.MACROPULSE_BROWSER_CHANNEL}:{});const context=await browser.newContext({viewport:{width:390,height:844},timezoneId:'America/New_York'});
   await context.addInitScript(({key,data})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(data));},{key:KEY,data:legacy});
   const page=await context.newPage(),errors=[];testPage=page;page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.type()==='confirm'?d.accept():d.dismiss());
   await page.goto(url);await page.getByRole('heading',{name:'Daily Fitness Command Center',exact:true}).waitFor();
@@ -35,7 +35,7 @@ const server=http.createServer((req,res)=>{let name=new URL(req.url,'http://loca
   const original=JSON.parse(JSON.stringify(await read()));const replacement={format:'MacroPulse',version:1,data:legacy};
   await page.locator('#importFile').setInputFiles({name:'legacy.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(replacement))});await page.locator('#modal').waitFor({state:'hidden'});assert.deepEqual(await read(),legacy);assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key+'_recovery')),KEY),original);
   await click('⌂ Home');await page.reload();await page.evaluate(()=>navigator.serviceWorker.ready);await page.waitForFunction(()=>!!navigator.serviceWorker.controller);
-  const cacheNames=await page.evaluate(()=>caches.keys());assert.ok(cacheNames.some(x=>x==='macropulse-v5-complete-1'));
+  const cacheNames=await page.evaluate(()=>caches.keys());assert.ok(cacheNames.some(x=>x==='macropulse-v5-1-1'));
   await context.setOffline(true);await page.reload();await page.getByRole('heading',{name:'Daily Fitness Command Center',exact:true}).waitFor();await click('+ 500 ml');assert.equal((await read()).upgrade.water.at(-1).ml,500);await context.setOffline(false);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);assert.deepEqual(errors,[]);
   await page.screenshot({path:path.join(root,'test-results','mobile-home.png'),fullPage:true});await context.close();
@@ -47,4 +47,5 @@ const server=http.createServer((req,res)=>{let name=new URL(req.url,'http://loca
   console.log('Browser checks passed: legacy preservation, feature flows, backups, corrupt data protection, mobile layout and offline reload.');
  }catch(err){if(testPage&&!testPage.isClosed()){fs.mkdirSync(path.join(root,'test-results'),{recursive:true});await testPage.screenshot({path:path.join(root,'test-results','failure.png'),fullPage:true}).catch(()=>{});}throw err;}finally{if(browser)await browser.close();server.close();}
 })().catch(err=>{console.error(err);process.exitCode=1;server.close();});
+
 
