@@ -60,6 +60,18 @@
     }
     storage.setItem(KEY,encoded);
   }
-  const api={KEY,RECOVERY,MIGRATION,COMPLETE_MIGRATION,valid,validUpgrade,defaults,completeDefaults,validComplete,write,date};
+  const FIVE_MIGRATION=KEY+'_before_five';
+  const baseValid=valid,baseWrite=write;
+  function fiveValid(x,training){
+    const F=typeof module!=='undefined'&&module.exports?require('./five.js'):root.MacroFive;
+    return baseValid(x,training)&&(x.five===undefined||!!F&&F.valid(x.five));
+  }
+  function fiveWrite(storage,state,training,options){
+    if(!fiveValid(state,training))throw Error('Invalid or future 5.0 data. Original data preserved.');
+    const raw=storage.getItem(KEY);
+    if(raw!==null&&state.five!==undefined&&storage.getItem(FIVE_MIGRATION)===null)storage.setItem(FIVE_MIGRATION,raw);
+    baseWrite(storage,state,training,options);
+  }
+  const api={KEY,RECOVERY,MIGRATION,COMPLETE_MIGRATION,FIVE_MIGRATION,valid:fiveValid,validUpgrade,defaults,completeDefaults,validComplete,write:fiveWrite,date};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.MacroData=api;
 })(typeof window!=='undefined'?window:globalThis);

@@ -1,5 +1,5 @@
-const CACHE='macropulse-v4-complete-6';
-const ASSETS=['./','./index.html','./complete.js?v=4.0.2','./complete-ui.js?v=4.0.2','./app.js?v=4.0.2','./data.js?v=4.0.2','./upgrade.js?v=4.0.2','./upgrade-ui.js?v=4.0.2','./training.js?v=4.0.2','./training-ui.js?v=4.0.2','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
+const CACHE='macropulse-v5-complete-1';
+const ASSETS=['./','./index.html','./five.js?v=5.0.0','./five-ui.js?v=5.0.0','./photos.js?v=5.0.0','./photos-ui.js?v=5.0.0','./complete.js?v=5.0.0','./complete-ui.js?v=5.0.0','./app.js?v=5.0.0','./data.js?v=5.0.0','./upgrade.js?v=5.0.0','./upgrade-ui.js?v=5.0.0','./training.js?v=5.0.0','./training-ui.js?v=5.0.0','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS.map(url=>new Request(url,{cache:'reload'}))))));
 // Activate after existing tabs close so each tab uses one release.
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('macropulse-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));

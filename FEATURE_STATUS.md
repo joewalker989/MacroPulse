@@ -1,4 +1,40 @@
-# MacroPulse Complete Upgrade — 4.0
+# MacroPulse Complete Upgrade — 5.0
+
+## 5.0: implemented offline PWA features
+
+All 16 requested capabilities have local implementations. The previous 3.x/4.0 features below remain available. No backend, account or AI provider is configured.
+
+| # | Capability | Shipped behavior and limits |
+| --- | --- | --- |
+| 1 | Live Workout Mode | Preview quick workout or saved routine day; readiness; per-set reps/minutes, added lb, effort and completion; foreground rest/elapsed timers; finish logs only checked sets. Calories remain zero unless logged separately. |
+| 2 | Smart Weight Recommendations | Local history rules: repeat, small increase with recorded effort/reps, or reduce for low readiness/high effort. Uses listed individual lb/kg equipment loads where available; explicit Apply required. No starting load invented without comparable history; no plate-inventory solver or safe-load guarantee. |
+| 3 | Pre-Workout Readiness | Sleep, energy, soreness and pain check before each live session. Pain blocks starting; low readiness displays recovery guidance. Manual check, no sensor inference. |
+| 4 | Exercise Coaching Cards | Existing equipment library cues plus setup/control/stop guidance, accessible from live workouts and Favorites. Text only; no video or automated form analysis. |
+| 5 | Workout Resume | Active plan, actual set values, completion, effort and notes reload from the existing local save. One active session per browser. Stale-tab writes are rejected. |
+| 6 | Workout Auto-Save | Valid live input saved on every edit and checkbox change, with saved/error status. Partial invalid numeric input is not saved. Failed saves roll back the new extension in memory and preserve disk state. Foreground operation; no cloud sync. |
+| 7 | Quick Workout Generator | Offline 5–60 minute previews matched to supported inventory, favorites and exercise exclusions. Estimated preparation/sets/rest fit budget; no generated log entries until performed and finished. |
+| 8 | Exercise Favorites | Persistent library favorites prioritized within matching movement groups by quick generator. |
+| 9 | Workout Notes | Autosaved session and exercise notes, retained in session history and backups; completed exercise notes also appear on generated log records. |
+| 10 | Exercise Progression Ladder | Five manual steps per exercise, current step shown during training; explicit review and confirmation before advancing/resetting. No inferred readiness to progress. |
+| 11 | Workout Comparison | Select two finished live sessions; completed sets and added-load rep-lb volume with change. Timed movements excluded from volume. Legacy history and Weekly Review retained; arbitrary old logs are not reconstructed into sessions. |
+| 12 | Training Balance Alerts | Seven-day primary-muscle set summary; missing supported groups flagged after six classified sets. Shows unclassified count. Missing logs are not proof of inactivity or a medical finding. |
+| 13 | Custom Challenges | Named, dated targets for training days, sessions or sets, calculated from actual history. Legacy entries count individually for session targets; no fabricated exercise records. |
+| 14 | Detailed Home Gym Inventory | Add/edit/remove named items, supported type, quantity, available individual loads or band levels, units and limitations. Supported types participate in quick matching; custom Other remains descriptive. Legacy equipment/routines unchanged. Quantity is recorded, not a guarantee of all safe movement setups. |
+| 15 | Recovery/Backup Verification | Separate immutable raw snapshot before first 5.0 save; export it in an importable version-1 envelope. Schema validation and SHA-256 calculation for downloaded workout backups without restoring them. Existing confirmed import/recovery paths retained. Photo backups verify checksum, records and decodable images; restoration is atomic/add-only. |
+| 16 | Photo Progression Studio | Private timestamped front/side/back photo file/camera capture, view-filtered timeline, side-by-side/slider comparison, optional recorded measurement overlays and reference grid, manual pan/zoom saved per photo, slideshow, comparison PNG and full/per-photo backup export. IndexedDB stores re-encoded JPEGs on-device. Explicit consent, file validation, storage estimate/persistence request, per-photo/all-photo deletion, verified add-only backup merge. |
+
+### Data and privacy boundaries
+
+- The original `macropulse_pwa_v1` key and all old record shapes are retained. Optional `five.version = 1` is created only on an explicit action; no startup writes. `macropulse_pwa_v1_before_five` captures the pre-5.0 raw record even when earlier snapshots already exist. Invalid/future schemas, failed snapshot writes and stale tabs block saves.
+- Standard workout JSON includes all live sessions, notes, favorites, inventory, ladders and challenges. **Progress photos are separate: export both workout JSON and photo JSON.** Core JSON import never removes or replaces photos.
+- Photos are in `macropulse_photos_v1` IndexedDB, store `photos`, version 1. Uploaded JPEG/PNG/WebP ≤12 MB is re-encoded to JPEG ≤1600px, discarding original metadata; timestamp is explicitly saved as UTC and displayed locally. Original source files remain outside the app. HEIC requires external conversion.
+- Data and downloads are unencrypted. No photo uploads, tracking, body detection, estimated measurements or AI analysis. Same-browser-profile access, browser eviction and device loss remain risks. Persistent-storage permission is optional and not an independent backup. Photo import accepts ≤200 MB files; large collections can be exported one photo at a time. Merge skips existing IDs and never overwrites them.
+- Erase in Privacy Center explicitly includes progress photos and recovery copies. Photo-only deletion leaves workout history intact. Downloaded files and copies on other devices remain under user control.
+- All local screens work offline after service-worker installation. Updates wait for existing tabs to close, retain localStorage/IndexedDB, and cache all 5.0 modules. Browser camera/file chooser permissions and capabilities vary. Real camera access, iPhone hardware, HEIC conversion, native iOS/WidgetKit, background notifications, cloud backup, encrypted vault, backend AI and external services are **not shipped**.
+
+### 5.0 verification
+
+32 Node tests and four browser suites cover existing 3.x/4.0 functionality, additive migrations/unknown fields, quota failures, future versions, stale tabs, actual per-set logging, autosave/resume, favorites/inventory/challenges/notes/ladders/comparison, photo views/timestamps, comparison/overlays/alignment/slideshow/PNG export, verified photo backup merge and corruption rejection, workout verification, offline reload, preserved old records and narrow mobile layout. Browser checks use synthetic data and image files in isolated profiles, never a user's real saved data or camera. Local Windows checks use installed Chrome because the bundled Chromium executable cannot launch in this environment; CI uses Chromium.
 
 ## Requested 15-feature expansion · 4.0.2
 

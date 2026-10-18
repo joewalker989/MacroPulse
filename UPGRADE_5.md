@@ -1,0 +1,23 @@
+# MacroPulse 5.0 implementation record
+
+Inspected baseline: main `1e699a89dbd727b1f34cecf544aa943231a073d8`, working 4.0.2 assets on GitHub Pages (HTTP 200), 26 passing unit tests, existing Pages deployment and PWA checks successful. Inspected all runtime modules, tests, history, manifest and service worker. Earlier conversation assistant content was unavailable beyond reference markers; the user's explicit 16-feature list defines this release.
+
+Preserved 3.x core: nutrition/macros and custom foods, templates and workout logging, rest timer, supplements, weight/progress, goals, full JSON export/import; equipment preferences/routines/substitutions. Preserved 4.0 scheduling, meal planning, hydration, habits, recovery, measurements, warm-ups/deload previews, calculator, supersets, manual video review, grocery list, goals/map/volume/calendar/predictor/programs, confirmed voice drafts, manual food-photo fallback, sourced menus/nutrients, templates, weekly review and accessible preferences. Existing integration limitations are retained in FEATURE_STATUS.md.
+
+Stages:
+
+1. Additive 5.0 model and snapshot, with 32 passing data/calculation tests before UI integration.
+2. Live workout UI, local photo store/studio, PWA cache generation, browser acceptance and existing regression suites.
+3. Recovery hardening, atomic photo-import abort tests, separate backup round trips, exact feature/limit documentation, final regression and release verification.
+
+No personal browser storage was accessed. Repository backup branch `backup/pre-5.0` and a local Git bundle preserve baseline code. In-browser data protection happens on first explicit save: lazy `five` extension and `macropulse_pwa_v1_before_five` raw snapshot. Unknown fields and old entries are preserved. Core import validates first and stores its existing recovery slot before replacement; photos are unchanged by core import. Future/malformed data and stale tabs block saves.
+
+Photo database schema: `macropulse_photos_v1`, version 1, key-path `id` in `photos`. Each record contains `id`, ISO timestamp `at`, `view` (`front`, `side`, `back`), measurement string, note, manual alignment `{x,y,scale}`, and re-encoded JPEG Blob. Version-1 creation only adds the store. No automatic photo migration, cloud upload or destructive upgrade. Photo backup restores validate checksum, structure, unique IDs and decodable JPEGs before opening an add-only transaction; an abort leaves the old store untouched. Existing IDs are skipped, including photos whose alignment has since changed.
+
+Standard backup remains `{format:'MacroPulse',version:1,data:...}` and includes the optional `five` extension. Photo backup is `{format:'MacroPulse Photos',sha256,payload:{version:1,photos:[...metadata,data]}}` where `data` is base64 JPEG. File download and verification are explicit actions. SHA-256 detects accidental change when checking the photo envelope; workout verification validates schema and prints a computed checksum. Neither is encryption or a guarantee of authenticity. Export both stores and keep independent copies before clearing storage or changing devices.
+
+Local checks: 32 Node tests; existing browser, complete-browser and core-browser suites; new five-browser suite. All pass in isolated Chrome profiles with synthetic records. Tests include legacy cache replacement, preserved original records/unknown extensions, future/corrupt schemas, quota/snapshot failures, stale-tab rollback, resume/actual performed sets, inventory/favorites/ladder/challenges/notes/comparison, front/side/back photos, timestamps, alignment/grid/overlay/slider, slideshow/PNG, corrupt photo-backup rejection, atomic transaction abort, idempotent add-only photo merge, workout JSON round trip without photo loss, offline photo rendering and narrow mobile layout. CI runs the same suites on Chromium. Real camera/microphone and physical iPhone testing are not claimed.
+
+Release instructions: export workout JSON in Settings and progress-photo JSON in Progress. Close every MacroPulse tab/installed window, reopen online and check the 5.0 header to activate the waiting service worker. Reopen offline after the new shell has cached. Cache activation removes old app caches only; it does not clear localStorage or IndexedDB.
+
+Boundaries: local rules and manual review implement the requested features. No backend/AI, cloud sync or encryption; no native iOS app, Health/WidgetKit integration or background alerts. Browser camera/file selection and persistent-storage grants vary by platform. HEIC must be converted to JPEG externally. See FEATURE_STATUS.md for each shipped feature's exact behavior.
