@@ -7,7 +7,7 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+(new
  browser=await chromium.launch(process.env.MACROPULSE_BROWSER_CHANNEL?{channel:process.env.MACROPULSE_BROWSER_CHANNEL}:{});
  const context=await browser.newContext({viewport:{width:390,height:844},timezoneId:'America/New_York'});
  await context.addInitScript(({key,data})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(data));},{key:KEY,data:legacy});
- const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));let approve=true;page.on('dialog',d=>d.type()==='confirm'&&approve?d.accept():d.dismiss());
+ const page=await context.newPage(),errors=[];page.setDefaultTimeout(15000);page.on('pageerror',e=>errors.push(e.message));let approve=true;page.on('dialog',d=>d.type()==='confirm'&&approve?d.accept():d.dismiss());
  const url=process.env.MACROPULSE_HEALTH_URL||'http://127.0.0.1:'+server.address().port;
  await page.goto(url);await page.locator('#healthDaily').waitFor();const read=()=>page.evaluate(k=>JSON.parse(localStorage.getItem(k)),KEY),click=n=>page.getByRole('button',{name:n,exact:true}).click();
  a.deepEqual(await read(),legacy);

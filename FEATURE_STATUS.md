@@ -1,3 +1,44 @@
+# MacroPulse 6.0 — shipped local features
+
+5.1 was deployed and verified before 6.0 implementation began: commit `48220d456ff9ecedeb4741804b1159b431dc61db`; successful PWA checks run `39089013476`, Pages run `39089013036`, and live `health-browser.cjs` acceptance on https://joewalker989.github.io/MacroPulse/ . 5.1 remains included; see RELEASE_5_1.md.
+
+| # | Requested feature | Shipped behavior / exact boundary |
+| --- | --- | --- |
+| 1 | Body transformation scorecard | Recorded weight/waist change and seven-day training, food and water logging coverage. No combined health/appearance grade or photo inference. |
+| 2 | Weekly calorie budget | Monday-based seven-day reference targets or explicitly saved per-day planning amounts; total, observed food and completion attestations. Unlogged is unknown; plan does not change approved daily intake or add exercise calories. Pre-history targets use current target as an approximate reference. |
+| 3 | Visual body measurements | Accessible schematic with manually measured waist/chest/hip/arm/thigh; dated cm storage, US/metric entry/display; waist also added to existing transformation timeline. Existing waist records preserved. |
+| 4 | Kitchen inventory | Add/edit/remove quantities, units and entered best-before dates; exact name+serving stock comparison with existing grocery list. No inferred consumption or live retailer data. |
+| 5 | Calorie target version history | Before/after calories/macros for manual Settings changes and calculator approvals from 6.0 onward. Reuses earlier calculator approval history; never invents older manual changes. Backup import restores supplied history. |
+| 6 | Smoothed weight trends | Seven-calendar-day moving means, last check-in per date, date counts and actual observations; no interpolation or invented readings. |
+| 7 | Protein distribution planner | Two to six equal planned allocations from current protein target; manually assign diary entries to meal slots, with unassigned protein shown. No meal-time inference. |
+| 8 | Nutrition gap detector | Reuses sourced nutrient coverage; protein difference and optional personal fiber/calcium/iron references and sodium maximum. Missing values and partial coverage give unknown gaps. Not a deficiency diagnosis or medical prescription. |
+| 9 | Food swap assistant | Local library/custom-food serving comparisons under calorie/protein limits, with differences displayed. Servings may differ; no AI or automatic diary substitution. |
+| 10 | Meal cost tracker | Per-logged-portion receipt/source notes and price replacement, seven-day coverage, separate currency totals, exclusion of removed meals. No live prices or exchange conversion. |
+| 11 | Estimated one-rep max | Reuses Epley, positive added-load sets of 1–10 reps, best daily observation within 90 days. New review view complements existing Strength Predictor. Not a safe-max prescription. |
+| 12 | Recovery journal | Dated sleep/energy/soreness/pain/notes and food-log completion attestations; daily check-in and journal entries share one history. Manual reports, no sensors. |
+| 13 | Exercise plateau detector | Three comparable dates spanning 14 days within 28 days; latest 1RM estimate <=102% of first flags plateau/decline review. No automatic load change or diagnosis. |
+| 14 | Equipment upgrade planner | Current equipment/movement coverage, proposed items with manual cost/currency/priority/reason and status. Purchased planning status does not falsely add equipment to inventory. |
+| 15 | Workout time analytics | Finished live sessions' elapsed wall-clock time, mean and separate manual-duration sum; excludes per-set live entries from manual totals. Rest/interruption included; no claim of verified active time. |
+| 16 | Smart daily check-in | Observed food/protein/water/planned sessions plus explicit readiness inputs and local pain/low-readiness guidance. No AI or inferred medical finding. |
+| 17 | Goal scenario simulator | Shared-profile hypothetical goal/rate with 5.1 guardrails, energy change and static timeframe approximation. Does not alter goal, deadline, food targets or weight. |
+| 18 | Weekly fitness report export | Standalone JSON and offline HTML with dates, coverage, targets, recorded changes, recovery, costs and time. No photos/raw backup; browser print-to-PDF available, no native PDF service. |
+| 19 | Data source center | Manual, illustrative and estimated data identified; nutrient sources, record counts and external-service boundaries shown. Existing per-source records retained. |
+| 20 | Privacy/sync status | Actual service-worker control, caches, online indicator, local photo count, usage/persistent-storage status where available, snapshot download. Cloud sync/encryption/AI/native integrations explicitly not integrated. |
+
+## Preservation and regression evidence
+
+- Original storage key, legacy fields, unknown extensions and IndexedDB photo store retained. Optional six schema v1 is lazy; no startup write. Independent immutable pre-6.0 raw snapshot precedes first six save and is downloadable. Failed snapshots/primary writes, stale tabs and future/invalid data are blocked. New feature changes roll back in memory on failure. Pre-5.1 and pre-6.0 Git backups preserve source, not personal device records.
+- Full app JSON export/import includes all new data. Photos remain separate; export both app and photo backups. Core import does not clear photos. Privacy erasure explicitly includes all release snapshots and existing photos.
+- Cache generation v6-0-1 precaches every runtime module; waits for existing tabs to close and retains user storage. Close all old app tabs/windows and reopen online to activate the new release.
+- 47 passing Node tests and six browser suites: old core, feature expansion, 5.0 live workouts/photo studio, 5.1 calculators and 6.0 capabilities. Includes formulas, bounded rates, sparse/deduplicated history, snapshots/quota errors, invalid/future schemas, stale tabs, backup round-trips, image/checksum/atomic restore checks, mobile layout, cache upgrade and offline reads/writes. Local Windows uses installed Chrome; GitHub CI uses Chromium. Isolated synthetic records/images only; personal saved data and camera not accessed.
+
+## Pending external integrations
+
+AI vision/coaching, nutrition/restaurant databases, live shopping/prices, cloud accounts/sync/backup, encryption, health wearables/Apple Health, native iOS/WidgetKit, background alarms and HEIC conversion remain **not integrated**. Real iPhone camera/hardware and live microphone/provider behavior are **not verified**. Optional browser storage and capture/speech capabilities depend on permissions/support; the new local features request none of these permissions. Existing opt-in speech/camera controls retain their documented boundaries.
+
+
+---
+
 # MacroPulse Complete Upgrade — 5.0
 
 ## 5.0: implemented offline PWA features

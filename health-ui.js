@@ -5,7 +5,7 @@ window.mountHealth=function({getState,save,escapeHTML:esc,today,uid,isBlocked}){
  const select=(name,label,items,current)=>`<label>${label}<select class="field" name="${name}">${items.map(([v,t])=>`<option value="${v}" ${String(v)===String(current)?'selected':''}>${t}</option>`).join('')}</select></label>`;
  const input=(name,label,value,min,max,step='any')=>`<label>${label}<input class="field" required name="${name}" type="number" value="${value}" min="${min}" max="${max}" step="${step}"></label>`;
  let preview=null;
- function commit(fn){if(isBlocked())throw Error('Saving blocked; export original data from Privacy Center.');const s=getState(),before=structuredClone(s);try{s.health=structuredClone(state());fn(s.health,s);if(!save())throw Error('Save failed; saved data preserved. Reload before continuing.');}catch(e){for(const k of Object.keys(s))delete s[k];Object.assign(s,before);throw e;}}
+ function commit(fn){if(isBlocked())throw Error('Saving blocked; export original data from Privacy Center.');const s=getState(),before=structuredClone(s);try{s.health=structuredClone(state());fn(s.health,s);if(!save({targetSource:'calculator'}))throw Error('Save failed; saved data preserved. Reload before continuing.');}catch(e){for(const k of Object.keys(s))delete s[k];Object.assign(s,before);throw e;}}
  function status(t){$('healthStatus').textContent=t;}
  function render(){
   const open=[...host.querySelectorAll('details[open]')].map(x=>x.id),s=getState(),h=state(),p=h.profile,u=p?.units||'us',factor=u==='us'?1/2.54:1;

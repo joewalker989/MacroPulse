@@ -35,7 +35,7 @@ const server=http.createServer((req,res)=>{let name=new URL(req.url,'http://loca
   const original=JSON.parse(JSON.stringify(await read()));const replacement={format:'MacroPulse',version:1,data:legacy};
   await page.locator('#importFile').setInputFiles({name:'legacy.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(replacement))});await page.locator('#modal').waitFor({state:'hidden'});assert.deepEqual(await read(),legacy);assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key+'_recovery')),KEY),original);
   await click('⌂ Home');await page.reload();await page.evaluate(()=>navigator.serviceWorker.ready);await page.waitForFunction(()=>!!navigator.serviceWorker.controller);
-  const cacheNames=await page.evaluate(()=>caches.keys());assert.ok(cacheNames.some(x=>x==='macropulse-v5-1-1'));
+  const cacheNames=await page.evaluate(()=>caches.keys());assert.ok(cacheNames.some(x=>x===fs.readFileSync(path.join(root,'sw.js'),'utf8').match(/const CACHE='([^']+)'/)[1]));
   await context.setOffline(true);await page.reload();await page.getByRole('heading',{name:'Daily Fitness Command Center',exact:true}).waitFor();await click('+ 500 ml');assert.equal((await read()).upgrade.water.at(-1).ml,500);await context.setOffline(false);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);assert.deepEqual(errors,[]);
   await page.screenshot({path:path.join(root,'test-results','mobile-home.png'),fullPage:true});await context.close();
