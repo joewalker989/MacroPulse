@@ -1,5 +1,5 @@
-const CACHE='macropulse-v6-1-1';
-const ASSETS=['./photo-compare.js?v=6.1.0','./six.js?v=6.1.0','./six-ui.js?v=6.1.0','./health.js?v=6.1.0','./health-ui.js?v=6.1.0','./','./index.html','./five.js?v=6.1.0','./five-ui.js?v=6.1.0','./photos.js?v=6.1.0','./photos-ui.js?v=6.1.0','./complete.js?v=6.1.0','./complete-ui.js?v=6.1.0','./app.js?v=6.1.0','./data.js?v=6.1.0','./upgrade.js?v=6.1.0','./upgrade-ui.js?v=6.1.0','./training.js?v=6.1.0','./training-ui.js?v=6.1.0','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
+const CACHE='macropulse-v7-0-1';
+const ASSETS=['./seven.js?v=7.0.0','./seven-ui.js?v=7.0.0','./photo-compare.js?v=7.0.0','./six.js?v=7.0.0','./six-ui.js?v=7.0.0','./health.js?v=7.0.0','./health-ui.js?v=7.0.0','./','./index.html','./five.js?v=7.0.0','./five-ui.js?v=7.0.0','./photos.js?v=7.0.0','./photos-ui.js?v=7.0.0','./complete.js?v=7.0.0','./complete-ui.js?v=7.0.0','./app.js?v=7.0.0','./data.js?v=7.0.0','./upgrade.js?v=7.0.0','./upgrade-ui.js?v=7.0.0','./training.js?v=7.0.0','./training-ui.js?v=7.0.0','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS.map(url=>new Request(url,{cache:'reload'}))))));
 // Activate after existing tabs close so each tab uses one release.
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('macropulse-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));

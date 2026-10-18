@@ -1,3 +1,25 @@
+# MacroPulse 7.0 — 50 implemented additions
+
+Baseline: 332aecffa32c2c0249baff6e089b1b442ad63db8 (6.1). Existing functionality was inspected before choosing these additions; the numbered guide maps each addition to an actual control. No external-service placeholders count toward the 50.
+
+See RELEASE_7_0.md for the complete numbered list and boundaries.
+
+
+
+## Preservation and validation
+
+Optional seven schema v1 is created on explicit use, with no startup writes. Before its first save, macropulse_pwa_v1_before_7 retains the original raw app data. Download this snapshot from Undo, integrity audit & action journal. Unknown app/record fields survive; invalid/future schemas, stale tabs and snapshot/write failures reject saves. These record-tool commits roll back memory on failure. Original localStorage key and IndexedDB photo store/version are retained. Photo metadata edits use existing revision protection; no photo blob is rewritten. Full app JSON includes the new extension. Photos and their annotations still require separate photo JSON backup. Privacy erasure includes the new release snapshot. Source backup branch backup/pre-7.0 and a local Git bundle precede this release.
+
+62 Node tests and eight browser suites cover all 50 numbered additions, formula boundaries, snapshots/quota failures, future schemas, copy/edit/undo semantics, unknown-field retention, live-set integrity, core/photo backup round trips, original photo pixels/metadata paths, offline reload, mobile width, local exports and keyboard navigation. The new suite asserts a coverage set of all integers 1–50. Existing 5.0/5.1/6.0/6.1 regressions remain in the test command; time-sensitive 6.0 fixtures now use relative dates. Local Windows uses Chrome; CI uses Chromium. Tests use synthetic records/images in isolated profiles, not personal storage or an actual camera.
+
+The new tools avoid unnecessary rerendering on unrelated food-search input. Home offers an in-app numbered guide, tool search and pinned shortcuts. Cache generation macropulse-v7-0-1 precaches all runtime modules and waits for old tabs to close; it does not erase records/photos.
+
+## Explicit limits
+
+AI/body analysis, external food/restaurant/price APIs, cloud accounts/sync/encrypted backup, health-device/native iOS integration, background alarms and HEIC conversion remain not integrated. Real iPhone hardware/camera/speech-provider behavior is not verified. Timers are foreground only. Nutrient/food/price values remain manual or illustrative. Progress summaries describe recorded information, not measured total intake, safe lifting capacity, health grades or inferred body composition. CSV/JSON extracts and period reports are not substitutes for full app and photo backups.
+
+---
+
 # MacroPulse 6.1 — photo library and visual comparison studio
 
 Adds explicit **Choose from photo library** (without a camera capture hint) and a separate **Take a photo** chooser, with a local preview before saving, editable capture timestamp/view and existing explicit consent. JPEG/PNG/WebP up to 12 MB remain supported. Browser camera/library chooser behavior varies; actual iPhone hardware and HEIC conversion are not verified/integrated.
