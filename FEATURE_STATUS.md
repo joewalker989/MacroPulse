@@ -1,3 +1,7 @@
+# MacroPulse 7.1.2 — timer controls and visible supplement benefits
+
+Fitness shows the readiness check, 00:00:00 timer and Start/red Stop controls immediately. Stack shows each benefit directly below the supplement. Existing pause/resume, evidence, cautions and sources are retained. See RELEASE_7_1_2.md.
+
 # MacroPulse 7.1.1 — workout demonstration pictures
 
 Larger start/movement illustrations now appear in templates, the library, logging and matched workout history. Custom workouts can save a matching demonstration reference. See RELEASE_7_1_1.md.
