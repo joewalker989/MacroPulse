@@ -21,7 +21,7 @@
  }
  async function digest(text){const bytes=new TextEncoder().encode(text);return [...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(x=>x.toString(16).padStart(2,'0')).join('');}
  const dataURL=blob=>new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(r.error);r.readAsDataURL(blob);});
- async function backup(){const rows=await all(),photos=[];for(const p of rows){const {blob,...meta}=p;photos.push({...meta,data:await dataURL(blob)});}const payload={version:1,photos};return {format:'MacroPulse Photos',sha256:await digest(JSON.stringify(payload)),payload};}
+ async function backup(ids=null){const rows=(await all()).filter(p=>!ids||ids.includes(p.id)),photos=[];for(const p of rows){const {blob,...meta}=p;photos.push({...meta,data:await dataURL(blob)});}const payload={version:1,photos};return {format:'MacroPulse Photos',sha256:await digest(JSON.stringify(payload)),payload};}
  async function decode(backup){
   if(backup?.format!=='MacroPulse Photos'||backup.payload?.version!==1||!Array.isArray(backup.payload.photos)||backup.payload.photos.length>5000)throw Error('Unsupported photo backup.');
   if(await digest(JSON.stringify(backup.payload))!==backup.sha256)throw Error('Checksum mismatch. No photos changed.');
@@ -29,6 +29,7 @@
    if(typeof p.data!=='string'||!/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(p.data)||p.data.length>MAX*1.4)throw Error('Invalid photo encoding.');
    const bytes=Uint8Array.from(atob(p.data.split(',')[1]),x=>x.charCodeAt(0)),{data,...meta}=p,record={...meta,blob:new Blob([bytes],{type:'image/jpeg'})};
    if(!valid(record)||ids.has(record.id)||bytes[0]!==255||bytes[1]!==216)throw Error('Invalid or duplicate photo.');
+   const bitmap=await createImageBitmap(record.blob);try{if(bitmap.width*bitmap.height>60000000)throw Error('Backup image dimensions too large.');}finally{bitmap.close();}
    ids.add(record.id);rows.push(record);
   }return rows;
  }
