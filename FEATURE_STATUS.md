@@ -1,3 +1,7 @@
+# MacroPulse 7.1.1 — workout demonstration pictures
+
+Larger start/movement illustrations now appear in templates, the library, logging and matched workout history. Custom workouts can save a matching demonstration reference. See RELEASE_7_1_1.md.
+
 # MacroPulse 7.1 — latest shipped experience
 
 Daily targets/jug/hydration now share one panel. Live workouts have a persistent pause-aware clock, set ring, red Stop and original movement illustrations. Food includes 20 Douglasville chain menu links, 10 sourced offline nutrition snapshots and an editable visited-place directory. Stack includes benefits, evidence and cautions for every existing option. See RELEASE_7_1.md for shipped features, preservation, validation and boundaries. Exact home-based 20-mile filtering, full imported menus and live restaurant services are not verified/integrated.
