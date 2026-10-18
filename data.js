@@ -46,6 +46,7 @@
         c.restaurants.every(x=>named(x)&&text(x.restaurant)&&text(x.serving)&&text(x.source)&&date(x.verified)&&macros(x))&&
         c.nutrients.every(x=>object(x)&&text(x.id)&&text(x.mealId)&&text(x.source)&&x.source.trim()&&['fiber','sodium','calcium','iron'].some(k=>x[k]!==undefined)&&['fiber','sodium','calcium','iron'].every(k=>x[k]===undefined||number(x[k])))&&
         c.routineArchive.every(x=>object(x)&&text(x.id)&&training.validState(x.training))&&
+        (c.visitedMenus===undefined||(object(c.visitedMenus)&&c.visitedMenus.version===1&&Array.isArray(c.visitedMenus.places)&&new Set(c.visitedMenus.places.map(p=>p.id)).size===c.visitedMenus.places.length&&c.visitedMenus.places.every(p=>object(p)&&text(p.id)&&p.id.length>0&&text(p.name)&&p.name.trim()&&p.name.length<=120&&text(p.location)&&p.location.length<=160&&text(p.note)&&p.note.length<=1000&&text(p.menuUrl)&&p.menuUrl.length<=1000&&(p.menuUrl===''||new URL(p.menuUrl).protocol==='https:'))))&&
         object(c.preferences)&&['largeText','highContrast','reducedMotion'].every(k=>typeof c.preferences[k]==='boolean')&&['home','food','fitness','stack','progress'].includes(c.preferences.startPage);
     }catch{return false;}
   }
@@ -75,11 +76,13 @@
     if(raw!==null&&state.health!==undefined&&storage.getItem(HEALTH_MIGRATION)===null)storage.setItem(HEALTH_MIGRATION,raw);
     if(raw!==null&&state.six!==undefined&&storage.getItem(SIX_MIGRATION)===null)storage.setItem(SIX_MIGRATION,raw);
     if(raw!==null&&state.seven!==undefined&&storage.getItem(SEVEN_MIGRATION)===null)storage.setItem(SEVEN_MIGRATION,raw);
+    if(raw!==null&&(state.five?.active?.timer||state.five?.sessions.some(s=>s.timer)||state.complete?.visitedMenus)&&storage.getItem(CLOCK_MIGRATION)===null)storage.setItem(CLOCK_MIGRATION,raw);
     baseWrite(storage,state,training,options);
   }
   const HEALTH_MIGRATION=KEY+'_before_5_1';
   const SIX_MIGRATION=KEY+'_before_6';
   const SEVEN_MIGRATION=KEY+'_before_7';
-  const api={KEY,RECOVERY,MIGRATION,COMPLETE_MIGRATION,FIVE_MIGRATION,HEALTH_MIGRATION,SIX_MIGRATION,SEVEN_MIGRATION,valid:fiveValid,validUpgrade,defaults,completeDefaults,validComplete,write:fiveWrite,date};
+  const CLOCK_MIGRATION=KEY+'_before_7_1';
+  const api={KEY,RECOVERY,MIGRATION,COMPLETE_MIGRATION,FIVE_MIGRATION,HEALTH_MIGRATION,SIX_MIGRATION,SEVEN_MIGRATION,CLOCK_MIGRATION,valid:fiveValid,validUpgrade,defaults,completeDefaults,validComplete,write:fiveWrite,date};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.MacroData=api;
 })(typeof window!=='undefined'?window:globalThis);
