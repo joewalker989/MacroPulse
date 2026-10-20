@@ -1,3 +1,11 @@
+# MacroPulse 8.0 — reviewed food and health imports
+
+Current release: reviewed Apple Health XML / standard fitness CSV import, local English nutrition-label OCR, food/barcode adapters, recipe and meal-description drafts, food-plan suggestions, imported-product nutrients, guarded expenditure estimates, set types/RIR, automatic rest, training-block previews, external video references, calendar reminders and a passphrase privacy screen. Home has direct links to the new tools.
+
+**The 20-feature expansion is not complete.** See [RELEASE_8_0.md](RELEASE_8_0.md) for the exact 20-row shipped/partial/pending report. Live Apple Health/fitness-app authorization, cloud sync, native watch/widgets, background app notifications and AI food/menu recognition are not integrated. Public food search returned HTTP 503 during validation; barcode lookup worked. Camera scanning depends on browser support and has not been tested on iPhone. A privacy screen does not encrypt saved data.
+
+The optional `connected` extension preserves the prior raw JSON before first save. No progress-photo storage is changed. All 89 unit tests and 12 browser suites passed locally, including actual local OCR and offline/legacy/photo regression checks. Older sections below describe prior releases and do not replace the current integration boundaries.
+
 # MacroPulse 7.2 — seven local convenience tools
 
 Workout focus mode, work/rest intervals, illustrated printable routines, workout notes, planned-workout calendar files, printable food diaries and a US/metric converter. See RELEASE_7_2.md for locations, verification and explicit boundaries. No app or photo record migration is needed.

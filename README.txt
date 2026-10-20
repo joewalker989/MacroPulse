@@ -1,4 +1,6 @@
-MACROPULSE 4.0 - COMPLETE UPGRADE PWA
+MACROPULSE 8.0 - LOCAL TRACKING WITH REVIEWED FOOD AND HEALTH IMPORTS
+
+See RELEASE_8_0.md for exact current feature status. Apple Health export.xml and standard fitness CSV can be imported locally with review; this is not live Apple Health or fitness-app sync. English nutrition-label OCR runs locally with verified downloads cached after first use. Optional online food/barcode queries use Open Food Facts community data, which needs review and may be unavailable. AI meal recognition, cloud sync, native watches/widgets and background app notifications are not integrated. The passphrase privacy screen does not encrypt stored records or photos. Older version notes follow.
 
 1. Unzip all files into the same folder.
 2. Upload the folder to any HTTPS static host (for example GitHub Pages, Netlify, or Cloudflare Pages).

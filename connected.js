@@ -4,7 +4,8 @@
  const obj=x=>x!==null&&typeof x==='object'&&!Array.isArray(x),text=(x,max=200)=>typeof x==='string'&&x.length<=max;
  const number=(x,min=0,max=1e7)=>typeof x==='number'&&Number.isFinite(x)&&x>=min&&x<=max;
  const date=x=>text(x,10)&&/^\d{4}-\d{2}-\d{2}$/.test(x)&&Number.isFinite(Date.parse(x+'T12:00:00Z'))&&new Date(x+'T12:00:00Z').toISOString().slice(0,10)===x;
- const stamp=x=>text(x,50)&&Number.isFinite(Date.parse(x));
+ const isoStamp=x=>typeof x==='string'?x.replace(/^(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2}) ([+-]\d{2})(\d{2})$/,'$1T$2$3:$4'):x;
+ const stamp=x=>text(x,50)&&/(?:Z|[+-]\d{2}:?\d{2})$/.test(x)&&Number.isFinite(Date.parse(isoStamp(x)));
  const shift=(d,n)=>{if(!date(d))throw Error('Choose a valid date.');const v=new Date(d+'T12:00:00Z');v.setUTCDate(v.getUTCDate()+n);return v.toISOString().slice(0,10);};
  const kinds=['weight','steps','activeEnergy','heartRate','sleep','workout'];
  const units={weight:'lb',steps:'count',activeEnergy:'kcal',heartRate:'bpm',sleep:'min',workout:'min'};
@@ -21,7 +22,7 @@
   if(raw.type==='activeEnergy'&&unit==='kJ'){value/=4.184;unit='kcal';}
   if(['sleep','workout'].includes(raw.type)&&unit==='s'){value/=60;unit='min';}
   if(raw.type==='steps'&&unit==='count')value=Math.round(value);
-  const row={type:raw.type,source:raw.source.trim(),start:raw.start,end:raw.end||raw.start,date:raw.start.slice(0,10),value,unit};
+  const row={type:raw.type,source:raw.source.trim(),start:isoStamp(raw.start),end:isoStamp(raw.end||raw.start),date:raw.start.slice(0,10),value,unit};
   return observation(row)&&!(row.type==='weight'&&(value<50||value>1000))?row:null;
  }
  const key=r=>JSON.stringify([r.type,r.source,Date.parse(r.start),Date.parse(r.end),r.value,r.unit]);
@@ -34,7 +35,7 @@
  }
  function parseCsv(input){const rows=csvRows(input),head=(rows.shift()||[]).map(x=>x.replace(/^\uFEFF/,'').trim());if(!['type','source','start','value','unit'].every(k=>head.includes(k)))throw Error('CSV needs type,source,start,end,value,unit columns. Download the example.');let skipped=0;const records=[];for(const row of rows){const raw=Object.fromEntries(head.map((k,i)=>[k,row[i]||''])),r=normalize(raw);if(r)records.push(r);else skipped++;}return {records,skipped};}
  const appleTypes={HKQuantityTypeIdentifierBodyMass:'weight',HKQuantityTypeIdentifierStepCount:'steps',HKQuantityTypeIdentifierActiveEnergyBurned:'activeEnergy',HKQuantityTypeIdentifierHeartRate:'heartRate'};
- function appleRecord(attrs){let type=appleTypes[attrs.type],unit=attrs.unit,value=attrs.value;if(attrs.type==='HKCategoryTypeIdentifierSleepAnalysis'){if(!/^HKCategoryValueSleepAnalysisAsleep/.test(attrs.value))return null;type='sleep';unit='min';value=(Date.parse(attrs.endDate)-Date.parse(attrs.startDate))/60000;}
+ function appleRecord(attrs){let type=appleTypes[attrs.type],unit=attrs.unit,value=attrs.value;if(attrs.type==='HKCategoryTypeIdentifierSleepAnalysis'){if(!/^HKCategoryValueSleepAnalysisAsleep/.test(attrs.value))return null;type='sleep';unit='min';value=(Date.parse(isoStamp(attrs.endDate))-Date.parse(isoStamp(attrs.startDate)))/60000;}
   if(!type)return null;if(unit==='count/min')unit='bpm';return normalize({type,source:attrs.sourceName||'Apple Health',start:attrs.startDate,end:attrs.endDate,value,unit});}
  const nutrientKeys={fiber:'fiber_100g',sodium:'sodium_100g',calcium:'calcium_100g',iron:'iron_100g',potassium:'potassium_100g',magnesium:'magnesium_100g',zinc:'zinc_100g',vitaminC:'vitamin-c_100g',vitaminD:'vitamin-d_100g',vitaminB12:'vitamin-b12_100g',sugars:'sugars_100g',saturatedFat:'saturated-fat_100g'};
  function foodProduct(raw,now=new Date().toISOString()){
