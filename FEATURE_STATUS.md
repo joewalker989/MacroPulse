@@ -1,3 +1,7 @@
+# MacroPulse 7.2 — seven local convenience tools
+
+Workout focus mode, work/rest intervals, illustrated printable routines, workout notes, planned-workout calendar files, printable food diaries and a US/metric converter. See RELEASE_7_2.md for locations, verification and explicit boundaries. No app or photo record migration is needed.
+
 # MacroPulse 7.1.2 — timer controls and visible supplement benefits
 
 Fitness shows the readiness check, 00:00:00 timer and Start/red Stop controls immediately. Stack shows each benefit directly below the supplement. Existing pause/resume, evidence, cautions and sources are retained. See RELEASE_7_1_2.md.
