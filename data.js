@@ -67,11 +67,13 @@
     const F=typeof module!=='undefined'&&module.exports?require('./five.js'):root.MacroFive;
     const H=typeof module!=='undefined'&&module.exports?require('./health.js'):root.MacroHealth;
     const S=typeof module!=='undefined'&&module.exports?require('./six.js'):root.MacroSix;const N=typeof module!=='undefined'&&module.exports?require('./seven.js'):root.MacroSeven;
-    return baseValid(x,training)&&(x.five===undefined||!!F&&F.valid(x.five))&&(x.health===undefined||!!H&&H.valid(x.health))&&(x.six===undefined||!!S&&S.valid(x.six))&&(x.seven===undefined||!!N&&N.valid(x.seven));
+    const C=typeof module!=='undefined'&&module.exports?require('./connected.js'):root.MacroConnected;
+    return baseValid(x,training)&&(x.five===undefined||!!F&&F.valid(x.five))&&(x.health===undefined||!!H&&H.valid(x.health))&&(x.six===undefined||!!S&&S.valid(x.six))&&(x.seven===undefined||!!N&&N.valid(x.seven))&&(x.connected===undefined||!!C&&C.valid(x.connected));
   }
   function fiveWrite(storage,state,training,options){
     if(!fiveValid(state,training))throw Error('Invalid or future app data. Original data preserved.');
     const raw=storage.getItem(KEY);
+    if(raw!==null&&state.connected!==undefined&&storage.getItem(CONNECTED_MIGRATION)===null)storage.setItem(CONNECTED_MIGRATION,raw);
     if(raw!==null&&state.five!==undefined&&storage.getItem(FIVE_MIGRATION)===null)storage.setItem(FIVE_MIGRATION,raw);
     if(raw!==null&&state.health!==undefined&&storage.getItem(HEALTH_MIGRATION)===null)storage.setItem(HEALTH_MIGRATION,raw);
     if(raw!==null&&state.six!==undefined&&storage.getItem(SIX_MIGRATION)===null)storage.setItem(SIX_MIGRATION,raw);
@@ -83,6 +85,7 @@
   const SIX_MIGRATION=KEY+'_before_6';
   const SEVEN_MIGRATION=KEY+'_before_7';
   const CLOCK_MIGRATION=KEY+'_before_7_1';
-  const api={KEY,RECOVERY,MIGRATION,COMPLETE_MIGRATION,FIVE_MIGRATION,HEALTH_MIGRATION,SIX_MIGRATION,SEVEN_MIGRATION,CLOCK_MIGRATION,valid:fiveValid,validUpgrade,defaults,completeDefaults,validComplete,write:fiveWrite,date};
+  const CONNECTED_MIGRATION=KEY+'_before_8';
+  const api={KEY,RECOVERY,MIGRATION,COMPLETE_MIGRATION,FIVE_MIGRATION,HEALTH_MIGRATION,SIX_MIGRATION,SEVEN_MIGRATION,CLOCK_MIGRATION,CONNECTED_MIGRATION,valid:fiveValid,validUpgrade,defaults,completeDefaults,validComplete,write:fiveWrite,date};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.MacroData=api;
 })(typeof window!=='undefined'?window:globalThis);
