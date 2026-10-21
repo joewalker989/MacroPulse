@@ -1,0 +1,10 @@
+/* Reviewed food matches and weighed grams; no inferred household-unit conversions. */
+(function(root){'use strict';
+ function calculate(name,yieldCount,rows,foods){
+  if(typeof name!=='string'||!name.trim()||name.length>120||!Number.isFinite(yieldCount)||yieldCount<.1||yieldCount>1000||!Array.isArray(rows)||!rows.length||rows.length>100)throw Error('Enter a recipe name, yield and 1–100 weighed ingredients.');
+  const nutrients=Object.create(null),coverage=Object.create(null),items=rows.map(row=>{const food=foods.find(f=>f.id===row.foodId);if(!food||!MacroFoodValid(food)||!Number.isFinite(row.grams)||row.grams<1||row.grams>10000)throw Error('Match every ingredient to a saved USDA food and enter 1–10,000 grams.');const qty=row.grams/100;for(const [id,n]of Object.entries(food.nutrients)){if(nutrients[id]&&nutrients[id].unit!==n.unit)throw Error('Nutrient units differ; choose compatible food records.');nutrients[id]??={name:n.name,unit:n.unit,value:0};nutrients[id].value+=n.value*qty;coverage[id]=(coverage[id]||0)+1;}return {name:food.name,serving:'100 g',qty,cal:food.cal,p:food.p,c:food.c,f:food.f,source:food.source,foodId:food.id,grams:row.grams};});
+  const total=items.reduce((s,i)=>{for(const k of ['cal','p','c','f'])s[k]+=i[k]*i.qty;return s;},{cal:0,p:0,c:0,f:0});return {name:name.trim(),yield:yieldCount,items,total,perPortion:Object.fromEntries(Object.entries(total).map(([k,v])=>[k,v/yieldCount])),nutrients:Object.fromEntries(Object.entries(nutrients).map(([id,n])=>[id,{...n,value:n.value/yieldCount,coveredIngredients:coverage[id],totalIngredients:items.length,complete:coverage[id]===items.length}]))};
+ }
+ function MacroFoodValid(f){return ['cal','p','c','f'].every(k=>Number.isFinite(f[k])&&f[k]>=0)&&f.basis==='100 g'&&f.nutrients&&Object.values(f.nutrients).every(n=>Number.isFinite(n.value)&&n.value>=0&&typeof n.unit==='string');}
+ const api={calculate};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.MacroRecipeNutrition=api;
+})(typeof window!=='undefined'?window:globalThis);
