@@ -8,16 +8,16 @@
   async function raw(path,{method='GET',body,authorized=true,headers={}}={}){
    if(authorized&&!session)throw Error('Sign in to your cloud account first.');
    if(authorized&&session.expires_at*1000<Date.now()+30000)await refresh();
-   const r=await fetcher(new URL(path,base),{method,credentials:'omit',referrerPolicy:'no-referrer',headers:{apikey:publishableKey,...(authorized?{Authorization:'Bearer '+session.access_token}:{}),...(body!==undefined?{'Content-Type':'application/json'}:{}),...headers},body:body===undefined?undefined:JSON.stringify(body),signal:AbortSignal.timeout(60000)});
-   if(!r.ok){let data;try{data=await r.json();}catch{}throw Object.assign(Error(data?.error_description||data?.error||data?.message||'Cloud request failed ('+r.status+').'),{status:r.status});}
+   const requestUser=authorized?session.user.id:null;const r=await fetcher(new URL(path,base),{method,credentials:'omit',referrerPolicy:'no-referrer',headers:{apikey:publishableKey,...(authorized?{Authorization:'Bearer '+session.access_token}:{}),...(body!==undefined?{'Content-Type':'application/json'}:{}),...headers},body:body===undefined?undefined:JSON.stringify(body),signal:AbortSignal.timeout(60000)});
+   if(authorized&&session?.user.id!==requestUser)throw Error('Cloud account changed while the request was running. Retry from the current account.');if(!r.ok){let data;try{data=await r.json();}catch{}throw Object.assign(Error(data?.error_description||data?.error||data?.message||'Cloud request failed ('+r.status+').'),{status:r.status});}
    return r.status===204?null:r.json();
   }
   function use(data){if(!data?.access_token||!data?.refresh_token||!data?.user?.id)throw Error('Cloud sign-in returned no session. Check email confirmation.');session={...data,expires_at:data.expires_at||Math.floor(Date.now()/1000)+(data.expires_in||900)};return {id:session.user.id,email:session.user.email};}
-  async function refresh(){if(!session?.refresh_token)throw Error('Sign in again.');const data=await raw('/auth/v1/token?grant_type=refresh_token',{method:'POST',authorized:false,body:{refresh_token:session.refresh_token}});use(data);}
+  async function refresh(){if(!session?.refresh_token)throw Error('Sign in again.');const expectedUser=session.user.id,expectedToken=session.refresh_token;const data=await raw('/auth/v1/token?grant_type=refresh_token',{method:'POST',authorized:false,body:{refresh_token:expectedToken}});if(session?.user.id!==expectedUser||session.refresh_token!==expectedToken)throw Error('Cloud account changed during token refresh. Retry from the current account.');use(data);}
   return {
    signIn:async(email,password)=>use(await raw('/auth/v1/token?grant_type=password',{method:'POST',authorized:false,body:{email,password}})),
    signUp:async(email,password)=>{const data=await raw('/auth/v1/signup',{method:'POST',authorized:false,body:{email,password}});return data.access_token?use(data):{confirmationRequired:true};},
-   signOut:async()=>{try{if(session)await raw('/auth/v1/logout',{method:'POST'});}finally{session=null;}},
+   signOut:async()=>{const expectedUser=session?.user.id;try{if(session)await raw('/auth/v1/logout',{method:'POST'});}finally{if(session?.user.id===expectedUser)session=null;}},
    user:()=>session?{id:session.user.id,email:session.user.email}:null,
    capabilities:()=>raw('/functions/v1/mp-services',{method:'POST',body:{action:'capabilities'}}),
    recognize:(action,input)=>raw('/functions/v1/mp-services',{method:'POST',body:{action,consent:true,...input}}),
