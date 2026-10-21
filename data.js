@@ -67,12 +67,13 @@
     const F=typeof module!=='undefined'&&module.exports?require('./five.js'):root.MacroFive;
     const H=typeof module!=='undefined'&&module.exports?require('./health.js'):root.MacroHealth;
     const S=typeof module!=='undefined'&&module.exports?require('./six.js'):root.MacroSix;const N=typeof module!=='undefined'&&module.exports?require('./seven.js'):root.MacroSeven;
-    const C=typeof module!=='undefined'&&module.exports?require('./connected.js'):root.MacroConnected;
-    return baseValid(x,training)&&(x.five===undefined||!!F&&F.valid(x.five))&&(x.health===undefined||!!H&&H.valid(x.health))&&(x.six===undefined||!!S&&S.valid(x.six))&&(x.seven===undefined||!!N&&N.valid(x.seven))&&(x.connected===undefined||!!C&&C.valid(x.connected));
+    const C=typeof module!=='undefined'&&module.exports?require('./connected.js'):root.MacroConnected;const P=typeof module!=='undefined'&&module.exports?require('./plus.js'):root.MacroPlus;
+    return baseValid(x,training)&&(x.five===undefined||!!F&&F.valid(x.five))&&(x.health===undefined||!!H&&H.valid(x.health))&&(x.six===undefined||!!S&&S.valid(x.six))&&(x.seven===undefined||!!N&&N.valid(x.seven))&&(x.connected===undefined||!!C&&C.valid(x.connected))&&(x.plus===undefined||!!P&&P.valid(x.plus));
   }
   function fiveWrite(storage,state,training,options){
     if(!fiveValid(state,training))throw Error('Invalid or future app data. Original data preserved.');
     const raw=storage.getItem(KEY);
+    if(raw!==null&&state.plus!==undefined&&storage.getItem(KEY+'_before_9')===null)storage.setItem(KEY+'_before_9',raw);
     if(raw!==null&&state.connected!==undefined&&storage.getItem(CONNECTED_MIGRATION)===null)storage.setItem(CONNECTED_MIGRATION,raw);
     if(raw!==null&&state.five!==undefined&&storage.getItem(FIVE_MIGRATION)===null)storage.setItem(FIVE_MIGRATION,raw);
     if(raw!==null&&state.health!==undefined&&storage.getItem(HEALTH_MIGRATION)===null)storage.setItem(HEALTH_MIGRATION,raw);

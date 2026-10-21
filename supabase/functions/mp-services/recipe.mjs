@@ -1,0 +1,12 @@
+/* Restricted publisher fetch: no arbitrary proxy, scripts, cookies or private networks. */
+export const recipeHosts=Object.freeze(['www.budgetbytes.com','www.skinnytaste.com','www.eatingwell.com','www.allrecipes.com']);
+function allowed(raw){const url=new URL(raw);if(url.protocol!=='https:'||url.username||url.password||url.port||!recipeHosts.includes(url.hostname))throw Error('Choose an HTTPS recipe from a supported publisher.');return url;}
+function find(value,result=[]){if(result.length>=10||!value||typeof value!=='object')return result;if(Array.isArray(value)){for(const x of value)find(x,result);}else{const type=value['@type'];if(type==='Recipe'||Array.isArray(type)&&type.includes('Recipe'))result.push(value);else if(value['@graph'])find(value['@graph'],result);}return result.slice(0,10);}
+export async function fetchRecipe(raw,fetcher=fetch){if(typeof raw!=='string'||raw.length>2000)throw Error('Enter a supported recipe URL.');let url=allowed(raw),response;
+ for(let i=0;i<4;i++){response=await fetcher(url,{redirect:'manual',headers:{Accept:'text/html'},signal:AbortSignal.timeout(20000)});if([301,302,303,307,308].includes(response.status)){url=allowed(new URL(response.headers.get('location')||'',url).href);if(i===3)throw Error('Too many recipe redirects.');continue;}break;}
+ if(!response?.ok||!response.headers.get('content-type')?.includes('text/html'))throw Error('Publisher does not allow recipe retrieval. Paste its Recipe JSON-LD or enter ingredients manually.');
+ if(Number(response.headers.get('content-length'))>2000000)throw Error('Recipe page exceeds the 2 MB limit.');const reader=response.body.getReader(),parts=[];let size=0;try{for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>2000000)throw Error('Recipe page exceeds the 2 MB limit.');parts.push(value);}}finally{await reader.cancel().catch(()=>{});}
+ const bytes=new Uint8Array(size);let offset=0;for(const part of parts){bytes.set(part,offset);offset+=part.length;}const html=new TextDecoder().decode(bytes),recipes=[];
+ for(const match of html.matchAll(/<script\b[^>]*\btype\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script\s*>/gi)){try{find(JSON.parse(match[1]),recipes);}catch{}if(recipes.length>=10)break;}
+ if(!recipes.length)throw Error('No supported Recipe JSON-LD found. Enter the recipe manually.');return {source:url.href,recipes:recipes.slice(0,10),reviewRequired:true};
+}
