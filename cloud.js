@@ -21,6 +21,7 @@
    user:()=>session?{id:session.user.id,email:session.user.email}:null,
    capabilities:()=>raw('/functions/v1/mp-services',{method:'POST',body:{action:'capabilities'}}),
    recognize:(action,input)=>raw('/functions/v1/mp-services',{method:'POST',body:{action,consent:true,...input}}),
+   fitness:(action,input={})=>raw('/functions/v1/mp-services',{method:'POST',body:{action,...input}}),
    usda:query=>raw('/functions/v1/mp-services',{method:'POST',body:{action:'usda',query}}),
    read:async()=>{const rows=await raw('/rest/v1/mp_snapshots?select=revision,payload,updated_at&user_id=eq.'+encodeURIComponent(session?.user.id||''));return rows[0]||null;},
    backup:async(payload,revision)=>{if(payload?.format!=='MacroPulse encrypted')throw Error('Only encrypted snapshots may be uploaded.');const rows=await raw('/rest/v1/rpc/mp_put_snapshot',{method:'POST',body:{expected_revision:revision,encrypted_payload:payload}});if(!rows?.length)throw Object.assign(Error('Cloud changed on another device. Preview the cloud copy before uploading again.'),{status:409});return rows[0];},
