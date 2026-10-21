@@ -1,6 +1,6 @@
 # MacroPulse 9.0 — encrypted backups and reviewed connections
 
-Encrypted cloud backups passed actual sign-in, private record/photo transfer and conflict tests. Reviewed weekly planning, USDA search, offline barcode-picture decoding and guarded Strava/recipe adapters are implemented. iOS/widgets and Watch simulator targets compiled; provider credentials and signed-device acceptance remain pending. See [RELEASE_9_0.md](RELEASE_9_0.md) for exact verification and remaining provider/device requirements. This does not make every pending feature live. Older release notes below remain historical.
+Encrypted cloud backups passed actual sign-in, private record/photo transfer and conflict tests. Reviewed weekly planning, USDA search, offline barcode-picture decoding, a credited 78-clip online exercise player and guarded Strava/recipe adapters are implemented. iOS/widgets and Watch simulator targets compiled; provider credentials and signed-device acceptance remain pending. See [RELEASE_9_0.md](RELEASE_9_0.md) for exact verification and remaining provider/device requirements. This does not make every pending feature live. Older release notes below remain historical.
 
 # MacroPulse 8.0 — reviewed food and health imports
 

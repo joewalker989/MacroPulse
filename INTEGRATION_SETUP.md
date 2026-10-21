@@ -32,6 +32,10 @@ Signed-in server recipe retrieval allows only Budget Bytes, Skinnytaste, EatingW
 
 The barcode-picture decoder downloads pinned `@zxing/browser@0.1.5` from jsDelivr after a user action and checks its SHA-256 before caching/execution. The selected image stays on the device. Subsequent scans work offline; food database lookup is a separate online step. This path does not require the browser's native BarcodeDetector. Actual iPhone camera optics, focus and HEIC handling still need device verification. Source/license: https://github.com/zxing-js/browser .
 
+## Licensed exercise clips
+
+Fitness includes 78 wger publisher clips across 46 movements, with per-clip author/source/Creative Commons attribution. The 24 H.264 clips have broader support; 54 HEVC clips require compatible devices. Actual browser metadata loading was verified for an H.264 clip. No autoplay, startup media request, media mirroring or offline video cache is used. Publisher failures and unavailable codecs are shown explicitly. See VIDEO_SOURCES.md.
+
 ## Existing-project security setting
 
 Enable leaked-password protection in Supabase Auth settings: https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection . The advisor also reports informational “RLS Enabled No Policy” entries for provider state/token/lease tables. These are intentionally server-only: all anon/authenticated table privileges are revoked, no client policies exist and only service-role code can access them. They must not be opened to client roles to clear an informational notice.

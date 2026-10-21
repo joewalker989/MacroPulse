@@ -12,6 +12,7 @@
 - Training-block calendar snapshots and reviewed day startup, retaining readiness/equipment checks and deload sets.
 - Server-side structured meal/photo/menu estimate requests, per-request input consent and mandatory manual nutrition review. These require an AI provider key and model; they are not live until configured and a real request succeeds.
 - Apple companion source and native bridge for reviewed HealthKit imports, Watch workout controls/real workout collection, widget water queues, Live Activities, hydration notifications and device authentication. See `native/apple/README.md` for signing, separate-storage migration and device verification requirements.
+- Licensed online exercise player with 78 credited wger clips across 46 movements (24 H.264; 54 HEVC). Original media stream only after selection; actual publisher metadata loaded successfully in a browser. Offline illustrations remain available. See VIDEO_SOURCES.md for per-media attribution and limits.
 - Cross-browser barcode-picture decoding with a pinned, hash-verified ZXing download, checksum review and offline reuse. An actual barcode image decoded successfully using both the downloaded runtime and the offline cache; tampered cache execution was rejected.
 - Read-only Strava browser OAuth implementation with account-bound, expiring, single-use state, encrypted server-only tokens, refresh/revoke and serialized provider operations. Provider credentials are not configured, so no real Strava connection is claimed.
 - Restricted signed-in server recipe retrieval for four publishers, with redirect/host/size checks and passive Recipe JSON-LD review. Publisher blocks and missing nutrition remain explicit.
@@ -39,7 +40,7 @@ Supabase's security advisor reports leaked-password protection disabled for this
 | Android Health Connect | No Android native implementation. |
 | Safari barcode camera | Barcode-picture fallback implemented and verified with actual ZXing decoding/offline reload. Real iPhone camera/library focus and HEIC behavior are not device-verified. Live video still depends on native BarcodeDetector. |
 | Recipe URLs | Browser import and four-publisher server retrieval implemented. No arbitrary URL proxy or ingredient-level nutrient calculation. Publisher delivery not guaranteed. |
-| Filmed exercise library | Existing illustrated movements and external demonstration references; no newly licensed complete embedded filmed library. |
+| Filmed exercise library | Licensed embedded online catalog: 78 clips/46 movements, with attribution and codec filters. It does not cover every variation or provide offline video. Actual H.264 publisher metadata loaded; every clip/device is not individually verified. |
 | Weekly meal planning | Uses the user's recipes/prices/tags; no verified allergy database, medical diet optimizer or live grocery pricing. |
 
 ## Data preservation and tests
@@ -62,7 +63,7 @@ The original 89 unit tests passed; new tests cover encryption/tampering, cloud c
 | 8 | Detailed nutrients | Imported product nutrients plus all supplied USDA nutrients; missing values stay unknown. |
 | 9 | Adaptive expenditure | Existing complete-log/weight gates and reviewed target proposal with floors/change limit; not a measured metabolism. |
 | 10 | AI restaurant menus | Implemented server/client transcription drafts; provider activation and real scans pending. Official restaurant nutrition is not inferred. |
-| 11 | Exercise video library | Offline illustrations and publisher video references; complete licensed embedded filmed collection remains pending. |
+| 11 | Exercise video library | Offline illustrations plus 78 licensed publisher clips/46 movements in an embedded online player. H.264/HEVC filtering, attribution and actual publisher loading verified. Some movements/devices remain uncovered; no offline video or form assessment. |
 | 12 | Set types and RIR | Implemented and preserved through finished logs. |
 | 13 | Training programs | Snapshots, deload weeks, full-block calendar and reviewed day execution. Automatic load increases remain proposals. |
 | 14 | Automatic rest | Existing foreground automatic rest on completed sets; no web background alarm promise. |
