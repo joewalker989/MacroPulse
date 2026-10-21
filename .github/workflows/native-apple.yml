@@ -1,0 +1,15 @@
+name: Apple companion builds
+on: [push, pull_request]
+jobs:
+  apple:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: brew install xcodegen
+      - run: xcodegen generate --spec project.yml
+        working-directory: native/apple
+      - run: xcodebuild -project MacroPulseNative.xcodeproj -scheme MacroPulse -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
+        working-directory: native/apple
+      - run: xcodebuild -project MacroPulseNative.xcodeproj -scheme MacroPulseWatch -sdk watchsimulator -destination 'generic/platform=watchOS Simulator' CODE_SIGNING_ALLOWED=NO build
+        working-directory: native/apple

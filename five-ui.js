@@ -62,5 +62,5 @@ window.mountFive=function({getState,save,escapeHTML:esc,today,uid,isBlocked}){
   if(a==='compare'){const x=state().sessions.find(x=>x.id===$('sessionA').value),y=state().sessions.find(x=>x.id===$('sessionB').value);if(!x||!y)throw Error('Finish two live sessions to compare.');const c=F.comparison(x,y);$('fiveComparison').textContent=`A: ${c.a.sets} sets, ${c.a.volume} rep-lb. B: ${c.b.sets} sets, ${c.b.volume} rep-lb. Change B − A: ${c.sets} sets, ${c.volume} rep-lb.`;}
  }catch(err){status(err.message);}});
  setInterval(()=>{updateConsole();if($('liveRest'))$('liveRest').textContent=restEnd?Date.now()<restEnd?'Rest · '+Math.ceil((restEnd-Date.now())/1000)+'s remaining':'Rest complete':'Rest timer ready';},1000);
- render();return {render,commit};
+ render();return {render,commit,previewPlan:p=>{if(state().active)throw Error('Finish or end the current session first.');preview(structuredClone(p));}};
 };
