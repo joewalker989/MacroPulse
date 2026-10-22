@@ -18,7 +18,7 @@ No existing app or photo schema is replaced. Sync metadata is separate and encry
 
 Unit coverage includes independent additions, food tuple identity, deletion review, same-record conflicts, atomic settings/workouts, duplicate dates, stock ledgers, late edits, unknown/prototype keys, weighed portions, incomplete nutrients and unit mismatch rejection. Browser coverage uses two isolated devices and an encrypted revision-checked server fixture: initial review, no-op sync, separate diary additions, automatic pull, target conflict selection, encrypted original recovery, restart baseline recovery, stale cloud rejection and baseline reset without app-data changes. Recipe browser coverage checks review invalidation after ingredient edits and integration with the existing planner.
 
-These browser server fixtures verify client behavior; they do not count as an additional live Supabase transfer test. The underlying live account/private-storage/revision controls were verified in 9.0. Final test and deployment evidence is recorded with the release handoff.
+All 124 unit tests and 16 browser suites passed locally. GitHub PWA checks and iOS/widget/Watch simulator builds also passed on the implementation commit (PWA run 39680048088; Apple run 39680048252). Separate live Supabase browser tests used two disposable accounts: actual encrypted record transfer, owner recovery upload/list/download/decryption, immutable recovery rejection, stale revision rejection and cross-account record/recovery denial all passed. Test sessions were signed out; cleanup confirmed zero remaining test accounts and storage objects. Final deployed-file verification is recorded with the release handoff.
 
 ## Still requires external setup or device verification
 
