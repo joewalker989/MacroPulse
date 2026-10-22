@@ -1,3 +1,7 @@
+# MacroPulse 9.1 — reviewed sync and weighed recipe nutrition
+
+Optional encrypted device/cloud record merging now includes explicit conflicts, encrypted original recovery and session-only automatic sync. Weighed recipes use reviewed USDA matches and preserve missing nutrient coverage. See [RELEASE_9_1.md](RELEASE_9_1.md) for behavior, tests and external setup still required. The sections below are historical releases.
+
 # MacroPulse 9.0 — encrypted backups and reviewed connections
 
 Encrypted cloud backups passed actual sign-in, private record/photo transfer and conflict tests. Reviewed weekly planning, USDA search, offline barcode-picture decoding, a credited 78-clip online exercise player and guarded Strava/recipe adapters are implemented. iOS/widgets and Watch simulator targets compiled; provider credentials and signed-device acceptance remain pending. See [RELEASE_9_0.md](RELEASE_9_0.md) for exact verification and remaining provider/device requirements. This does not make every pending feature live. Older release notes below remain historical.
