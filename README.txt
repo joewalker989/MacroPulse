@@ -1,3 +1,11 @@
+MACROPULSE 9.5 - MULTI-SELECT FOOD RESULTS
+
+Open https://joewalker989.github.io/MacroPulse/#food . Select search results for a meal, use Review selected meal, review each portion and package basis, then preview and confirm the combined meal. Select up to 20 foods across searches. Drafts clear on reload; saved-source foods also work offline. Batch logging does not save new foods to your library or change targets.
+
+See RELEASE_9_5.md and ROADMAP_PROGRESS.md. Items 1–7, 9 and 11 are shipped. Item 10 still needs user-device/email/recovery acceptance; Apple Health item 8 remains deferred. Item 12, actual meal times and time zones, is next.
+
+HISTORICAL RELEASE NOTES FOLLOW
+
 MACROPULSE 9.4 - GUIDED SECOND-DEVICE SETUP
 
 Open https://joewalker989.github.io/MacroPulse/ and choose Settings > Set up another device. Keep independent app and photo backups, use the same account and separate encryption passphrase, review the merge, then verify this device against cloud. Photos transfer separately after preview. The guide never connects Apple Health.
