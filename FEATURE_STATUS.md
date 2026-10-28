@@ -1,3 +1,7 @@
+# MacroPulse 9.2 — daily flow and reviewed setup
+
+Roadmap items 1–7 are implemented: simplified daily Home, guided setup, current cloud/session messages, library-only USDA saving, persistent planning preferences, recipe nutrients in diary coverage and inventory/ledger sync review. See [RELEASE_9_2.md](RELEASE_9_2.md) and [ROADMAP_PROGRESS.md](ROADMAP_PROGRESS.md). Native Apple activation and other provider/device dependencies remain pending. Older sections below describe historical releases.
+
 # MacroPulse 9.1 — reviewed sync and weighed recipe nutrition
 
 Optional encrypted device/cloud record merging now includes explicit conflicts, encrypted original recovery and session-only automatic sync. Weighed recipes use reviewed USDA matches and preserve missing nutrient coverage. See [RELEASE_9_1.md](RELEASE_9_1.md) for behavior, tests and external setup still required. The sections below are historical releases.
