@@ -1,6 +1,6 @@
 /* Home presentation only: retain existing nodes, event delegation and persistence. */
 window.mountDailyHome=function({getState,today,escapeHTML:esc}){
- const home=document.getElementById('home'),$=id=>document.getElementById(id),opened=new Set();
+ const home=document.getElementById('home'),$=id=>document.getElementById(id),opened=new Set();let lastMode=null;
  const next=document.createElement('section');next.id='dailyNext';next.className='panel';next.setAttribute('aria-label','Next useful action');
  const glance=document.createElement('div');glance.id='dailyAtGlance';glance.className='grid';glance.setAttribute('aria-label','Today’s recorded activity');
  const tools=document.createElement('div');tools.id='dailyToolsHeading';tools.innerHTML='<h2>More tools & insights</h2><p class="notice">Open a section when you need it. Your history, calculators and advanced tools are still here.</p><button class="alt" type="button" id="dailyFindTool">Find any tool</button>';
@@ -21,7 +21,7 @@ window.mountDailyHome=function({getState,today,escapeHTML:esc}){
  function collapsePanel(panel){
   if(panel.tagName==='DETAILS'||panel.id==='hydrationHub'||panel.id==='dailyNext'||panel===calorie||panel.closest('details')||panel.querySelector('#hydrationHub'))return;
   const heading=panel.querySelector('h3,h2');if(!heading)return;const key=(panel.parentElement.id||'home')+':'+(panel.id||heading.textContent),wrapper=document.createElement('details'),summary=document.createElement('summary');
-  wrapper.className='panel daily-secondary';wrapper.dataset.dailyGroup=key;wrapper.open=opened.has(key);summary.textContent=heading.textContent.replace(/^\d+(?:\.\d+)*\s*·\s*/,'');wrapper.append(summary);panel.before(wrapper);wrapper.append(panel);
+  wrapper.className='panel daily-secondary';wrapper.dataset.dailyGroup=key;wrapper.open=opened.has(key)||getState().complete?.preferences.homeView==='full';summary.textContent=heading.textContent.replace(/^\d+(?:\.\d+)*\s*·\s*/,'');wrapper.append(summary);panel.before(wrapper);wrapper.append(panel);
   // Cross-tool save/undo messages must remain visible when their introduction is collapsed.
   for(const live of panel.querySelectorAll(':scope > [data-seven-status], :scope > [data-six-status]'))wrapper.before(live);
  }
@@ -40,6 +40,7 @@ window.mountDailyHome=function({getState,today,escapeHTML:esc}){
   next.querySelector('[data-daily-water]')?.addEventListener('click',()=>$('dailyWaterShortcut').click());
   if(status?.textContent==='Complete Upgrade · local features')status.textContent='Changes use the existing saved records.';
   for(const panel of home.querySelectorAll('.panel'))collapsePanel(panel);
+  const mode=app.complete?.preferences.homeView||'simple';if(mode!==lastMode){for(const panel of home.querySelectorAll('details.daily-secondary'))panel.open=mode==='full';if(mode==='simple')opened.clear();lastMode=mode;}
  }
  // This formerly expanded release-shortcut panel is secondary to the daily actions.
  if($('connectedShortcuts'))$('connectedShortcuts').open=false;
