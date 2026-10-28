@@ -1,4 +1,4 @@
-MACROPULSE 9.5 - MULTI-SELECT FOOD RESULTS
+MACROPULSE 9.5.1 - MULTI-SELECT FOOD RESULTS
 
 Open https://joewalker989.github.io/MacroPulse/#food . Select search results for a meal, use Review selected meal, review each portion and package basis, then preview and confirm the combined meal. Select up to 20 foods across searches. Drafts clear on reload; saved-source foods also work offline. Batch logging does not save new foods to your library or change targets.
 

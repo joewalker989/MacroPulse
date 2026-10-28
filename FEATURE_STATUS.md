@@ -1,4 +1,4 @@
-# MacroPulse 9.5 — multi-select food results
+# MacroPulse 9.5.1 — multi-select food results
 
 Roadmap item 11 adds a reviewed meal draft of up to 20 combined-search foods. Selections survive new searches; quantities, package bases, date and totals require review before a single confirmed save. Existing library records and targets stay unchanged. See [RELEASE_9_5.md](RELEASE_9_5.md). Items 1–7, 9 and 11 are implemented. Item 10 user-device/email/recovery acceptance remains pending; native item 8 stays deferred. Older release details follow.
 

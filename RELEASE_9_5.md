@@ -1,6 +1,8 @@
-# MacroPulse 9.5 — multi-select food results
+# MacroPulse 9.5.1 — multi-select food results
 
 Roadmap item **11** is implemented. Items 1–7 and 9 remain complete. Item 10's guide is shipped, while the user's physical-device/email/recovery acceptance remains pending. Native Apple Health (8) remains deferred.
+
+Version 9.5.1 narrows the batch commit and rollback to diary and nutrient fields. Unrelated root fields, including literal unknown property names, are retained without copying them onto the app object. The browser regression reads exact saved JSON and checks this preservation.
 
 ## Shipped
 
