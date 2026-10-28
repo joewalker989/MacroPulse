@@ -1,3 +1,11 @@
+MACROPULSE 9.3 - COMBINED FOOD SEARCH
+
+Open https://joewalker989.github.io/MacroPulse/#food . Search saved foods, USDA and Open Food Facts together, then review the source and portion before logging. Saved matches work offline. Open Food Facts name search requires cloud sign-in and shares the 20/day service quota; public barcodes and USDA demo search do not require sign-in.
+
+See RELEASE_9_3.md and ROADMAP_PROGRESS.md for shipped versus pending work. Items 1–7 and 9 are shipped; direct Apple Health (8) is deferred because Mac/Xcode and Apple Developer setup are unavailable. Items 10–100 remain pending.
+
+HISTORICAL RELEASE NOTES FOLLOW
+
 MACROPULSE 9.2 - DAILY FLOW AND REVIEWED SETUP
 
 Open https://joewalker989.github.io/MacroPulse/ . Today prioritizes daily tracking; Guided setup reviews profile, goals, units, equipment and Home detail without automatically changing calorie targets. Optional cloud controls reflect sign-in/passphrase state. USDA foods can save without diary logging; planning preferences persist; reviewed recipe nutrients retain coverage; inventory sync keeps quantities and ledgers together.
