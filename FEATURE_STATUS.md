@@ -1,3 +1,7 @@
+# MacroPulse 9.4 — guided second-device setup
+
+Settings now guides independent backups, same-account/passphrase setup, reviewed merging, read-only cloud comparison and separate encrypted photo transfer. Automated isolated browsers passed a real backend test; user physical-device/email/recovery acceptance remains pending, so item 10 is partially complete. See [RELEASE_9_4.md](RELEASE_9_4.md). Items 1–7 and 9 remain shipped; item 8 is deferred. Older release details follow.
+
 # MacroPulse 9.3 — combined food search
 
 Roadmap item 9 joins saved foods, USDA and Open Food Facts in one reviewed search with offline cached results and independent source failures. OFF name search uses the signed-in service and shares its 20/day quota; public barcode and USDA searches remain available without sign-in. See [RELEASE_9_3.md](RELEASE_9_3.md). Items 1–7 remain shipped; item 8 is deferred because Mac/Xcode and an Apple Developer team are unavailable. Items 10–100 remain pending. Older release details follow.

@@ -2,6 +2,12 @@
 
 No server secret belongs in GitHub, app settings, a screenshot or a chat message. The browser config contains only the Supabase project URL and publishable key. Account tokens and the backup encryption passphrase remain in memory.
 
+## Guided device setup and acceptance
+
+Use Settings > Set up another device. Preserve separate app and photo backups on each populated device. Prepare the original device, then connect the additional device using the same account and passphrase. Preview and apply reviewed merges; use the read-only cloud verification on both. Transfer photos separately through encrypted version preview and add-only restore. Existing photo IDs/edits are retained, not overwritten. A changed passphrase is a session input, not automatic rotation of older encrypted files.
+
+Automated two-browser real-backend tests use disposable confirmed accounts and synthetic data. They do not test email confirmation delivery, account recovery or the user's own phones. These remain acceptance requirements for roadmap item 10. Automatic sync only works while the signed-in app is open; credentials/passphrase are not retained after closing.
+
 ## AI recognition
 
 In the connected Supabase project's Edge Function secrets, securely set `OPENAI_API_KEY` and `OPENAI_MODEL` to a model available to your provider account that supports images and structured output. Then sign in to MacroPulse and submit a consented test description/photo. Review the returned nutrition before logging. Until a real provider request succeeds, this is an implemented integration awaiting activation, not verified AI recognition. Requests may incur provider charges. The function uses `store:false`; provider retention policies still apply.
