@@ -1,6 +1,6 @@
 # MacroPulse improvement roadmap progress
 
-Updated October 28, 2026. Numbers match the approved 100-item list. Items 1–7 shipped in 9.2; item 9 is implemented in 9.3 with local regression and live provider verification. Deployment evidence is recorded separately. Unchecked items remain pending; existing partial implementations do not count as completed upgrades.
+Updated October 28, 2026. Numbers match the approved 100-item list. Items 1–7 shipped in 9.2; item 9 shipped in 9.3. Release 9.4 implements the guided portion of item 10; user physical-device/email/recovery acceptance remains pending. Deployment evidence is recorded separately. Unchecked items remain pending; existing partial implementations do not count as completed upgrades.
 
 ## First priorities
 
@@ -13,7 +13,7 @@ Updated October 28, 2026. Numbers match the approved 100-item list. Items 1–7 
 - [x] 7. Correct inventory sync protection.
 - [ ] 8. Finish the real Apple Health connection — deferred: user has neither Mac/Xcode nor an Apple Developer team. Signed companion installation and physical-device permission/acceptance tests remain required.
 - [x] 9. Create one combined food search — saved/USDA/OFF, source and portion review, offline cache, partial failures; OFF name search requires sign-in.
-- [ ] 10. Complete guided second-device setup and real-user acceptance.
+- [ ] 10. Complete guided second-device setup and real-user acceptance — guide and read-only cloud verification shipped in 9.4, with automated real-backend testing; user physical-device/email/recovery acceptance remains pending.
 
 ## Food logging
 

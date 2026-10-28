@@ -1,3 +1,11 @@
+MACROPULSE 9.4 - GUIDED SECOND-DEVICE SETUP
+
+Open https://joewalker989.github.io/MacroPulse/ and choose Settings > Set up another device. Keep independent app and photo backups, use the same account and separate encryption passphrase, review the merge, then verify this device against cloud. Photos transfer separately after preview. The guide never connects Apple Health.
+
+See RELEASE_9_4.md and ROADMAP_PROGRESS.md. The guide has automated real-backend coverage, but your own physical-device, email and recovery acceptance remains pending. Items 1–7 and 9 are shipped; item 10 is partially complete; native item 8 is deferred.
+
+HISTORICAL RELEASE NOTES FOLLOW
+
 MACROPULSE 9.3 - COMBINED FOOD SEARCH
 
 Open https://joewalker989.github.io/MacroPulse/#food . Search saved foods, USDA and Open Food Facts together, then review the source and portion before logging. Saved matches work offline. Open Food Facts name search requires cloud sign-in and shares the 20/day service quota; public barcodes and USDA demo search do not require sign-in.
