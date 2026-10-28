@@ -1,3 +1,7 @@
+# MacroPulse 9.5 — multi-select food results
+
+Roadmap item 11 adds a reviewed meal draft of up to 20 combined-search foods. Selections survive new searches; quantities, package bases, date and totals require review before a single confirmed save. Existing library records and targets stay unchanged. See [RELEASE_9_5.md](RELEASE_9_5.md). Items 1–7, 9 and 11 are implemented. Item 10 user-device/email/recovery acceptance remains pending; native item 8 stays deferred. Older release details follow.
+
 # MacroPulse 9.4 — guided second-device setup
 
 Settings now guides independent backups, same-account/passphrase setup, reviewed merging, read-only cloud comparison and separate encrypted photo transfer. Automated isolated browsers passed a real backend test; user physical-device/email/recovery acceptance remains pending, so item 10 is partially complete. See [RELEASE_9_4.md](RELEASE_9_4.md). Items 1–7 and 9 remain shipped; item 8 is deferred. Older release details follow.

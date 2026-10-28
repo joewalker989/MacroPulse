@@ -1,10 +1,10 @@
 {
   "name": "macropulse-pwa",
   "private": true,
-  "version": "9.4.0",
+  "version": "9.5.0",
   "scripts": {
     "test": "node --test tests/*.test.cjs",
-    "test:browser": "node tests/browser.cjs && node tests/complete-browser.cjs && node tests/core-browser.cjs && node tests/five-browser.cjs && node tests/health-browser.cjs && node tests/six-browser.cjs && node tests/photo-studio-browser.cjs && node tests/seven-browser.cjs && node tests/experience-browser.cjs && node tests/demonstrations-browser.cjs && node tests/extras-browser.cjs && node tests/connected-browser.cjs && node tests/plus-browser.cjs && node tests/barcode-browser.cjs && node tests/video-browser.cjs && node tests/sync-browser.cjs && node tests/daily-home-browser.cjs && node tests/setup-browser.cjs && node tests/food-search-browser.cjs && node tests/device-setup-browser.cjs",
+    "test:browser": "node tests/browser.cjs && node tests/complete-browser.cjs && node tests/core-browser.cjs && node tests/five-browser.cjs && node tests/health-browser.cjs && node tests/six-browser.cjs && node tests/photo-studio-browser.cjs && node tests/seven-browser.cjs && node tests/experience-browser.cjs && node tests/demonstrations-browser.cjs && node tests/extras-browser.cjs && node tests/connected-browser.cjs && node tests/plus-browser.cjs && node tests/barcode-browser.cjs && node tests/video-browser.cjs && node tests/sync-browser.cjs && node tests/daily-home-browser.cjs && node tests/setup-browser.cjs && node tests/food-search-browser.cjs && node tests/device-setup-browser.cjs && node tests/food-batch-browser.cjs",
     "test:core": "node tests/core-browser.cjs"
   },
   "devDependencies": {
