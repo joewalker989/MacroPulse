@@ -10,6 +10,10 @@ In the connected Supabase project's Edge Function secrets, securely set `OPENAI_
 
 Public limited demo search does not need a private key. For production server lookup set `USDA_API_KEY` securely in Edge secrets. The existing data source retains USDA IDs, source links, per-100 g basis and all supplied nutrients. Missing macros are rejected rather than invented. Public demo quotas and provider outages remain visible.
 
+## Open Food Facts combined search
+
+Name search uses the fixed Search-a-licious HTTPS endpoint through authenticated mp-services action off-search; no provider API key is needed. It shares the 20/day/account server recipe/recognition quota. JWT verification and getUser authentication remain enabled. The query alone is forwarded; it is not stored by MacroPulse beyond the existing per-account usage count. Provider logging policies still apply. Public API 3.6 barcode lookup, saved foods and USDA demo search work without sign-in. API 3.6 nutrition uses complete labelled as-sold input sets, excluding inferred estimates. Missing package basis must be confirmed before logging.
+
 ## Strava browser authorization
 
 Register a Strava developer application with callback domain `joewalker989.github.io`. The exact callback is `https://joewalker989.github.io/MacroPulse/oauth.html`. Securely set `STRAVA_CLIENT_ID`, `STRAVA_CLIENT_SECRET` and `FITNESS_TOKEN_KEY` in Supabase Edge secrets. The last value must be a cryptographically random 32-byte key encoded as base64. Keep it safe: rotating or losing it requires reconnecting stored provider authorizations. Do not reuse the user's backup passphrase.

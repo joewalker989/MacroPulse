@@ -1,3 +1,7 @@
+# MacroPulse 9.3 — combined food search
+
+Roadmap item 9 joins saved foods, USDA and Open Food Facts in one reviewed search with offline cached results and independent source failures. OFF name search uses the signed-in service and shares its 20/day quota; public barcode and USDA searches remain available without sign-in. See [RELEASE_9_3.md](RELEASE_9_3.md). Items 1–7 remain shipped; item 8 is deferred because Mac/Xcode and an Apple Developer team are unavailable. Items 10–100 remain pending. Older release details follow.
+
 # MacroPulse 9.2 — daily flow and reviewed setup
 
 Roadmap items 1–7 are implemented: simplified daily Home, guided setup, current cloud/session messages, library-only USDA saving, persistent planning preferences, recipe nutrients in diary coverage and inventory/ledger sync review. See [RELEASE_9_2.md](RELEASE_9_2.md) and [ROADMAP_PROGRESS.md](ROADMAP_PROGRESS.md). Native Apple activation and other provider/device dependencies remain pending. Older sections below describe historical releases.
