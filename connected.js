@@ -39,6 +39,14 @@
   if(!type)return null;if(unit==='count/min')unit='bpm';return normalize({type,source:attrs.sourceName||'Apple Health',start:attrs.startDate,end:attrs.endDate,value,unit});}
  const nutrientKeys={fiber:'fiber_100g',sodium:'sodium_100g',calcium:'calcium_100g',iron:'iron_100g',potassium:'potassium_100g',magnesium:'magnesium_100g',zinc:'zinc_100g',vitaminC:'vitamin-c_100g',vitaminD:'vitamin-d_100g',vitaminB12:'vitamin-b12_100g',sugars:'sugars_100g',saturatedFat:'saturated-fat_100g'};
  function foodProduct(raw,now=new Date().toISOString()){
+  // API 3.5+ separates labelled data from estimates. Use one complete as-sold
+  // manufacturer/packaging set; never mix sets or fill missing values with estimates.
+  const modern=raw.product||raw;if(modern.nutrition){
+   const sets=(Array.isArray(modern.nutrition.input_sets)?modern.nutrition.input_sets:[]).filter(s=>s&&['manufacturer','packaging'].includes(s.source)&&s.preparation==='as_sold'&&['100g','100ml'].includes(s.per)&&s.per_quantity===100&&s.per_unit===(s.per==='100ml'?'ml':'g')).sort((a,b)=>Number(b.source==='manufacturer')-Number(a.source==='manufacturer'));
+   for(const set of sets){const n={};for(const [key,value]of Object.entries(set.nutrients||{})){if(!value||value.modifier||!number(value.value,0,1e7))continue;let v;if(['energy','energy-kj'].includes(key)&&value.unit==='kJ')v=value.value;else if(key==='energy-kcal'&&value.unit==='kcal')v=value.value;else if(['g','mg','µg','μg','ug'].includes(value.unit))v=value.value*(value.unit==='g'?1:value.unit==='mg'?.001:.000001);if(v!==undefined)n[(key==='energy-kj'?'energy':key)+'_100g']=v;}
+    try{return foodProduct({...modern,nutrition:undefined,nutrition_data_per:set.per,nutriments:n},now);}catch{}
+   }throw Error('This product has no complete labelled per-100 g/ml nutrition. Use its label instead.');
+  }
   const x=raw.product||raw,n=x.nutriments||{},result={code:String(x.code||raw.code||''),name:String(x.product_name||x.product_name_en||'').trim().slice(0,120),serving:x.nutrition_data_per==='100ml'?'100 ml':x.nutrition_data_per==='100g'?'100 g':'100 g/ml (check label)',source:'',fetched:now,nutrients:{}};
   result.source=`https://world.openfoodfacts.org/product/${result.code}`;
   const energy=n['energy-kcal_100g']??(number(n.energy_100g)?n.energy_100g/4.184:undefined);
