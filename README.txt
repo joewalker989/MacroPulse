@@ -1,3 +1,11 @@
+MACROPULSE 9.2 - DAILY FLOW AND REVIEWED SETUP
+
+Open https://joewalker989.github.io/MacroPulse/ . Today prioritizes daily tracking; Guided setup reviews profile, goals, units, equipment and Home detail without automatically changing calorie targets. Optional cloud controls reflect sign-in/passphrase state. USDA foods can save without diary logging; planning preferences persist; reviewed recipe nutrients retain coverage; inventory sync keeps quantities and ledgers together.
+
+See RELEASE_9_2.md and ROADMAP_PROGRESS.md for exact shipped versus pending scope. Local browser data is not encrypted by the privacy screen. Native Apple Health/Watch permissions and AI/Strava provider activation still require real acceptance. Export app records and a separate photo backup before migrations.
+
+HISTORICAL RELEASE NOTES FOLLOW
+
 MACROPULSE 8.0 - LOCAL TRACKING WITH REVIEWED FOOD AND HEALTH IMPORTS
 
 See RELEASE_8_0.md for exact current feature status. Apple Health export.xml and standard fitness CSV can be imported locally with review; this is not live Apple Health or fitness-app sync. English nutrition-label OCR runs locally with verified downloads cached after first use. Optional online food/barcode queries use Open Food Facts community data, which needs review and may be unavailable. AI meal recognition, cloud sync, native watches/widgets and background app notifications are not integrated. The passphrase privacy screen does not encrypt stored records or photos. Older version notes follow.

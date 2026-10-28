@@ -47,7 +47,7 @@
         c.nutrients.every(x=>object(x)&&text(x.id)&&text(x.mealId)&&text(x.source)&&x.source.trim()&&['fiber','sodium','calcium','iron'].some(k=>x[k]!==undefined)&&['fiber','sodium','calcium','iron'].every(k=>x[k]===undefined||number(x[k])))&&
         c.routineArchive.every(x=>object(x)&&text(x.id)&&training.validState(x.training))&&
         (c.visitedMenus===undefined||(object(c.visitedMenus)&&c.visitedMenus.version===1&&Array.isArray(c.visitedMenus.places)&&new Set(c.visitedMenus.places.map(p=>p.id)).size===c.visitedMenus.places.length&&c.visitedMenus.places.every(p=>object(p)&&text(p.id)&&p.id.length>0&&text(p.name)&&p.name.trim()&&p.name.length<=120&&text(p.location)&&p.location.length<=160&&text(p.note)&&p.note.length<=1000&&text(p.menuUrl)&&p.menuUrl.length<=1000&&(p.menuUrl===''||new URL(p.menuUrl).protocol==='https:'))))&&
-        object(c.preferences)&&['largeText','highContrast','reducedMotion'].every(k=>typeof c.preferences[k]==='boolean')&&['home','food','fitness','stack','progress'].includes(c.preferences.startPage);
+        object(c.preferences)&&['largeText','highContrast','reducedMotion'].every(k=>typeof c.preferences[k]==='boolean')&&(c.preferences.homeView===undefined||['simple','full'].includes(c.preferences.homeView))&&['home','food','fitness','stack','progress'].includes(c.preferences.startPage);
     }catch{return false;}
   }
   function write(storage,state,training,{replacing=false}={}){
