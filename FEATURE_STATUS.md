@@ -1,3 +1,7 @@
+# MacroPulse 9.8 — cooked recipes and pantry-first planning
+
+Items **21–30** now include reviewed ingredient matching, finished-weight batches, linked leftovers/corrections, cooking sessions, price history, pantry-first household plans, verified grocery units, ingredient variations and prep/appliance constraints. See [RELEASE_9_8.md](RELEASE_9_8.md). Full-list execution continues with restaurants; external integration/device acceptance remains pending where documented. Older releases follow.
+
 # MacroPulse 9.7 — reviewed food logging
 
 Items **13–18 and 20** now include tolerant search/aliases, reversible duplicate review, evidence-based conversions, preferred portions, calorie explanations, original-label image review and reviewed multi-food descriptions. See [RELEASE_9_7.md](RELEASE_9_7.md). AI item 19 remains pending actual provider activation and acceptance. Earlier releases below remain historical.

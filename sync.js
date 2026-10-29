@@ -14,6 +14,8 @@
    if(Array.isArray(l)&&Array.isArray(r)&&(b===M||Array.isArray(b))){const all=[...(b===M?[]:b),...l,...r],field=identity(l,path)||identity(r,path);if(field&&all.every(x=>typeof keyOf(x,field)==='string'&&keyOf(x,field))&&[l,r,...(b===M?[]:[b])].every(x=>new Set(x.map(v=>keyOf(v,field))).size===x.length)){const bm=new Map((b===M?[]:b).map(x=>[keyOf(x,field),x])),lm=new Map(l.map(x=>[keyOf(x,field),x])),rm=new Map(r.map(x=>[keyOf(x,field),x])),out=[];for(const id of new Set([...lm.keys(),...rm.keys(),...bm.keys()])){const value=walk(bm.has(id)?bm.get(id):M,lm.has(id)?lm.get(id):M,rm.has(id)?rm.get(id):M,path+'/@'+part(id));if(value!==M)out.push(value);}/* Preserve cloud ordering when every merged keyed record already matches it. This prevents reorder-only uploads and rebases from undoing the committed order. */if(out.length===r.length&&out.every(value=>equal(value,rm.get(keyOf(value,field)))))return copy(r);return out;}}
    if(b!==M&&equal(l,b))return copy(r);if(b!==M&&equal(r,b))return copy(l);return conflict(b,l,r,path);
   }
+  // Cooked batch balances, reservations and diary portions form one ledger.
+  const batchLedger=x=>[x?.recipeTools?.batches||[],x?.recipeTools?.leftovers||[]];if(!equal(batchLedger(local),batchLedger(remote))){const value=conflict(base===null?M:base,local,remote,'');return {value,conflicts,needsReview:true};}
   // Archived duplicates and their diary/nutrient/cost links must travel together.
   const archives=x=>x?.foodTools?.archives||[];if(!equal(archives(local),archives(remote))){const value=conflict(base===null?M:base,local,remote,'');return {value,conflicts,needsReview:true};}
   // Stock movements and current quantities form one cross-module ledger.
