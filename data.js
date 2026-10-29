@@ -1,6 +1,7 @@
 /* Storage compatibility: retain the original key, records and unknown extensions. */
 (function(root){
   'use strict';
+  const MealTime=typeof module==='object'&&module.exports?require('./meal-time'):root.MacroMealTime;
   const KEY='macropulse_pwa_v1', RECOVERY=KEY+'_recovery', MIGRATION=KEY+'_before_upgrade', COMPLETE_MIGRATION=KEY+'_before_complete';
   const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
   const number=x=>typeof x==='number'&&Number.isFinite(x)&&x>=0;
@@ -8,7 +9,7 @@
   const date=x=>text(x)&&/^\d{4}-\d{2}-\d{2}$/.test(x)&&!Number.isNaN(Date.parse(x+'T12:00:00'))&&new Date(x+'T12:00:00').toISOString().slice(0,10)===x;
   function valid(x,training){
     try{return object(x)&&object(x.settings)&&['cal','p','c','f','goal'].every(k=>number(x.settings[k]))&&number(x.weight)&&
-      Array.isArray(x.meals)&&x.meals.every(m=>object(m)&&text(m.id)&&date(m.date)&&text(m.name)&&['cal','p','c','f'].every(k=>number(m[k])))&&
+      Array.isArray(x.meals)&&x.meals.every(m=>object(m)&&text(m.id)&&date(m.date)&&text(m.name)&&(m.eatenAt===undefined||MealTime.valid(m.eatenAt))&&['cal','p','c','f'].every(k=>number(m[k])))&&
       Array.isArray(x.workouts)&&x.workouts.every(w=>object(w)&&text(w.id)&&date(w.date)&&text(w.exercise)&&['sets','reps','weight','duration','cal'].every(k=>number(w[k])))&&
       Array.isArray(x.weights)&&x.weights.every(w=>object(w)&&date(w.date)&&number(w.value))&&
       Array.isArray(x.foods)&&x.foods.every(f=>Array.isArray(f)&&text(f[0])&&text(f[1])&&[2,3,4,5].every(k=>number(f[k])))&&

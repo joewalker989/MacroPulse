@@ -1,6 +1,6 @@
 # MacroPulse improvement roadmap progress
 
-Updated October 28, 2026. Numbers match the approved 100-item list. Items 1–7 shipped in 9.2; item 9 shipped in 9.3. Release 9.4 implements the guided portion of item 10; user physical-device/email/recovery acceptance remains pending. Release 9.5.1 implements item 11, multi-select food results. Deployment evidence is recorded separately. Unchecked items remain pending; existing partial implementations do not count as completed upgrades.
+Updated October 29, 2026. Numbers match the approved 100-item list. Items 1–7 shipped in 9.2; item 9 shipped in 9.3. Release 9.4 implements the guided portion of item 10; user physical-device/email/recovery acceptance remains pending. Release 9.5.1 implements item 11, multi-select food results. Release 9.6.0 implements item 12, actual meal times and time zones. Deployment evidence is recorded separately. Unchecked items remain pending; existing partial implementations do not count as completed upgrades.
 
 ## First priorities
 
@@ -18,7 +18,7 @@ Updated October 28, 2026. Numbers match the approved 100-item list. Items 1–7 
 ## Food logging
 
 - [x] 11. Multi-select food results — up to 20 foods across searches, per-source portion review, combined preview and atomic confirmation; offline saved foods supported.
-- [ ] 12. Record actual meal times and time zones.
+- [x] 12. Record actual meal times and time zones. Optional reviewed consumption times for all diary entries and multi-select meals; explicit DST handling, preserved diary dates and unknown times for old/copied foods. See RELEASE_9_6.md.
 - [ ] 13. Improve search tolerance and aliases.
 - [ ] 14. Resolve duplicate food entries with source/serving review.
 - [ ] 15. Support reliable serving conversions.
