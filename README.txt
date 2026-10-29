@@ -1,3 +1,9 @@
+MACROPULSE 9.8 - COOKED RECIPES AND PANTRY-FIRST PLANNING
+
+In Nutrition, open Cooked batches, leftovers & pantry-first planning. Review saved recipes, finished cooked weights, containers, portions, dated prices and household plans. Plans can add reviewed groceries without consuming stock or logging food. See RELEASE_9_8.md and ROADMAP_PROGRESS.md. The full approved list remains in active execution.
+
+HISTORICAL RELEASE NOTES FOLLOW
+
 MACROPULSE 9.7 - REVIEWED FOOD LOGGING
 
 In Nutrition, open Food aliases, portions & reviewed entry tools. Review conversions and source identities, save aliases/portions, compare and reversibly archive duplicates, or describe several foods for explicit review. Nutrition-label OCR now keeps the original image visible with zoom. No new provider is activated. See RELEASE_9_7.md and ROADMAP_PROGRESS.md.
