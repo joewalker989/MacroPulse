@@ -1,3 +1,7 @@
+# MacroPulse 9.7 — reviewed food logging
+
+Items **13–18 and 20** now include tolerant search/aliases, reversible duplicate review, evidence-based conversions, preferred portions, calorie explanations, original-label image review and reviewed multi-food descriptions. See [RELEASE_9_7.md](RELEASE_9_7.md). AI item 19 remains pending actual provider activation and acceptance. Earlier releases below remain historical.
+
 # MacroPulse 9.6.0 — actual meal times and time zones
 
 Roadmap item **12** is implemented. An editor works with every dated food entry, while multi-select logging offers an optional shared time. Explicit previews preserve diary dates, handle daylight-saving changes and retain unknown times for old/copied foods. Time metadata survives backups and reviewed sync as a single value. See [RELEASE_9_6.md](RELEASE_9_6.md). Items 1–7, 9, 11–12 are shipped; item 8 remains deferred and item 10 still needs physical-device/email/recovery acceptance. Older release details follow.

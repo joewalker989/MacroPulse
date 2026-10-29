@@ -1,3 +1,9 @@
+MACROPULSE 9.7 - REVIEWED FOOD LOGGING
+
+In Nutrition, open Food aliases, portions & reviewed entry tools. Review conversions and source identities, save aliases/portions, compare and reversibly archive duplicates, or describe several foods for explicit review. Nutrition-label OCR now keeps the original image visible with zoom. No new provider is activated. See RELEASE_9_7.md and ROADMAP_PROGRESS.md.
+
+HISTORICAL RELEASE NOTES FOLLOW
+
 MACROPULSE 9.6.0 - ACTUAL MEAL TIMES AND TIME ZONES
 
 Open https://joewalker989.github.io/MacroPulse/#food . In Meal times & time zones, browse a diary date and edit any food entry. Enter the actual date/time eaten and its time zone, preview, then confirm. Multi-select meals also offer an optional shared time. Old and copied meals keep unknown times. Changing zones never moves daily totals.

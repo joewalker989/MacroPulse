@@ -13,7 +13,7 @@
       Array.isArray(x.workouts)&&x.workouts.every(w=>object(w)&&text(w.id)&&date(w.date)&&text(w.exercise)&&['sets','reps','weight','duration','cal'].every(k=>number(w[k])))&&
       Array.isArray(x.weights)&&x.weights.every(w=>object(w)&&date(w.date)&&number(w.value))&&
       Array.isArray(x.foods)&&x.foods.every(f=>Array.isArray(f)&&text(f[0])&&text(f[1])&&[2,3,4,5].every(k=>number(f[k])))&&
-      object(x.supplements)&&Object.entries(x.supplements).every(([d,a])=>date(d)&&Array.isArray(a)&&a.every(Number.isInteger))&&
+      (x.foodTools===undefined||(typeof module!=='undefined'&&module.exports?require('./food-tools'):root.MacroFoodTools).valid(x.foodTools))&&object(x.supplements)&&Object.entries(x.supplements).every(([d,a])=>date(d)&&Array.isArray(a)&&a.every(Number.isInteger))&&
       (x.training===undefined||training.validState(x.training))&&(x.upgrade===undefined||validUpgrade(x.upgrade,training))&&(x.complete===undefined||validComplete(x.complete,training));
     }catch{return false;}
   }
@@ -81,6 +81,7 @@
     if(raw!==null&&state.six!==undefined&&storage.getItem(SIX_MIGRATION)===null)storage.setItem(SIX_MIGRATION,raw);
     if(raw!==null&&state.seven!==undefined&&storage.getItem(SEVEN_MIGRATION)===null)storage.setItem(SEVEN_MIGRATION,raw);
     if(raw!==null&&(state.five?.active?.timer||state.five?.sessions.some(s=>s.timer)||state.complete?.visitedMenus)&&storage.getItem(CLOCK_MIGRATION)===null)storage.setItem(CLOCK_MIGRATION,raw);
+    if(raw!==null&&state.foodTools!==undefined&&storage.getItem(KEY+'_before_food_tools')===null)storage.setItem(KEY+'_before_food_tools',raw);
     baseWrite(storage,state,training,options);
   }
   const HEALTH_MIGRATION=KEY+'_before_5_1';
