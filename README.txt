@@ -1,3 +1,9 @@
+MACROPULSE 9.9 - SOURCED RESTAURANTS AND COMPLETE ORDER REVIEW
+
+In Nutrition, open Nearby restaurants, complete orders & usual meals. Choose a private or temporary area, review the source/location/serving of every item and customization, then preview an order before logging or saving it as a usual order. Unknown nutrition, price and allergens remain explicit. Source and scope details: RELEASE_9_9.md and GEOGRAPHIC_DATA_NOTICE.md. Full-list execution continues.
+
+HISTORICAL RELEASE NOTES FOLLOW
+
 MACROPULSE 9.8 - COOKED RECIPES AND PANTRY-FIRST PLANNING
 
 In Nutrition, open Cooked batches, leftovers & pantry-first planning. Review saved recipes, finished cooked weights, containers, portions, dated prices and household plans. Plans can add reviewed groceries without consuming stock or logging food. See RELEASE_9_8.md and ROADMAP_PROGRESS.md. The full approved list remains in active execution.

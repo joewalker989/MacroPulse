@@ -1,6 +1,6 @@
 # MacroPulse improvement roadmap progress
 
-Updated October 29, 2026. Numbers match the approved 100-item list. Items 1–7 shipped in 9.2; item 9 shipped in 9.3. Release 9.4 implements the guided portion of item 10; user physical-device/email/recovery acceptance remains pending. Release 9.5.1 implements item 11, multi-select food results. Release 9.6.0 implements item 12, actual meal times and time zones. Release 9.7 implements items 13–18 and 20; item 19 remains pending. Release 9.8 implements recipe/planning items 21–30. Deployment evidence is recorded separately. Unchecked items remain pending; existing partial implementations do not count as completed upgrades.
+Updated October 29, 2026. Numbers match the approved 100-item list. Items 1–7 shipped in 9.2; item 9 shipped in 9.3. Release 9.4 implements the guided portion of item 10; user physical-device/email/recovery acceptance remains pending. Release 9.5.1 implements item 11, multi-select food results. Release 9.6.0 implements item 12, actual meal times and time zones. Release 9.7 implements items 13–18 and 20; item 19 remains pending. Release 9.8 implements recipe/planning items 21–30. Release 9.9 implements restaurant items 31–38 and scoped temporary travel item 40; AI menu item 39 remains pending. Deployment evidence is recorded separately. Unchecked items remain pending; existing partial implementations do not count as completed upgrades.
 
 ## First priorities
 
@@ -43,16 +43,16 @@ Updated October 29, 2026. Numbers match the approved 100-item list. Items 1–7 
 
 ## Restaurants
 
-- [ ] 31. Verify nearby locations within the privately chosen radius.
-- [ ] 32. Show menu freshness and location applicability.
-- [ ] 33. Support reviewed order customization.
-- [ ] 34. Match restaurant meals to remaining targets.
-- [ ] 35. Save exact usual restaurant orders and modifications.
-- [ ] 36. Build complete order combinations.
-- [ ] 37. Include current sourced meal prices where available.
-- [ ] 38. Improve allergen certainty/unknown visibility.
-- [ ] 39. Activate and verify menu-photo recognition.
-- [ ] 40. Add temporary travel searches.
+- [x] 31. Verify nearby locations within the privately chosen radius.
+- [x] 32. Show menu freshness and location applicability.
+- [x] 33. Support reviewed order customization.
+- [x] 34. Match restaurant meals to remaining targets.
+- [x] 35. Save exact usual restaurant orders and modifications.
+- [x] 36. Build complete order combinations.
+- [x] 37. Include current sourced meal prices where available.
+- [x] 38. Improve allergen certainty/unknown visibility.
+- [ ] 39. Activate and verify menu-photo recognition — actual provider credentials and a real consented request/acceptance remain pending.
+- [x] 40. Add temporary travel searches — offline city centers, temporary areas/user-checked locations and explicit external Maps links. No live global directory or address-geocoding API is integrated.
 
 ## Training
 

@@ -1,0 +1,9 @@
+# Geographic data and location references
+
+`city-centers.js` contains a transformed subset of the [GeoNames cities15000 extract](https://download.geonames.org/export/dump/cities15000.zip), downloaded October 29, 2026: the 5,000 largest populated places in that extract plus every included US place, totaling 8,152 records. It retains IDs, names, ASCII names, country/region codes, coordinates and population for local search/ranking. Alternate names and unrelated fields are omitted; records are sorted for the app. This is not a complete city, address or restaurant database.
+
+GeoNames provides the data under [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/). Source and license are also linked in the restaurant interface. Coordinates are approximate WGS84 city centers, supplied as-is without a warranty of accuracy, currency or completeness. See the [GeoNames readme](https://download.geonames.org/export/dump/readme.txt) and [data sources](https://www.geonames.org/datasources/).
+
+`restaurant-locations.js` records public restaurant facts with individual source links, review dates and coordinate methods. Some points come from official location metadata; others are [US Census/TIGER address-range geocodes](https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.html). Address-range interpolation is not a surveyed restaurant entrance. Straight-line filtering is approximate and does not verify driving time, current opening, local menu availability, current checkout price or allergen safety.
+
+Private home/search coordinates are never part of these public files. Device location is requested only after its button is selected and is filtered locally. Saving an area is an explicit local preference; temporary travel centers remain in page memory. Opening an external location or Maps link is a separate user action. The app does not include a live global restaurant-directory or street-address geocoding API.

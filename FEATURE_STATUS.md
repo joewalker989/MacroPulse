@@ -1,3 +1,7 @@
+# MacroPulse 9.9 — sourced restaurant and order review
+
+Items **31–38 and 40** include sourced local radius filtering, private/temporary areas, offline cities, source/location/price/allergen visibility, reviewed customizations, complete combinations and exact usual orders. No live global directory or address-geocoding API is integrated; travel can use explicit external Maps search and user-checked locations. AI menu-photo item 39 remains pending actual activation. See [RELEASE_9_9.md](RELEASE_9_9.md) and [GEOGRAPHIC_DATA_NOTICE.md](GEOGRAPHIC_DATA_NOTICE.md). Full-list execution continues; older releases follow.
+
 # MacroPulse 9.8 — cooked recipes and pantry-first planning
 
 Items **21–30** now include reviewed ingredient matching, finished-weight batches, linked leftovers/corrections, cooking sessions, price history, pantry-first household plans, verified grocery units, ingredient variations and prep/appliance constraints. See [RELEASE_9_8.md](RELEASE_9_8.md). Full-list execution continues with restaurants; external integration/device acceptance remains pending where documented. Older releases follow.
