@@ -1,3 +1,7 @@
+# MacroPulse 9.6.0 — actual meal times and time zones
+
+Roadmap item **12** is implemented. An editor works with every dated food entry, while multi-select logging offers an optional shared time. Explicit previews preserve diary dates, handle daylight-saving changes and retain unknown times for old/copied foods. Time metadata survives backups and reviewed sync as a single value. See [RELEASE_9_6.md](RELEASE_9_6.md). Items 1–7, 9, 11–12 are shipped; item 8 remains deferred and item 10 still needs physical-device/email/recovery acceptance. Older release details follow.
+
 # MacroPulse 9.5.1 — multi-select food results
 
 Roadmap item 11 adds a reviewed meal draft of up to 20 combined-search foods. Selections survive new searches; quantities, package bases, date and totals require review before a single confirmed save. Existing library records and targets stay unchanged. See [RELEASE_9_5.md](RELEASE_9_5.md). Items 1–7, 9 and 11 are implemented. Item 10 user-device/email/recovery acceptance remains pending; native item 8 stays deferred. Older release details follow.
