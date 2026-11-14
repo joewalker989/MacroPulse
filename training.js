@@ -20,7 +20,10 @@
     ['dead-bug','Dead Bug','Core',[],'Keep lower back gently against the floor; alternate limbs.'],
     ['crunch','Controlled Crunch','Core',[],'Curl shoulders up gently without pulling your neck.'],
     ['march','Brisk March','Cardio',[],'March at a comfortable pace with room to move.'],
-    ['bike','Stationary Bike','Cardio',['Stationary bike'],'Adjust seat and ride at a comfortable pace.']
+    ['bike','Stationary Bike','Cardio',['Stationary bike'],'Adjust seat and ride at a comfortable pace.'],
+    ['shoulder-press','Shoulder Press','Push',['Dumbbells'],'Press with control through a comfortable overhead range.'],
+    ['curl','Biceps Curl','Arms',['Dumbbells'],'Keep your torso steady and lower the dumbbells with control.'],
+    ['calf-raise','Calf Raise','Calves',[],'Rise and lower under control; use stable support for balance if needed.']
   ];
   const library = rows.map(([id,name,group,requires,cue])=>({id,name,group,requires,cue}));
   const available = inventory => library.filter(e=>e.requires.every(r=>inventory.includes(r)));
