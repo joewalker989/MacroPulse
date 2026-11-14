@@ -101,3 +101,26 @@ green, phone Safari/Android playback and keyboard/screen-reader review are compl
 and all enabled media evidence has been reviewed. An empty reviewed manifest is an
 intentional honest pilot, not a completed filmed trainer library. No deployment is
 authorized by this implementation task.
+
+## Follow-up: production and clearance handoff
+
+The user chose preparation of a filming/review package. The full handoff is in
+[`review/realmotion/README.md`](review/realmotion/README.md), with 15 exact shot rows,
+rights-holder and specialist enquiries, hash-bound review worksheets, and physical
+iOS/Android acceptance sheets. None of the enquiries have been sent or agreements
+accepted. No production approval or signature has been fabricated.
+
+Fresh direct requests successfully retrieved wger video records 2–4, 17–20 and 48,
+license record 2, and HTTP HEAD responses for all eight media files. Their checked
+metadata agrees with the existing catalog. Public source snapshots and UTC timestamps
+are retained in the handoff evidence folder. This supersedes the earlier failed
+web-reader attempt for source availability only; it supplies no model release,
+specialist review or real-device playback approval.
+
+`npm run audit:realmotion` now reports the unresolved full-pilot requirements and
+returns a failing status until exact production media, approvals, checksums and device
+sign-offs are present. It cannot authenticate evidence or replace the release owner's
+rights/professional verification. The normal application CI can be green while this
+content gate remains blocked. The gate is a separate read-only pre-release check,
+not a change to GitHub Pages deployment or app storage. Keep this PR draft until the
+required real-world work is complete.

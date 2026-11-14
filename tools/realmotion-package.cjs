@@ -1,0 +1,27 @@
+/* Offline, printable production handoff. Copies only the named public evidence files. */
+const fs=require('node:fs'),path=require('node:path');
+const source=path.resolve(__dirname,'../review/realmotion'),destination=process.argv[2];
+if(!destination||!path.isAbsolute(destination))throw Error('Provide an absolute output directory for the handoff package.');
+const documents=['README.md','production-brief.md','rights-and-review.md','device-acceptance.md'];
+const copied=[...documents,'pilot-shots.csv','release-intake.template.json','evidence/wger-records.json','evidence/publisher-availability.json'];
+fs.mkdirSync(destination,{recursive:true});for(const file of copied){const target=path.join(destination,file);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(path.join(source,file),target);}
+const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const inline=s=>esc(s).replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/\[([^\]]+)\]\(([^)]+)\)/g,(_,label,url)=>{const index=documents.indexOf(url);return `<a href="${index>=0?'#section-'+index:url}">${label}</a>`;});
+function render(markdown){
+ const lines=markdown.split(/\r?\n/),out=[];let paragraph=[],list=null;
+ const flush=()=>{if(paragraph.length){out.push('<p>'+inline(paragraph.join(' '))+'</p>');paragraph=[];}if(list){out.push('</'+list+'>');list=null;}};
+ for(let i=0;i<lines.length;i++){
+  const line=lines[i];if(!line.trim()){flush();continue;}
+  if(line.startsWith('|')){flush();const rows=[];while(i<lines.length&&lines[i].startsWith('|')){const cells=lines[i].split('|').slice(1,-1).map(x=>x.trim());if(!cells.every(c=>/^:?-+:?$/.test(c)))rows.push(cells);i++;}i--;out.push('<div class="table"><table>'+rows.map((row,index)=>'<tr>'+row.map(cell=>'<'+(index?'td':'th')+'>'+inline(cell)+'</'+(index?'td':'th')+'>').join('')+'</tr>').join('')+'</table></div>');continue;}
+  const heading=/^(#{1,6}) (.+)$/.exec(line);if(heading){flush();const level=Math.min(heading[1].length+1,6);out.push(`<h${level}>${inline(heading[2])}</h${level}>`);continue;}
+  const item=/^(?:([-]) |(\d+)\. )(.+)$/.exec(line);if(item){if(paragraph.length)flush();const type=item[1]?'ul':'ol';if(list!==type){flush();out.push('<'+type+'>');list=type;}out.push('<li>'+inline(item[3])+'</li>');continue;}
+  if(list&&/^\s{2,}\S/.test(line)){out[out.length-1]=out[out.length-1].replace(/<\/li>$/,' '+inline(line.trim())+'</li>');continue;}
+  if(list)flush();paragraph.push(line);
+ }
+ flush();return out.join('\n');
+}
+const sections=documents.map((file,i)=>`<section id="section-${i}">${render(fs.readFileSync(path.join(source,file),'utf8'))}</section>`).join('\n');
+const html=`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MacroPulse · Filming and Review Package</title><style>
+:root{font-family:system-ui,sans-serif;color:#18332e;background:#f1f5f2;line-height:1.65}*{box-sizing:border-box}p,li,h2,h3,h4{overflow-wrap:anywhere}body{margin:0}header{background:#123e35;color:white;padding:40px max(20px,calc((100vw - 950px)/2))}header p{max-width:780px}h1{line-height:1.15;font-size:clamp(30px,6vw,46px);margin:12px 0}header a{color:#a8f0cd}nav{display:flex;flex-wrap:wrap;gap:12px}main{max-width:990px;margin:auto;padding:24px 20px}section{background:white;padding:28px;border:1px solid #cbdcd2;border-radius:14px;margin-bottom:24px}h2,h3,h4{line-height:1.3;color:#124839}h2{font-size:28px;margin-top:0}h3{border-top:1px solid #dce6df;padding-top:20px;margin-top:28px}a{color:#12624c;overflow-wrap:anywhere}code{font-size:.9em;background:#edf4ef;padding:2px 4px;overflow-wrap:anywhere}li{margin-bottom:7px}.table{overflow:auto}table{border-collapse:collapse;width:100%;font-size:14px}th,td{border:1px solid #d2e0d7;padding:10px;text-align:left;vertical-align:top}th{background:#e9f3ed}strong{font-weight:700}.status{display:inline-block;background:#eaf1aa;color:#26390b;font-weight:700;padding:5px 12px;border-radius:30px}footer{padding:0 20px 30px;max-width:990px;margin:auto}@media(max-width:500px){section{padding:18px}main{padding:16px 10px}td,th{padding:8px;min-width:120px}}@media print{:root{background:white;font-size:10pt}header{background:white;color:#123e35;padding:0}header a{color:#123e35}main{padding:0;max-width:none}section{border:0;padding:0;border-radius:0;break-before:page}.table{overflow:visible}table{font-size:9pt}tr{break-inside:avoid}h2,h3,h4{break-after:avoid}nav,footer{display:none}.status{border:1px solid #748329}}
+</style><header><span class="status">Production package · approvals pending</span><h1>RealMotion Studio</h1><p>The five-exercise filming, rights and professional review handoff for MacroPulse PR #22. The package is ready to use; the full filmed pilot is not cleared for release.</p><nav><a href="#section-0">Start here</a><a href="#section-1">Film</a><a href="#section-2">Clear and review</a><a href="#section-3">Test on phones</a><a href="pilot-shots.csv">15-shot checklist</a></nav></header><main>${sections}</main><footer>Offline document. No media, accounts, payments, analytics or external scripts are loaded. Use the browser Print menu for a paper/PDF copy.</footer></html>`;
+fs.writeFileSync(path.join(destination,'START-HERE.html'),html);process.stdout.write('Prepared offline handoff with '+copied.length+' supporting files.\n');

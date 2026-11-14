@@ -1,0 +1,78 @@
+{
+  "checkedAtUtc": "2026-11-14T04:55:40.5634440Z",
+  "checks": [
+    {
+      "contentLength": "38136083",
+      "lastModified": "Wed, 06 Dec 2023 19:49:04 GMT",
+      "status": 200,
+      "id": 2,
+      "acceptRanges": "bytes",
+      "contentType": "video/quicktime",
+      "url": "https://wger.de/media/exercise-video/507/307e7276-a14d-4ea0-b579-f5b0dbc6f5af.MOV"
+    },
+    {
+      "contentLength": "52134396",
+      "lastModified": "Wed, 06 Dec 2023 19:49:04 GMT",
+      "status": 200,
+      "id": 3,
+      "acceptRanges": "bytes",
+      "contentType": "video/quicktime",
+      "url": "https://wger.de/media/exercise-video/507/6b6054b5-9236-4a63-8392-6ea7a9010ca6.MOV"
+    },
+    {
+      "contentLength": "390563423",
+      "lastModified": "Wed, 06 Dec 2023 19:49:04 GMT",
+      "status": 200,
+      "id": 4,
+      "acceptRanges": "bytes",
+      "contentType": "video/quicktime",
+      "url": "https://wger.de/media/exercise-video/507/e96295da-58b8-4b6f-921e-4cb1af3c6cfc.MOV"
+    },
+    {
+      "contentLength": "4543158",
+      "lastModified": "Wed, 06 Dec 2023 19:49:03 GMT",
+      "status": 200,
+      "id": 17,
+      "acceptRanges": "bytes",
+      "contentType": "video/quicktime",
+      "url": "https://wger.de/media/exercise-video/75/080c799b-8afd-4130-8d72-9cef0cd79f54.MOV"
+    },
+    {
+      "contentLength": "9894638",
+      "lastModified": "Wed, 06 Dec 2023 19:49:03 GMT",
+      "status": 200,
+      "id": 18,
+      "acceptRanges": "bytes",
+      "contentType": "video/quicktime",
+      "url": "https://wger.de/media/exercise-video/75/a8263fe5-3015-41e3-9781-2d255adcea63.MOV"
+    },
+    {
+      "contentLength": "9938046",
+      "lastModified": "Wed, 06 Dec 2023 19:49:03 GMT",
+      "status": 200,
+      "id": 19,
+      "acceptRanges": "bytes",
+      "contentType": "video/quicktime",
+      "url": "https://wger.de/media/exercise-video/75/9d803f97-0a48-4483-8f1c-ee5b19d6021e.MOV"
+    },
+    {
+      "contentLength": "4576193",
+      "lastModified": "Wed, 06 Dec 2023 19:49:03 GMT",
+      "status": 200,
+      "id": 20,
+      "acceptRanges": "bytes",
+      "contentType": "video/quicktime",
+      "url": "https://wger.de/media/exercise-video/75/c9cbd391-1e22-4014-8794-04630c80665f.MOV"
+    },
+    {
+      "contentLength": "31753930",
+      "lastModified": "Wed, 06 Dec 2023 19:49:00 GMT",
+      "status": 200,
+      "id": 48,
+      "acceptRanges": "bytes",
+      "contentType": "video/quicktime",
+      "url": "https://wger.de/media/exercise-video/92/8bfb917c-3d0d-49b9-8073-5d7e01c1b894.MOV"
+    }
+  ],
+  "method": "HEAD only; no playback, visual, equipment or anatomical review"
+}

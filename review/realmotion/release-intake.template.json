@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "status": "pending actual footage and human approvals",
+  "buildCommit": null,
+  "clips": [],
+  "devices": {
+    "ios-safari": {
+      "date": null,
+      "by": null,
+      "os": null,
+      "buildCommit": null,
+      "decision": "pending",
+      "device": null,
+      "evidence": null,
+      "cases": {},
+      "browser": null
+    },
+    "android-chrome": {
+      "date": null,
+      "by": null,
+      "os": null,
+      "buildCommit": null,
+      "decision": "pending",
+      "device": null,
+      "evidence": null,
+      "cases": {},
+      "browser": null
+    }
+  },
+  "releaseOwner": {
+    "by": null,
+    "evidence": null,
+    "buildCommit": null,
+    "date": null,
+    "decision": "pending"
+  }
+}
