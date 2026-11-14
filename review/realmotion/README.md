@@ -13,8 +13,13 @@ The user selected the filming-and-review route rather than supplying existing ow
    agreements, final-file approvals, rep boundaries, muscle labels and coaching decisions.
 3. Complete [the phone acceptance sheet](device-acceptance.md) on real iOS Safari and
    Android Chrome. Emulation and an Apple build are not substitutes for phone playback.
-4. The developer fills `release-intake.template.json` with the approved production records,
-   adds the same records to the trusted manifest and runs `npm run audit:realmotion -- path/to/completed.json`.
+4. The developer copies `release-intake.template.json` to a private local working folder,
+   fills it with the approved production records, and adds those same clip records to
+   the trusted manifest. After committing the final app/media candidate, record that
+   immutable commit in the private intake and complete phone/owner sign-offs against it.
+   Keep the completed intake outside this public repository; this avoids publishing
+   private approvals and avoids a self-referencing commit. Then run
+   `npm run audit:realmotion -- path/to/completed.json`.
    The command currently exits 1 by design: the full pilot is not cleared.
 
 ## Your involvement
