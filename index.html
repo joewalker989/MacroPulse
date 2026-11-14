@@ -11,11 +11,11 @@ dialog#guidedSetup{background:#102c27;color:#f1f5f9;border:1px solid #356254;bor
 #realMotion h2{margin:4px 0 16px}
 #realMotion video{display:block;width:100%;max-height:45dvh;background:#000;margin:12px 0}
 #realMotion [hidden]{display:none!important}
-#realMotion button,#realMotion select{min-height:44px;max-width:100%;white-space:normal;margin:4px 4px 4px 0}
+#realMotion button,#realMotion select{min-height:44px;min-width:0;max-width:100%;white-space:normal;margin:4px 4px 4px 0}
 #realMotion button{background:#173d34;color:#f1f5f9;border:1px solid #356254;border-radius:10px;padding:10px 12px}
 #realMotion select{background:#0a211d;color:#fff;border:1px solid #526176;border-radius:10px;padding:8px}
 #realMotion .rm-angles{display:flex;flex-wrap:wrap;gap:4px}
-#realMotion .rm-angles button{flex:1;min-width:85px}
+#realMotion .rm-angles button{flex:1 1 110px;min-width:0;overflow-wrap:anywhere}
 #realMotion button:disabled{opacity:1;color:#b0bac5;background:#263342;cursor:not-allowed}
 #realMotion :focus-visible{outline:3px solid #fbbf24;outline-offset:3px}
 #realMotion .rm-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:12px 0}
