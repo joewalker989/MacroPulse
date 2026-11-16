@@ -1,7 +1,7 @@
 /* Pure training rules shared by the PWA and Node tests. No network required. */
 (function (root) {
   'use strict';
-  const equipment = ['Dumbbells', 'Bench', 'Resistance bands', 'Barbell', 'Squat rack', 'Pull-up bar', 'Stationary bike'];
+  const equipment = ['Dumbbells', 'Bench', 'Resistance bands', 'Barbell', 'Squat rack', 'Pull-up bar', 'Stationary bike', 'Kettlebell', 'Cable machine', 'Cable handles', 'Ankle strap', 'Rope attachment', 'V-bar handle', 'Lat pulldown station', 'Seated cable row station', 'Chest press machine', 'Leg extension machine', 'Leg press machine', 'Glute kickback machine'];
   const rows = [
     ['push-up','Push-Up','Push',[], 'Keep your body straight; lower under control.'],
     ['floor-press','Dumbbell Floor Press','Push',['Dumbbells'],'Keep wrists stacked over elbows; pause gently on the floor.'],
@@ -20,14 +20,41 @@
     ['dead-bug','Dead Bug','Core',[],'Keep lower back gently against the floor; alternate limbs.'],
     ['crunch','Controlled Crunch','Core',[],'Curl shoulders up gently without pulling your neck.'],
     ['march','Brisk March','Cardio',[],'March at a comfortable pace with room to move.'],
-    ['bike','Stationary Bike','Cardio',['Stationary bike'],'Adjust seat and ride at a comfortable pace.']
+    ['bike','Stationary Bike','Cardio',['Stationary bike'],'Adjust seat and ride at a comfortable pace.'],
+    ["shoulder-press","Shoulder Press","Push",["Dumbbells"],"Press with control without leaning backward."],
+    ["curl","Biceps Curl","Arms",["Dumbbells"],"Keep elbows near your sides; lower under control."],
+    ["calf-raise","Calf Raise","Calves",[],"Use support for balance; rise and lower with control."],
+    ["barbell-bench","Barbell Bench Press","Push",["Barbell","Bench","Squat rack"],"Set rack safeties or use a qualified spotter; keep feet planted and lower with control."],
+    ["barbell-deadlift","Barbell Deadlift","Hinge",["Barbell"],"Brace before lifting; keep the bar close and stand tall without leaning back."],
+    ["lateral-raise","Dumbbell Lateral Raise","Push",["Dumbbells"],"Use light weights; raise to a comfortable shoulder height without swinging."],
+    ["hammer-curl","Hammer Curls","Arms",["Dumbbells"],"Keep palms facing inward and elbows near your sides; lower with control."],
+    ["kettlebell-swing","Kettlebell swing","Hinge",["Kettlebell"],"Learn the hip hinge first; drive through the hips and avoid lifting with the lower back."],
+    ["kettlebell-push-press","Kettlebell Push Press","Push",["Kettlebell"],"Use a small knee dip, brace, then drive overhead without leaning backward."],
+    ["kettlebell-rdl","Kettlebell Romanian Deadlift","Hinge",["Kettlebell"],"Keep a soft knee bend; push hips back and keep the weight close."],
+    ["kettlebell-goblet","Goblet Squat with Kettlebell","Legs",["Kettlebell"],"Hold the bell close; keep heels down and knees tracking with toes."],
+    ["cable-crossover","Cable Crossover (Mid)","Push",["Cable machine","Cable handles"],"Use a stable stance and soft elbows; bring hands together without shrugging."],
+    ["cable-leg-curl","Lying Cable Leg Curl","Hinge",["Cable machine","Ankle strap","Bench"],"Secure the ankle strap; keep hips steady and curl within a comfortable range."],
+    ["cable-woodchop","Cable Woodchop (High to Low)","Core",["Cable machine","Cable handles"],"Use a controlled high-to-low path; pivot comfortably instead of twisting through your lower back."],
+    ["lat-pulldown","Lat Pulldown","Pull",["Lat pulldown station"],"Set the thigh pad; pull toward the upper chest without swinging or pulling behind your neck."],
+    ["cable-row","Seated Cable Row close V bar","Pull",["Seated cable row station","V-bar handle"],"Keep your torso steady; draw elbows back without jerking."],
+    ["machine-chest-press","Seated Machine Chest Press","Push",["Chest press machine"],"Adjust the seat so handles sit around chest height; press without locking forcefully."],
+    ["cable-lateral-raise","Cable Lateral Raise","Push",["Cable machine","Cable handles"],"Use a light load; lift to a comfortable shoulder height with a soft elbow."],
+    ["cable-face-pull","Cable Rope Face Pull","Pull",["Cable machine","Rope attachment"],"Pull the rope toward your face with control; keep neck relaxed and avoid leaning back."],
+    ["cable-curl","Cable Bicep Curl rope","Arms",["Cable machine","Rope attachment"],"Keep upper arms close to your sides; curl without swinging."],
+    ["cable-pushdown","Cable Tricep Pushdown","Arms",["Cable machine","Rope attachment"],"Keep elbows near your sides and extend with control; avoid using body weight to push."],
+    ["cable-overhead-extension","Overhead Cable Rope Extension","Arms",["Cable machine","Rope attachment"],"Brace your trunk; keep upper arms steady and use a comfortable elbow range."],
+    ["leg-extension","Leg Extension","Legs",["Leg extension machine"],"Align knees with the machine pivot; extend smoothly without kicking or forcing the lockout."],
+    ["leg-press","Leg Press","Legs",["Leg press machine"],"Keep hips and back supported; use a comfortable depth and avoid forcefully locking knees."],
+    ["glute-kickback","Glute Kickback Machine","Hinge",["Glute kickback machine"],"Adjust the support; move through the hip without arching your lower back."]
   ];
   const library = rows.map(([id,name,group,requires,cue])=>({id,name,group,requires,cue}));
   const available = inventory => library.filter(e=>e.requires.every(r=>inventory.includes(r)));
+  // Keep established automatic choices stable; gym additions use previewed programs.
+  const automaticIds=new Set(["push-up","floor-press","bench-press","band-press","row","band-row","pull-up","prone-pull","squat","goblet","barbell-squat","lunge","bridge","rdl","dead-bug","crunch","march","bike"]);
   function generate(options, inventory) {
     const {days,minutes,goal,core,cardio}=options;
     if(!Number.isInteger(days)||days<3||days>6||![20,30,45,60].includes(minutes)||!['strength','muscle','general'].includes(goal)||typeof core!=='boolean'||typeof cardio!=='boolean'||!Array.isArray(inventory)) throw Error('Invalid routine preferences');
-    const pool=available(inventory), reps=goal==='strength'?6:goal==='muscle'?10:12, rest=goal==='strength'?120:60;
+    const pool=available(inventory).filter(e=>automaticIds.has(e.id)), reps=goal==='strength'?6:goal==='muscle'?10:12, rest=goal==='strength'?120:60;
     const slots=(days<=4?4:2)+(core?1:0);
     const sets=Math.max(1,Math.min(goal==='strength'?4:3,Math.floor(((minutes-3-(cardio?5:0))/slots-1)/(rest/60+0.75))));
     // Conservative per-set estimate includes movement, rest and transitions.

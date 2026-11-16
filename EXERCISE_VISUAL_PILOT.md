@@ -1,3 +1,5 @@
+> Current follow-up: the original visual replacement is deployed. The catalog now has 25 real-person clips and 22 realistic 3D references, muscle browsing and a seven-day muscle-building plan. See [GYM_MUSCLE_WEEK.md](GYM_MUSCLE_WEEK.md) for the current implementation, rights and limits. The implementation notes below describe the earlier pilot.
+
 # Realistic exercise visuals
 
 All 25 existing exercise demonstration IDs now use realistic references: two licensed real-person videos and 23 generated anatomical 3D references. The original cartoon exercise renderer and schematic fallback controls are removed. This applies to Quick Log, the Exercise Library, generated/saved routines, coaching/favorites, live workouts, log previews, recorded workouts and printable exercise guides through their shared renderer.
