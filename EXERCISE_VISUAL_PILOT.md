@@ -32,3 +32,11 @@ No AI motion, guessed angle, fake muscle overlay or invented trainer endorsement
 - Exact filmed Core and Resistance Bands variants and remaining movements, plus additional real camera angles.
 - Qualified mechanics review, complete-rep boundaries, anatomy overlays and synchronized captions/recorded voice require content and evidence; the existing review workflow remains authoritative for those features.
 - Physical iOS/Android decoding, speech, screen reader and low-bandwidth checks. Desktop Chromium tests cannot establish those outcomes.
+
+## Validation
+
+- 204 unit tests and all 27 browser suites passed locally on Chromium.
+- Actual shipped MP4 decoding, moving playback, end-of-clip repeat, four speeds, credits, no startup video requests, category/equipment filters and navigation focus passed.
+- Cue reading/cancellation uses a speech mock in the automated check; actual device voices remain a physical-device check.
+- Poster/offline-shell reload, missing-video fallback, 320/390px large-text width checks, unchanged synthetic saved records and zero player/filter persistence writes passed. Existing backup, photo, stale-tab and sync regressions passed.
+- Pilot media were inspected visually for movement/equipment matching. Neither those checks nor passing CI establish specialist form review or signed model releases.
