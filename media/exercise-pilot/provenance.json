@@ -1,0 +1,67 @@
+{
+  "checked": "2026-11-15",
+  "termsPage": "https://ymove.app/free-exercise-videos",
+  "publisherTermsRevision": "2026-11-09",
+  "commercialAppUse": true,
+  "attribution": "Exercise video by Your Move",
+  "attributionURL": "https://ymove.app/exercise-api",
+  "standaloneRedistribution": false,
+  "specialistMechanicsReview": false,
+  "separateSignedModelDocumentsSupplied": false,
+  "assets": [
+    {
+      "exerciseId": "goblet",
+      "title": "Dumbbell Goblet Squat",
+      "url": "media/exercise-pilot/goblet.mp4",
+      "poster": "media/exercise-pilot/goblet.jpg",
+      "bytes": 1875528,
+      "seconds": 19.12,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "a2a797d0-f6f6-436e-8616-6c1d93e73d67",
+      "originalDownload": "https://ymove.app/api/free/a2a797d0-f6f6-436e-8616-6c1d93e73d67",
+      "thumbnailDownload": "https://ymove.app/api/free/a2a797d0-f6f6-436e-8616-6c1d93e73d67?type=thumbnail",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-pilot/goblet.mp4",
+          "bytes": 1875528,
+          "sha256": "b904f193848260c75d89c56cccf00237cbcbca1d15b27136f698853a1e5f6536"
+        },
+        {
+          "file": "media/exercise-pilot/goblet.jpg",
+          "bytes": 36675,
+          "sha256": "eb610195ff2c3b1bfbc4f20e5b179c330f588f6291b748588864aeb79be5fcf9"
+        }
+      ]
+    },
+    {
+      "exerciseId": "row",
+      "title": "Single Arm Dumbbell Row — Legs Apart",
+      "url": "media/exercise-pilot/row.mp4",
+      "poster": "media/exercise-pilot/row.jpg",
+      "bytes": 1074064,
+      "seconds": 12.84,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "d3fece95-c7e2-4794-ba8f-65a5b3e30a28",
+      "originalDownload": "https://ymove.app/api/free/d3fece95-c7e2-4794-ba8f-65a5b3e30a28",
+      "thumbnailDownload": "https://ymove.app/api/free/d3fece95-c7e2-4794-ba8f-65a5b3e30a28?type=thumbnail",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-pilot/row.mp4",
+          "bytes": 1074064,
+          "sha256": "66ecd9675d6d07657fdbc74b32155a20def240a2f235503cc1df0b283c586e6c"
+        },
+        {
+          "file": "media/exercise-pilot/row.jpg",
+          "bytes": 37114,
+          "sha256": "50c30a17ce07b1d9a079897781527d4926b834429436912c28aba331e9c59592"
+        }
+      ]
+    }
+  ]
+}

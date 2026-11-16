@@ -1,0 +1,621 @@
+{
+  "checked": "2026-11-15",
+  "origin": "generated-3d-motion",
+  "professionalFormReview": false,
+  "model": {
+    "source": "https://github.com/mortensams/freefitness/blob/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae/dist/opengym3d-exercise-pack-v1.zip",
+    "packSha256": "5ca8389789a63cd5eee7115392c66fcd2a4b945f2a495cbe334cb355441065e3",
+    "packLicense": "MIT",
+    "copyright": "Copyright (c) 2026 SylvesterAssiamahGK",
+    "meshLicense": "CC0-1.0",
+    "meshTerms": "https://download.makehumancommunity.org/about/license.html",
+    "originalFile": "models/squat.glb",
+    "sha256": "191f78106bf4d7d1f23a2f9cf694f83ae347b887a5c3268b7cf6eff68aba71f5",
+    "changes": "Reset to bind pose; original animation not played. New authored joint-direction motion, inverse limb placement, neutral material and exercise-specific equipment. Isometric plank is a static hold, not fabricated movement."
+  },
+  "assets": [
+    {
+      "exerciseId": "push-up",
+      "title": "Push-Up",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/push-up.mp4",
+      "poster": "media/exercise-3d/push-up.jpg",
+      "bytes": 52649,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/push-up.mp4",
+          "bytes": 52649,
+          "sha256": "9001328bc53d3defa108850529337f689882b57d0d0864a609706023fba5bb23"
+        },
+        {
+          "file": "media/exercise-3d/push-up.jpg",
+          "bytes": 18003,
+          "sha256": "2cdc6a4270b4ac6192d8745036bace387b3ae8ab8bfacb815a04e2f465df1349"
+        }
+      ]
+    },
+    {
+      "exerciseId": "floor-press",
+      "title": "Dumbbell Floor Press",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/floor-press.mp4",
+      "poster": "media/exercise-3d/floor-press.jpg",
+      "bytes": 50600,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/floor-press.mp4",
+          "bytes": 50600,
+          "sha256": "492e749ec44a6c14c7c11dd5de16bf46ff1ebbc3b76925b97ffa37ff59b2b23f"
+        },
+        {
+          "file": "media/exercise-3d/floor-press.jpg",
+          "bytes": 20499,
+          "sha256": "803980a484267ab31348e84497d0c336a66bcdd14f321056aa7772b22316612c"
+        }
+      ]
+    },
+    {
+      "exerciseId": "bench-press",
+      "title": "Dumbbell Bench Press",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/bench-press.mp4",
+      "poster": "media/exercise-3d/bench-press.jpg",
+      "bytes": 54134,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/bench-press.mp4",
+          "bytes": 54134,
+          "sha256": "028b2c327e4bb8abfb288c81090c285cbea6b318ef74452b7791daf474ce8872"
+        },
+        {
+          "file": "media/exercise-3d/bench-press.jpg",
+          "bytes": 20393,
+          "sha256": "0f0d7d642c6bc261b522d33d28481e763d82cbd757391651479baf6178616f99"
+        }
+      ]
+    },
+    {
+      "exerciseId": "band-press",
+      "title": "Band Chest Press",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/band-press.mp4",
+      "poster": "media/exercise-3d/band-press.jpg",
+      "bytes": 48586,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/band-press.mp4",
+          "bytes": 48586,
+          "sha256": "41b3a74b38e9fd211c416b4c98597408561a3d772216392c94565576f1847b0a"
+        },
+        {
+          "file": "media/exercise-3d/band-press.jpg",
+          "bytes": 17673,
+          "sha256": "93b1d82819f6540b837879bcd6631bb7dff410c4fe93bbc0890c3e8ebe4cedb3"
+        }
+      ]
+    },
+    {
+      "exerciseId": "band-row",
+      "title": "Band Row",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/band-row.mp4",
+      "poster": "media/exercise-3d/band-row.jpg",
+      "bytes": 53186,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/band-row.mp4",
+          "bytes": 53186,
+          "sha256": "a2f36b5e5641f2e91c859f43151bf851fea9e6df70d4450ce0be45f4caf3ca9a"
+        },
+        {
+          "file": "media/exercise-3d/band-row.jpg",
+          "bytes": 20256,
+          "sha256": "8538cfc26aa9eb158ed00d779b6a31645db732d34763f2e23f97c5ed1a1b1965"
+        }
+      ]
+    },
+    {
+      "exerciseId": "pull-up",
+      "title": "Pull-Up",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/pull-up.mp4",
+      "poster": "media/exercise-3d/pull-up.jpg",
+      "bytes": 72813,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/pull-up.mp4",
+          "bytes": 72813,
+          "sha256": "e1ec0424d87ab5c0e85dccf2ddd40a12c7d847cefbda9d1e1808cf758b87c5ac"
+        },
+        {
+          "file": "media/exercise-3d/pull-up.jpg",
+          "bytes": 20587,
+          "sha256": "14027d0bd305257b31086a32af378f39296724c55ab168463f326674a17d0491"
+        }
+      ]
+    },
+    {
+      "exerciseId": "prone-pull",
+      "title": "Prone W Raise",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/prone-pull.mp4",
+      "poster": "media/exercise-3d/prone-pull.jpg",
+      "bytes": 37203,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/prone-pull.mp4",
+          "bytes": 37203,
+          "sha256": "2d49f8d4580f6932b8ebf935a18a03022e76424e251a3b88ada1886ea5b69a93"
+        },
+        {
+          "file": "media/exercise-3d/prone-pull.jpg",
+          "bytes": 17985,
+          "sha256": "e187f0b4ada398fdec0816d861e6a87ccd5e68e3ab4119d92d5716db3c0ade7c"
+        }
+      ]
+    },
+    {
+      "exerciseId": "squat",
+      "title": "Bodyweight Squat",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/squat.mp4",
+      "poster": "media/exercise-3d/squat.jpg",
+      "bytes": 73220,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/squat.mp4",
+          "bytes": 73220,
+          "sha256": "06616ea04058921fc5912bdcd417630efedb014ddf029ad023a61b23f2b48fbb"
+        },
+        {
+          "file": "media/exercise-3d/squat.jpg",
+          "bytes": 15288,
+          "sha256": "94a2d9c2e8ac35f5d0687a5f879ed6a217c473ea29d458ed626e7cb34153a20c"
+        }
+      ]
+    },
+    {
+      "exerciseId": "barbell-squat",
+      "title": "Barbell Squat",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/barbell-squat.mp4",
+      "poster": "media/exercise-3d/barbell-squat.jpg",
+      "bytes": 95914,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/barbell-squat.mp4",
+          "bytes": 95914,
+          "sha256": "bc964a9914f6f1bd4e61dbea4fe05a4aa18f543837a0ed8943d46e51a23a794e"
+        },
+        {
+          "file": "media/exercise-3d/barbell-squat.jpg",
+          "bytes": 24743,
+          "sha256": "a06e920558e5d86c79aab9e547132b7c5af785519f85b72e14ca93422ae6597c"
+        }
+      ]
+    },
+    {
+      "exerciseId": "lunge",
+      "title": "Reverse Lunge",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 12,
+      "hold": false,
+      "url": "media/exercise-3d/lunge.mp4",
+      "poster": "media/exercise-3d/lunge.jpg",
+      "bytes": 124112,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/lunge.mp4",
+          "bytes": 124112,
+          "sha256": "eb35602fec36399ec70fe2f9d1fb23ecfeb7b096ff6441cca4b5f855875d3171"
+        },
+        {
+          "file": "media/exercise-3d/lunge.jpg",
+          "bytes": 13538,
+          "sha256": "de586abf6f30aa23b5cfb6794692e8c417509da1d2386f61fc386bbeeac92466"
+        }
+      ]
+    },
+    {
+      "exerciseId": "bridge",
+      "title": "Glute Bridge",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/bridge.mp4",
+      "poster": "media/exercise-3d/bridge.jpg",
+      "bytes": 54729,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/bridge.mp4",
+          "bytes": 54729,
+          "sha256": "8f4672b8421dc4092726fca56ff71819a571f42b7f725034ce4c11ed952dfb42"
+        },
+        {
+          "file": "media/exercise-3d/bridge.jpg",
+          "bytes": 18922,
+          "sha256": "0fa0f7c273b9147701828ab191341e3b429ac6960ea51cf9de73479f133a3486"
+        }
+      ]
+    },
+    {
+      "exerciseId": "rdl",
+      "title": "Dumbbell Romanian Deadlift",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/rdl.mp4",
+      "poster": "media/exercise-3d/rdl.jpg",
+      "bytes": 76699,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/rdl.mp4",
+          "bytes": 76699,
+          "sha256": "45cae7579b735456dee2d1e136ec80a3bc03dec2d26988f4f8e300ce947e5413"
+        },
+        {
+          "file": "media/exercise-3d/rdl.jpg",
+          "bytes": 15328,
+          "sha256": "6a97b7a14412f5f6ee2b1d7317da3efdda8a2a5774e1b4003ac3d2253e3d9bea"
+        }
+      ]
+    },
+    {
+      "exerciseId": "dead-bug",
+      "title": "Dead Bug",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 12,
+      "hold": false,
+      "url": "media/exercise-3d/dead-bug.mp4",
+      "poster": "media/exercise-3d/dead-bug.jpg",
+      "bytes": 100922,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/dead-bug.mp4",
+          "bytes": 100922,
+          "sha256": "d92feba98574943a81ad341a4b36d8ccb48597b73ade15f032733d65796520eb"
+        },
+        {
+          "file": "media/exercise-3d/dead-bug.jpg",
+          "bytes": 19259,
+          "sha256": "4f1dcf86eea67e4ce276c4254c39adca18e6925dc7407c0e68670a739e3dcfea"
+        }
+      ]
+    },
+    {
+      "exerciseId": "crunch",
+      "title": "Controlled Crunch",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/crunch.mp4",
+      "poster": "media/exercise-3d/crunch.jpg",
+      "bytes": 34065,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/crunch.mp4",
+          "bytes": 34065,
+          "sha256": "fcfe0e906f81f4fbf5540a92de9ffb21b46aa7256ac87e1d96072213eb903ad3"
+        },
+        {
+          "file": "media/exercise-3d/crunch.jpg",
+          "bytes": 18871,
+          "sha256": "1e147a977160399ab53ad9f0f0cefb00ca4f201e54ceb9efda3dd244de547b91"
+        }
+      ]
+    },
+    {
+      "exerciseId": "march",
+      "title": "Brisk March",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 12,
+      "hold": false,
+      "url": "media/exercise-3d/march.mp4",
+      "poster": "media/exercise-3d/march.jpg",
+      "bytes": 92761,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/march.mp4",
+          "bytes": 92761,
+          "sha256": "b52fc62523074305079f942a2485b4653395ee71ff6c65c2396afdd02b3aebc4"
+        },
+        {
+          "file": "media/exercise-3d/march.jpg",
+          "bytes": 13619,
+          "sha256": "58d3d9dd22aee8244f03adc0945cedf4a0bd9eb1c93b2fe25187636c43f7961b"
+        }
+      ]
+    },
+    {
+      "exerciseId": "bike",
+      "title": "Stationary Bike",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/bike.mp4",
+      "poster": "media/exercise-3d/bike.jpg",
+      "bytes": 63596,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/bike.mp4",
+          "bytes": 63596,
+          "sha256": "a16ee255b558d6ade1af8a65a1c5c74f7b5e04bcff3010c14ea29c6d45dcce6c"
+        },
+        {
+          "file": "media/exercise-3d/bike.jpg",
+          "bytes": 19451,
+          "sha256": "ffc2b14f51de2c72b087d536bd88258097f6cd742b6983b8e3ff8c94cee80174"
+        }
+      ]
+    },
+    {
+      "exerciseId": "shoulder-press",
+      "title": "Shoulder Press",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/shoulder-press.mp4",
+      "poster": "media/exercise-3d/shoulder-press.jpg",
+      "bytes": 57898,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/shoulder-press.mp4",
+          "bytes": 57898,
+          "sha256": "bb84e03e0b8b18a1f64497e673da3998708093f56769b7fc4a3ec6f693337d83"
+        },
+        {
+          "file": "media/exercise-3d/shoulder-press.jpg",
+          "bytes": 16360,
+          "sha256": "65b5a5cff244cc4685b493304bb351210a893202184009f4642e003c281d5cd3"
+        }
+      ]
+    },
+    {
+      "exerciseId": "curl",
+      "title": "Biceps Curl",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/curl.mp4",
+      "poster": "media/exercise-3d/curl.jpg",
+      "bytes": 54211,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/curl.mp4",
+          "bytes": 54211,
+          "sha256": "951e87ecead0e19d5efb92929d6a91b5ccce4d881218f9e98491ade422d112c2"
+        },
+        {
+          "file": "media/exercise-3d/curl.jpg",
+          "bytes": 15029,
+          "sha256": "bc03adf144f3f2db760bb3b54b1d1eb220720f1bac692a4a28fd0a153e40e0f1"
+        }
+      ]
+    },
+    {
+      "exerciseId": "calf-raise",
+      "title": "Calf Raise",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/calf-raise.mp4",
+      "poster": "media/exercise-3d/calf-raise.jpg",
+      "bytes": 33319,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/calf-raise.mp4",
+          "bytes": 33319,
+          "sha256": "592cfeb1e26e465d9e1ea903288ccc58f583cbc1a8cd1e0cfad6a418e6eec210"
+        },
+        {
+          "file": "media/exercise-3d/calf-raise.jpg",
+          "bytes": 13161,
+          "sha256": "7fb5950b01ef3a514669fa38b89c5b762fed1d151f84dbeedd606539c07a71df"
+        }
+      ]
+    },
+    {
+      "exerciseId": "plank",
+      "title": "Plank",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": true,
+      "url": "media/exercise-3d/plank.mp4",
+      "poster": "media/exercise-3d/plank.jpg",
+      "bytes": 14962,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/plank.mp4",
+          "bytes": 14962,
+          "sha256": "53fde706bb739b4fae7558ecefab901623626fd5e2a0babab4115b4cabcea70d"
+        },
+        {
+          "file": "media/exercise-3d/plank.jpg",
+          "bytes": 18849,
+          "sha256": "878e96b0dfddedefc8bd2d801afa7b2c769a61479a6fba6c353186e09c1878ac"
+        }
+      ]
+    },
+    {
+      "exerciseId": "leg-raise",
+      "title": "Leg Raise",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/leg-raise.mp4",
+      "poster": "media/exercise-3d/leg-raise.jpg",
+      "bytes": 55787,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/leg-raise.mp4",
+          "bytes": 55787,
+          "sha256": "9df5f8efdf91b24e471eb98ef66ee940845fa42ff126c77ce1244116d5df387b"
+        },
+        {
+          "file": "media/exercise-3d/leg-raise.jpg",
+          "bytes": 18478,
+          "sha256": "6c3b1463bae9762d8f20207e6b812cd83edac1261a15a58aea190c836ca9508b"
+        }
+      ]
+    },
+    {
+      "exerciseId": "band-curl",
+      "title": "Band Curl",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/band-curl.mp4",
+      "poster": "media/exercise-3d/band-curl.jpg",
+      "bytes": 60889,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/band-curl.mp4",
+          "bytes": 60889,
+          "sha256": "20e564f89a13ae1515526b8d2c3baf2a2f7f7b8e0c31c8358af25a16e904040f"
+        },
+        {
+          "file": "media/exercise-3d/band-curl.jpg",
+          "bytes": 17025,
+          "sha256": "752d56e6df45068ab020357111fe6bc25b5cadd61b1277d8129256099f1b5b23"
+        }
+      ]
+    },
+    {
+      "exerciseId": "band-squat",
+      "title": "Band Squat",
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "seconds": 6,
+      "hold": false,
+      "url": "media/exercise-3d/band-squat.mp4",
+      "poster": "media/exercise-3d/band-squat.jpg",
+      "bytes": 68217,
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/band-squat.mp4",
+          "bytes": 68217,
+          "sha256": "60570091f3047f320364c791e42faa2f3b6cef8907d373774f6358c5346343ab"
+        },
+        {
+          "file": "media/exercise-3d/band-squat.jpg",
+          "bytes": 15690,
+          "sha256": "ec205ce8ab4785a860c361dd2a1c7d7ab41ae5cb45bb27f851e1370ac7eda942"
+        }
+      ]
+    }
+  ],
+  "rendererHashes": {
+    "scene.mjs": "fd00d7975b7d2285532f3ae0e66a902a4cd7dc6799654bf97b931b0fa96d41e7",
+    "render.cjs": "11b56876d82f9ca3acf9a4416056e76553e543a71b6b34fdc5264b67b3d12c5f",
+    "update-manifest.cjs": "ec7882f5197e57e4f9355e9e38a0423b386b169061d3f1f0548257684d507242"
+  }
+}
