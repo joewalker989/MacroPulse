@@ -1,7 +1,7 @@
 /* Equipment and routine UI; shares the existing app's state and backup format. */
 window.mountTraining = function ({getState,save,escapeHTML:esc,logExercise}) {
   const T=window.MacroTraining, host=document.getElementById('training'), $=id=>document.getElementById(id);
-  let timerEnd=0, timerHandle;
+  let timerEnd=0, timerHandle, exerciseCategory='All', exerciseAvailable=true;
   const current=()=>getState().training||{equipment:[],options:{days:3,minutes:30,goal:'general',core:true,cardio:false},routine:[]};
   function update(next){getState().training=next;save();render();}
   const button=(label,action,value)=>`<button type="button" class="alt small" data-training="${action}" data-value="${esc(value)}">${esc(label)}</button>`;
@@ -16,7 +16,7 @@ window.mountTraining = function ({getState,save,escapeHTML:esc,logExercise}) {
       const pairCue=partner?`<p class="notice green">Superset with ${esc(T.library.find(e=>e.id===partner.exerciseId)?.name)}. Alternate one set of each, then rest ${Math.max(x.rest,partner.rest)}s. Complete extra sets solo if needed.</p>`:'';
       return `<div class="entry"><strong>${esc(e.name)}</strong>${window.MacroWorkoutVisuals?MacroWorkoutVisuals.illustration(e):''}<div class="muted">${x.sets} × ${x.reps} ${x.unit} · ${x.rest}s rest · ${esc(e.group)}</div>${pairCue}<p class="notice">${esc(e.cue)}</p><div class="actions">${button('Log / adjust','log',`${i}:${j}`)}${button('Start rest','rest',x.rest)}</div><label>Substitute<select class="field" data-substitute="${i}:${j}">${alternatives.map(a=>`<option value="${a.id}" ${a.id===e.id?'selected':''}>${esc(a.name)}</option>`).join('')}</select></label></div>`;
     }).join('')}</details>`).join('')}</div>
-    <div class="panel"><h3>Exercise Library</h3><p class="notice">Start and movement demonstration pictures with technique cues, filtered to your equipment. Illustrations are simplified.</p>${T.available(s.equipment).map(e=>`<details class="entry" open><summary>${esc(e.name)} · ${esc(e.group)}</summary>${window.MacroWorkoutVisuals?MacroWorkoutVisuals.illustration(e):''}<p class="notice">${esc(e.cue)}</p></details>`).join('')}</div>`;
+    ${MacroExercisePreviews.library(s.equipment,exerciseCategory,exerciseAvailable)}`;
   }
   host.addEventListener('submit',e=>{
     e.preventDefault();const s=current(),f=e.target.elements;
@@ -30,6 +30,10 @@ window.mountTraining = function ({getState,save,escapeHTML:esc,logExercise}) {
   });
   host.addEventListener('change',e=>{
     const s=current(),el=e.target;
+    if(el.id==='exerciseCategory'||el.id==='exerciseAvailable'){
+      exerciseCategory=$('exerciseCategory').value;exerciseAvailable=$('exerciseAvailable').checked;
+      const focusId=el.id;render();$(focusId).focus();return;
+    }
     if(el.dataset.equipment){const name=el.dataset.equipment;update({...s,equipment:el.checked?[...s.equipment,name]:s.equipment.filter(x=>x!==name),routine:[]});}
     if(el.dataset.substitute){const [i,j]=el.dataset.substitute.split(':').map(Number);const old=T.library.find(x=>x.id===s.routine[i].exercises[j].exerciseId);if(T.available(s.equipment).some(x=>x.id===el.value&&x.group===old.group)){s.routine[i].exercises[j].exerciseId=el.value;update(s);}}
   });
@@ -48,5 +52,9 @@ window.mountTraining = function ({getState,save,escapeHTML:esc,logExercise}) {
     }
   });
   $('cancelRest').onclick=()=>{clearInterval(timerHandle);$('restStatus').textContent='Rest timer ready';};
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-exercise-category]');if(!b)return;
+    exerciseCategory=b.dataset.exerciseCategory;exerciseAvailable=false;render();
+    $('exerciseLibraryTitle').focus({preventScroll:true});$('exerciseLibrary').scrollIntoView({block:'start'});
+  });
   render();return {render};
 };
