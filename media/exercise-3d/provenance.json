@@ -223,32 +223,6 @@
       ]
     },
     {
-      "exerciseId": "barbell-squat",
-      "title": "Barbell Squat",
-      "kind": "3d-motion",
-      "width": 800,
-      "height": 600,
-      "seconds": 6,
-      "hold": false,
-      "url": "media/exercise-3d/barbell-squat.mp4",
-      "poster": "media/exercise-3d/barbell-squat.jpg",
-      "bytes": 95914,
-      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
-      "creditURL": "https://download.makehumancommunity.org/about/license.html",
-      "files": [
-        {
-          "file": "media/exercise-3d/barbell-squat.mp4",
-          "bytes": 95914,
-          "sha256": "bc964a9914f6f1bd4e61dbea4fe05a4aa18f543837a0ed8943d46e51a23a794e"
-        },
-        {
-          "file": "media/exercise-3d/barbell-squat.jpg",
-          "bytes": 24743,
-          "sha256": "a06e920558e5d86c79aab9e547132b7c5af785519f85b72e14ca93422ae6597c"
-        }
-      ]
-    },
-    {
       "exerciseId": "lunge",
       "title": "Reverse Lunge",
       "kind": "3d-motion",
@@ -615,7 +589,7 @@
   ],
   "rendererHashes": {
     "scene.mjs": "fd00d7975b7d2285532f3ae0e66a902a4cd7dc6799654bf97b931b0fa96d41e7",
-    "render.cjs": "11b56876d82f9ca3acf9a4416056e76553e543a71b6b34fdc5264b67b3d12c5f",
+    "render.cjs": "2d7d3a5ec6b0d774110da918146f8bdd9d76f51913e4c9801c1c8da37fa7d29d",
     "update-manifest.cjs": "ec7882f5197e57e4f9355e9e38a0423b386b169061d3f1f0548257684d507242"
   }
 }

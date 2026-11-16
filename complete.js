@@ -2,9 +2,13 @@
 (function(root){
  'use strict';
  const T=typeof module!=='undefined'&&module.exports?require('./training.js'):root.MacroTraining;
+ const G=typeof module!=='undefined'&&module.exports?require('./gym-routines.js'):root.MacroGymRoutines;
  const U=typeof module!=='undefined'&&module.exports?require('./upgrade.js'):root.MacroUpgrade;
  const muscleFor={Push:'Chest',Pull:'Back',Legs:'Quads',Hinge:'Glutes',Core:'Core',Cardio:'Cardio'};
  const muscles=['Chest','Back','Quads','Glutes','Core'];
+ // This legacy volume view has five groups. Do not relabel shoulder or isolated
+ // hamstring work as chest/glutes just because it shares a planning pattern.
+ const volumeGroup=e=>['shoulder-press','lateral-raise','cable-lateral-raise','kettlebell-push-press','cable-leg-curl'].includes(e?.id)?null:muscleFor[e?.group]||null;
  const identify=name=>T.library.find(e=>e.name.toLowerCase()===String(name).trim().toLowerCase()||e.id===name);
  const days=(a,b)=>(Date.parse(b+'T12:00:00Z')-Date.parse(a+'T12:00:00Z'))/86400000;
  function trend(points){
@@ -29,7 +33,7 @@
  }
  function volume(workouts,from,to){
    const result=Object.fromEntries(muscles.map(x=>[x,{sets:0,reps:0,load:0}]));let unknown=0;
-   for(const w of workouts.filter(w=>w.date>=from&&w.date<=to)){const e=identify(w.exercise);if(!e){unknown++;continue;}const m=muscleFor[e.group];if(!result[m])continue;result[m].sets+=w.sets;result[m].reps+=w.sets*w.reps;result[m].load+=w.sets*w.reps*w.weight;}
+   for(const w of workouts.filter(w=>w.date>=from&&w.date<=to)){const e=identify(w.exercise);if(!e){unknown++;continue;}const m=volumeGroup(e);if(m==='Cardio')continue;if(!result[m]){unknown++;continue;}result[m].sets+=w.sets;result[m].reps+=w.sets*w.reps;result[m].load+=w.sets*w.reps*w.weight;}
    return {groups:result,unknown};
  }
  function predictor(workouts,exercise,target,today){
@@ -39,7 +43,7 @@
    return {best,message:best>=target?'Estimated strength milestone already reached.':fit.slope>0&&wait>0&&wait<=180?`Trend estimate: ${U.shift(fit.last.date,Math.ceil(wait))}. Epley estimated 1RM; not a safe lifting prescription or guarantee.`:'No credible increasing trend within six months. Keep logging comparable sessions.'};
  }
  function replacements(id,equipment,excluded){const e=T.library.find(x=>x.id===id);return e?T.available(equipment).filter(x=>x.group===e.group&&x.id!==id&&!excluded.includes(x.id)):[];}
- const programs=[{id:'foundation',name:'Foundation · 3 days',detail:'Full-body practice, 30 minutes, general fitness.',options:{days:3,minutes:30,goal:'general',core:true,cardio:false}},{id:'strength',name:'Strength · 3 days',detail:'Longer rests, 45 minutes. Choose loads yourself.',options:{days:3,minutes:45,goal:'strength',core:true,cardio:false}},{id:'muscle',name:'Muscle · 4 days',detail:'Full-body rotation, 45 minutes.',options:{days:4,minutes:45,goal:'muscle',core:true,cardio:false}}];
+ const programs=[{id:'foundation',name:'Foundation · 3 days',detail:'Full-body practice, 30 minutes, general fitness.',options:{days:3,minutes:30,goal:'general',core:true,cardio:false}},{id:'strength',name:'Strength · 3 days',detail:'Longer rests, 45 minutes. Choose loads yourself.',options:{days:3,minutes:45,goal:'strength',core:true,cardio:false}},{id:'muscle',name:'Muscle · 4 days',detail:'Full-body rotation, 45 minutes.',options:{days:4,minutes:45,goal:'muscle',core:true,cardio:false}},...(G?.programs||[])];
  function calendar(state,end,count=35){return Array.from({length:count},(_,i)=>{const date=U.shift(end,i-count+1);return {date,workouts:state.workouts.filter(w=>w.date===date).length,meals:state.meals.filter(m=>m.date===date).length,planned:(state.upgrade?.schedule||[]).filter(s=>s.date===date&&s.status==='planned').length};});}
  function weekly(state,today){
    const summarize=(end)=>{const from=U.shift(end,-6),w=state.workouts.filter(x=>x.date>=from&&x.date<=end),m=state.meals.filter(x=>x.date>=from&&x.date<=end),logged=new Set(m.map(x=>x.date)).size;return {trainingDays:new Set(w.map(x=>x.date)).size,mealDays:logged,cal:logged?Math.round(m.reduce((s,x)=>s+x.cal,0)/logged):null,sets:w.reduce((s,x)=>s+x.sets,0)};};
@@ -51,6 +55,6 @@
 
  function restaurantSearch(rows,query,max){return rows.filter(x=>(x.restaurant+' '+x.name).toLowerCase().includes(query.trim().toLowerCase())&&(!Number.isFinite(max)||x.cal<=max));}
  function workoutCommand(text){const t=String(text).trim().toLowerCase();if(t==='stop rest')return {action:'stop'};const m=t.match(/^(sets|reps|rest) (\d+)(?: seconds?)?$/);if(!m)throw Error('Use: sets 3, reps 10, rest 60 seconds, or stop rest.');const n=Number(m[2]),max={sets:20,reps:100,rest:600}[m[1]];if(n<1||n>max)throw Error(`Use ${m[1]} between 1 and ${max}.`);return {action:m[1],value:n};}
- const api={identify,muscleFor,muscles,trend,goalStatus,volume,predictor,replacements,programs,calendar,weekly,scale,mealDraft,nutritionQuality,restaurantSearch,workoutCommand};
+ const api={identify,muscleFor,muscles,volumeGroup,trend,goalStatus,volume,predictor,replacements,programs,calendar,weekly,scale,mealDraft,nutritionQuality,restaurantSearch,workoutCommand};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.MacroComplete=api;
 })(typeof window!=='undefined'?window:globalThis);

@@ -14,9 +14,9 @@ run(seed,async({page,ctx,key,read,screenshot})=>{
  for(const category of ['Upper Body','Lower Body','Full Body','Core','Resistance Bands']){
   await page.locator('#templateList [data-exercise-category="'+category+'"]').click();a.equal(await page.locator('#exerciseCategory').inputValue(),category);a.equal(await page.locator('#exerciseAvailable').isChecked(),false);a.equal(await page.locator('[data-exercise-card]').count(),4);a.equal(await page.locator('#exerciseLibraryTitle').evaluate(e=>e===document.activeElement),true);
  }
- await page.locator('#exerciseCategory').selectOption('All');a.equal(await page.locator('[data-exercise-card]').count(),25);
+ await page.locator('#exerciseCategory').selectOption('All');a.equal(await page.locator('[data-exercise-card]').count(),47);
  await page.locator('#exerciseAvailable').check();a.equal(await page.locator('[data-exercise-card=band-row]').count(),0);a.equal(await page.locator('[data-exercise-card=goblet]').count(),1);
- a.match(await page.locator('[data-exercise-card=goblet]').innerText(),/Target muscles: Quads, glutes/);
+ a.match(await page.locator('[data-exercise-card=goblet]').innerText(),/Target muscles: Quads, Glutes/);
  await page.locator('[data-exercise-card=goblet]').screenshot({path:require('node:path').join(__dirname,'../test-results/pilot-card.png')});
  for(const id of ['goblet','row']){
   await page.locator('#templateList [data-realmotion='+id+']').first().click();a.equal(await page.locator('#rmVideo').getAttribute('src'),null);a.equal(await page.locator('[data-rm-angle]:disabled').count(),3);

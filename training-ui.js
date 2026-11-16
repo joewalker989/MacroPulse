@@ -1,22 +1,22 @@
 /* Equipment and routine UI; shares the existing app's state and backup format. */
 window.mountTraining = function ({getState,save,escapeHTML:esc,logExercise}) {
   const T=window.MacroTraining, host=document.getElementById('training'), $=id=>document.getElementById(id);
-  let timerEnd=0, timerHandle, exerciseCategory='All', exerciseAvailable=true;
+  let timerEnd=0, timerHandle, exerciseCategory='All', exerciseAvailable=true, exerciseMuscle='All', exerciseMediaType='All', exerciseSearch='';
   const current=()=>getState().training||{equipment:[],options:{days:3,minutes:30,goal:'general',core:true,cardio:false},routine:[]};
   function update(next){getState().training=next;save();render();}
   const button=(label,action,value)=>`<button type="button" class="alt small" data-training="${action}" data-value="${esc(value)}">${esc(label)}</button>`;
   function render(){
     const s=current(),o=s.options;
     host.innerHTML=`<div class="panel"><h3>My Equipment</h3><p class="notice">Bodyweight exercises are always available. Custom equipment is saved in your inventory; automatic matching currently uses the supported equipment below.</p><div class="equipment-grid">${T.equipment.map(name=>`<label><input type="checkbox" data-equipment="${esc(name)}" ${s.equipment.includes(name)?'checked':''}> ${esc(name)}</label>`).join('')}</div><form id="equipmentForm" class="row"><label style="flex:1">Custom equipment<input class="field" name="equipment" required maxlength="60" placeholder="e.g. Cable machine"></label><button class="alt">Add</button></form>${s.equipment.filter(x=>!T.equipment.includes(x)).map(x=>`<div class="entry row"><span>${esc(x)}</span>${button('Remove','remove',x)}</div>`).join('')}</div>
-    <div class="panel"><h3>Build Your Routine</h3><form id="routineForm"><div class="grid2"><label>Days per week<select class="field" name="days">${[3,4,5,6].map(n=>`<option ${n===o.days?'selected':''}>${n}</option>`).join('')}</select></label><label>Workout duration<select class="field" name="minutes">${[20,30,45,60].map(n=>`<option value="${n}" ${n===o.minutes?'selected':''}>${n} minutes</option>`).join('')}</select></label></div><label>Goal<select class="field" name="goal">${[['general','General fitness'],['strength','Strength'],['muscle','Build muscle']].map(([v,n])=>`<option value="${v}" ${v===o.goal?'selected':''}>${n}</option>`).join('')}</select></label><div class="actions"><label><input type="checkbox" name="core" ${o.core?'checked':''}> Include core</label><label><input type="checkbox" name="cardio" ${o.cardio?'checked':''}> Include 5 min cardio</label></div><p class="notice">Time estimates include a 3-minute warm-up and rests. Short sessions use fewer sets. Plan days around your recovery; this is a local rule-based planner.</p><button class="btn" style="margin-top:12px">Generate routine</button></form></div>
-    <div class="panel"><h3>My Routine</h3>${s.routine.length?'<p class="notice">Open an exercise to review or adjust its log. A day is not marked complete automatically. Changing inventory clears this plan so it cannot retain unavailable equipment.</p>':'<p class="muted">Choose equipment and preferences, then generate a plan.</p>'}${s.routine.map((day,i)=>`<details class="entry"><summary>${esc(day.name)} · ~${day.estimatedMinutes} min</summary>${day.exercises.map((x,j)=>{
+    <div class="panel"><h3>Build Your Routine</h3><p><button type="button" class="btn" data-complete="gym-week-open">Preview 7-day Muscle Builder</button></p><button type="button" class="alt" data-complete="program-open">Browse gym routines</button><form id="routineForm"><div class="grid2"><label>Days per week<select class="field" name="days">${[3,4,5,6].map(n=>`<option ${n===o.days?'selected':''}>${n}</option>`).join('')}</select></label><label>Workout duration<select class="field" name="minutes">${[20,30,45,60].map(n=>`<option value="${n}" ${n===o.minutes?'selected':''}>${n} minutes</option>`).join('')}</select></label></div><label>Goal<select class="field" name="goal">${[['general','General fitness'],['strength','Strength'],['muscle','Build muscle']].map(([v,n])=>`<option value="${v}" ${v===o.goal?'selected':''}>${n}</option>`).join('')}</select></label><div class="actions"><label><input type="checkbox" name="core" ${o.core?'checked':''}> Include core</label><label><input type="checkbox" name="cardio" ${o.cardio?'checked':''}> Include 5 min cardio</label></div><p class="notice">Time estimates include a 3-minute warm-up and rests. Short sessions use fewer sets. Plan days around your recovery; this is a local rule-based planner.</p><button class="btn" style="margin-top:12px">Generate routine</button></form></div>
+    <div class="panel"><h3>My Routine</h3>${s.routine.length&&s.routine.every(d=>d.programId==='gym-muscle-week')?MacroGymRoutines.weekHTML(esc):''}${s.routine.length?'<p class="notice">Open an exercise to review or adjust its log. A day is not marked complete automatically. Changing inventory clears this plan so it cannot retain unavailable equipment.</p>':'<p class="muted">Choose equipment and preferences, then generate a plan.</p>'}${s.routine.map((day,i)=>`<details class="entry"><summary>${esc(day.name)} · ~${day.estimatedMinutes} min</summary>${day.programGuidance?`<p class="notice">${esc(day.programGuidance)}</p>`:''}${day.exercises.map((x,j)=>{
       const e=T.library.find(e=>e.id===x.exerciseId); if(!e)return '';
       const alternatives=T.available(s.equipment).filter(a=>a.group===e.group);
       const partner=x.superset?day.exercises.find(p=>p!==x&&p.superset===x.superset):null;
       const pairCue=partner?`<p class="notice green">Superset with ${esc(T.library.find(e=>e.id===partner.exerciseId)?.name)}. Alternate one set of each, then rest ${Math.max(x.rest,partner.rest)}s. Complete extra sets solo if needed.</p>`:'';
-      return `<div class="entry"><strong>${esc(e.name)}</strong>${window.MacroWorkoutVisuals?MacroWorkoutVisuals.illustration(e):''}<div class="muted">${x.sets} × ${x.reps} ${x.unit} · ${x.rest}s rest · ${esc(e.group)}</div>${pairCue}<p class="notice">${esc(e.cue)}</p><div class="actions">${button('Log / adjust','log',`${i}:${j}`)}${button('Start rest','rest',x.rest)}</div><label>Substitute<select class="field" data-substitute="${i}:${j}">${alternatives.map(a=>`<option value="${a.id}" ${a.id===e.id?'selected':''}>${esc(a.name)}</option>`).join('')}</select></label></div>`;
+      return `<div class="entry"><strong>${esc(e.name)}</strong>${window.MacroWorkoutVisuals?MacroWorkoutVisuals.illustration(e):''}<div class="muted">${x.sets} × ${x.repMin?`${x.repMin}–${x.repMax}`:x.reps} ${x.unit}${x.perSide?' each side':''} · ${x.rest}s rest · ${esc(e.group)}</div>${pairCue}${x.targetNote?`<p class="notice">${esc(x.targetNote)}</p>`:''}<p class="notice">${esc(e.cue)}</p><div class="actions">${button('Log / adjust','log',`${i}:${j}`)}${button('Start rest','rest',x.rest)}</div><label>Substitute<select class="field" data-substitute="${i}:${j}">${alternatives.map(a=>`<option value="${a.id}" ${a.id===e.id?'selected':''}>${esc(a.name)}</option>`).join('')}</select></label></div>`;
     }).join('')}</details>`).join('')}</div>
-    ${MacroExercisePreviews.library(s.equipment,exerciseCategory,exerciseAvailable)}`;
+    ${MacroExercisePreviews.library(s.equipment,exerciseCategory,exerciseAvailable,exerciseMuscle,exerciseMediaType,exerciseSearch)}`;
   }
   host.addEventListener('submit',e=>{
     e.preventDefault();const s=current(),f=e.target.elements;
@@ -30,8 +30,8 @@ window.mountTraining = function ({getState,save,escapeHTML:esc,logExercise}) {
   });
   host.addEventListener('change',e=>{
     const s=current(),el=e.target;
-    if(el.id==='exerciseCategory'||el.id==='exerciseAvailable'){
-      exerciseCategory=$('exerciseCategory').value;exerciseAvailable=$('exerciseAvailable').checked;
+    if(['exerciseCategory','exerciseAvailable','exerciseMuscle','exerciseMediaType','exerciseSearch'].includes(el.id)){
+      exerciseCategory=$('exerciseCategory').value;exerciseAvailable=$('exerciseAvailable').checked;exerciseMuscle=$('exerciseMuscle').value;exerciseMediaType=$('exerciseMediaType').value;exerciseSearch=$('exerciseSearch').value.trim();
       const focusId=el.id;render();$(focusId).focus();return;
     }
     if(el.dataset.equipment){const name=el.dataset.equipment;update({...s,equipment:el.checked?[...s.equipment,name]:s.equipment.filter(x=>x!==name),routine:[]});}
@@ -53,8 +53,10 @@ window.mountTraining = function ({getState,save,escapeHTML:esc,logExercise}) {
   });
   $('cancelRest').onclick=()=>{clearInterval(timerHandle);$('restStatus').textContent='Rest timer ready';};
   document.addEventListener('click',e=>{const b=e.target.closest('[data-exercise-category]');if(!b)return;
-    exerciseCategory=b.dataset.exerciseCategory;exerciseAvailable=false;render();
+    exerciseCategory=b.dataset.exerciseCategory;exerciseAvailable=false;exerciseMuscle='All';exerciseMediaType='All';exerciseSearch='';render();
     $('exerciseLibraryTitle').focus({preventScroll:true});$('exerciseLibrary').scrollIntoView({block:'start'});
   });
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-exercise-muscle]');if(!b)return;exerciseMuscle=b.dataset.exerciseMuscle;render();document.querySelector('[data-exercise-muscle="'+exerciseMuscle+'"]').focus();});
+  document.addEventListener('click',e=>{if(!e.target.closest('[data-exercise-human]'))return;exerciseCategory='All';exerciseAvailable=false;exerciseMuscle='All';exerciseMediaType='human-footage';exerciseSearch='';render();$('exerciseLibraryTitle').focus({preventScroll:true});$('exerciseLibrary').scrollIntoView({block:'start'});});
   render();return {render};
 };

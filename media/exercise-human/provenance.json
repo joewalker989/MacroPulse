@@ -1,0 +1,658 @@
+{
+  "publisher": "Your Move",
+  "source": "https://ymove.app/free-exercise-videos",
+  "checked": "2026-11-15",
+  "terms": "Free 25-video collection. Commercial app and website use permitted with visible linked credit Exercise video by Your Move to https://ymove.app/exercise-api. No resale or standalone redistribution. Original publisher files, no edits.",
+  "assets": [
+    {
+      "exerciseId": "barbell-bench",
+      "title": "Barbell Bench Press",
+      "url": "media/exercise-human/barbell-bench.mp4",
+      "poster": "media/exercise-human/barbell-bench.jpg",
+      "bytes": 1147598,
+      "seconds": 14.84,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "dd7e706c-2086-4f4b-867f-d7fece2f720d",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/barbell-bench.mp4",
+          "bytes": 1147598,
+          "sha256": "fe995f4c7bd460547a35ed2c21f83588057c74fa17bf26dc2ebc44961dcb2bde"
+        },
+        {
+          "file": "media/exercise-human/barbell-bench.jpg",
+          "bytes": 46952,
+          "sha256": "5376b3b7bd0597eee534d3f9b2dc9b5c1023aa84938c1e00648e0d2bd531feff"
+        }
+      ]
+    },
+    {
+      "exerciseId": "barbell-deadlift",
+      "title": "Barbell Deadlift",
+      "url": "media/exercise-human/barbell-deadlift.mp4",
+      "poster": "media/exercise-human/barbell-deadlift.jpg",
+      "bytes": 2650584,
+      "seconds": 20,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "b59952ca-1551-4c07-835d-ab78bfe9953c",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/barbell-deadlift.mp4",
+          "bytes": 2650584,
+          "sha256": "d07a95473fd2c22394951ebbb6a23829b7f2d5bb51f0b2844b95f3c29e69ba16"
+        },
+        {
+          "file": "media/exercise-human/barbell-deadlift.jpg",
+          "bytes": 50680,
+          "sha256": "1d548c74f71e3b6aee789692a6a3d041267b4514009152eae6f873c9fbc5728f"
+        }
+      ]
+    },
+    {
+      "exerciseId": "barbell-squat",
+      "title": "Barbell Back Squat",
+      "url": "media/exercise-human/barbell-squat.mp4",
+      "poster": "media/exercise-human/barbell-squat.jpg",
+      "bytes": 1756362,
+      "seconds": 14,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "fd0eaa34-d14b-4421-b41c-1669f93253b3",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/barbell-squat.mp4",
+          "bytes": 1756362,
+          "sha256": "e1619abcd21b0f97d83703b13f36c4a3f3261535417d92f50df99ffb7810d993"
+        },
+        {
+          "file": "media/exercise-human/barbell-squat.jpg",
+          "bytes": 51113,
+          "sha256": "0874921046cfc8cce73a22c77a3ebee09fb939ab5ad7f89a107ee08ba0ecf554"
+        }
+      ]
+    },
+    {
+      "exerciseId": "cable-crossover",
+      "title": "Cable Crossover (Mid)",
+      "url": "media/exercise-human/cable-crossover.mp4",
+      "poster": "media/exercise-human/cable-crossover.jpg",
+      "bytes": 1423751,
+      "seconds": 20,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "e2b1d801-055a-4dc5-ad6e-486e3dbfcfb7",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/cable-crossover.mp4",
+          "bytes": 1423751,
+          "sha256": "eff6a7d1d10d9ec0345248cfdf58654785084c24f127d107715cdeacbe941c34"
+        },
+        {
+          "file": "media/exercise-human/cable-crossover.jpg",
+          "bytes": 51704,
+          "sha256": "831445ad626817cb56730fb8590c6f79a3e462bef80b8af11be5409366b42121"
+        }
+      ]
+    },
+    {
+      "exerciseId": "cable-curl",
+      "title": "Cable Bicep Curl rope",
+      "url": "media/exercise-human/cable-curl.mp4",
+      "poster": "media/exercise-human/cable-curl.jpg",
+      "bytes": 2536321,
+      "seconds": 20.28,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "f32940f7-7da6-4741-a72f-13e52c56a79c",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/cable-curl.mp4",
+          "bytes": 2536321,
+          "sha256": "4e8251b499dddbe664a218f0a4cb14f166d813da2e9218df69bdaddd021297ab"
+        },
+        {
+          "file": "media/exercise-human/cable-curl.jpg",
+          "bytes": 67192,
+          "sha256": "126e39f9fe375fde797eb92562e4f2eb7514fd7dc46f74ad98d63d04ffed80a5"
+        }
+      ]
+    },
+    {
+      "exerciseId": "cable-face-pull",
+      "title": "Cable Rope Face Pull",
+      "url": "media/exercise-human/cable-face-pull.mp4",
+      "poster": "media/exercise-human/cable-face-pull.jpg",
+      "bytes": 2928967,
+      "seconds": 27.76,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "d9b9cf47-c5ff-4672-b8a8-2fe5f4845231",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/cable-face-pull.mp4",
+          "bytes": 2928967,
+          "sha256": "80cbd4eb34086751475cfabfcd06ff44f7c11c1270282d74ca729d2c15f045ba"
+        },
+        {
+          "file": "media/exercise-human/cable-face-pull.jpg",
+          "bytes": 53903,
+          "sha256": "c32c284e66aa5790bea933571cc65576da7c961861fd2c783571bada626ea3c1"
+        }
+      ]
+    },
+    {
+      "exerciseId": "cable-lateral-raise",
+      "title": "Cable Lateral Raise",
+      "url": "media/exercise-human/cable-lateral-raise.mp4",
+      "poster": "media/exercise-human/cable-lateral-raise.jpg",
+      "bytes": 3237290,
+      "seconds": 25.76,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "710d4aa4-e4ea-4fad-8930-a7b9bf582cae",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/cable-lateral-raise.mp4",
+          "bytes": 3237290,
+          "sha256": "e5775dfe1fb306731aedd428ab6cfc67ccd85bc8be5ada49e22285d75326a00d"
+        },
+        {
+          "file": "media/exercise-human/cable-lateral-raise.jpg",
+          "bytes": 78679,
+          "sha256": "9af053afd06dd110610b4823c5d2005115fb01dbd6a6ede5b7ff9ff0348fc0c0"
+        }
+      ]
+    },
+    {
+      "exerciseId": "cable-leg-curl",
+      "title": "Lying Cable Leg Curl",
+      "url": "media/exercise-human/cable-leg-curl.mp4",
+      "poster": "media/exercise-human/cable-leg-curl.jpg",
+      "bytes": 618805,
+      "seconds": 8.68,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "856b4128-b57d-4b08-b0de-7f19b4553020",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/cable-leg-curl.mp4",
+          "bytes": 618805,
+          "sha256": "a693085863bd26b525bb3bb219e3c217f2bdb339c598cfbec4ab04527f832143"
+        },
+        {
+          "file": "media/exercise-human/cable-leg-curl.jpg",
+          "bytes": 51826,
+          "sha256": "9122252228a8297baaca07efd7f56e3eef33d6a4dd52e6d4baf656c9a159851f"
+        }
+      ]
+    },
+    {
+      "exerciseId": "cable-overhead-extension",
+      "title": "Overhead Cable Rope Extension",
+      "url": "media/exercise-human/cable-overhead-extension.mp4",
+      "poster": "media/exercise-human/cable-overhead-extension.jpg",
+      "bytes": 2021301,
+      "seconds": 13.56,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "a1c3384e-62db-4595-9b97-df2e7f131234",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/cable-overhead-extension.mp4",
+          "bytes": 2021301,
+          "sha256": "f0ccc71bb2fa87ef8025378edc50c80db1ee9e8604b5216c95233afa958eb143"
+        },
+        {
+          "file": "media/exercise-human/cable-overhead-extension.jpg",
+          "bytes": 94612,
+          "sha256": "b09181be82187eace52f28efc2d4f2edfa9a1a01431e95b4e4700edf03d80caa"
+        }
+      ]
+    },
+    {
+      "exerciseId": "cable-pushdown",
+      "title": "Cable Tricep Pushdown",
+      "url": "media/exercise-human/cable-pushdown.mp4",
+      "poster": "media/exercise-human/cable-pushdown.jpg",
+      "bytes": 2050298,
+      "seconds": 15.28,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "3875dae4-14a6-4533-84d3-ef9acbadbaea",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/cable-pushdown.mp4",
+          "bytes": 2050298,
+          "sha256": "939b5bfc4485f0e3d28c3b8c15b816acf4954d3de170029c4bbef67355c7e23d"
+        },
+        {
+          "file": "media/exercise-human/cable-pushdown.jpg",
+          "bytes": 74653,
+          "sha256": "bfdc2f3dc3596f473d26ac570c3ca741dc090cd782589a363d7917a332426f96"
+        }
+      ]
+    },
+    {
+      "exerciseId": "cable-row",
+      "title": "Seated Cable Row close V bar",
+      "url": "media/exercise-human/cable-row.mp4",
+      "poster": "media/exercise-human/cable-row.jpg",
+      "bytes": 864914,
+      "seconds": 8.24,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "77976f52-b13a-4fd0-addf-f4404e3a8e95",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/cable-row.mp4",
+          "bytes": 864914,
+          "sha256": "957579876dc560f4a889ea2e9dcf2a302abaa484ffcde7b82f0615bb70bc9004"
+        },
+        {
+          "file": "media/exercise-human/cable-row.jpg",
+          "bytes": 56344,
+          "sha256": "7758f1b10b07ac7d9f98d11d1c8d0bc87ede9455c5879dbae9f7afc5a9c9d71a"
+        }
+      ]
+    },
+    {
+      "exerciseId": "cable-woodchop",
+      "title": "Cable Woodchop (High to Low)",
+      "url": "media/exercise-human/cable-woodchop.mp4",
+      "poster": "media/exercise-human/cable-woodchop.jpg",
+      "bytes": 1664424,
+      "seconds": 16.72,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "02f17b45-d37d-4452-9082-4679e06f8c03",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/cable-woodchop.mp4",
+          "bytes": 1664424,
+          "sha256": "959952eb31891421f02678af5500b731dbdc958da045929eb90e2201e0d4f1b5"
+        },
+        {
+          "file": "media/exercise-human/cable-woodchop.jpg",
+          "bytes": 51970,
+          "sha256": "ee60c7273bf3c4a8b67574e33f826d2f9a24c612319dd1fdb971675b405fd0ae"
+        }
+      ]
+    },
+    {
+      "exerciseId": "glute-kickback",
+      "title": "Glute Kickback Machine",
+      "url": "media/exercise-human/glute-kickback.mp4",
+      "poster": "media/exercise-human/glute-kickback.jpg",
+      "bytes": 2485051,
+      "seconds": 16.96,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "5611abf4-57f7-4153-b29d-a17cd7e2907d",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/glute-kickback.mp4",
+          "bytes": 2485051,
+          "sha256": "59aa92bcb703b68ed2158b46c065f6a043641564dd24a112e3402eed574b3940"
+        },
+        {
+          "file": "media/exercise-human/glute-kickback.jpg",
+          "bytes": 69427,
+          "sha256": "93a1bf1ea24d8791945e05f16725a1945d618754b3f14e816b7dd2f38540466c"
+        }
+      ]
+    },
+    {
+      "exerciseId": "goblet",
+      "title": "Dumbbell Goblet Squat",
+      "url": "media/exercise-pilot/goblet.mp4",
+      "poster": "media/exercise-pilot/goblet.jpg",
+      "bytes": 1875528,
+      "seconds": 19.12,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "a2a797d0-f6f6-436e-8616-6c1d93e73d67",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-pilot/goblet.mp4",
+          "bytes": 1875528,
+          "sha256": "b904f193848260c75d89c56cccf00237cbcbca1d15b27136f698853a1e5f6536"
+        },
+        {
+          "file": "media/exercise-pilot/goblet.jpg",
+          "bytes": 36675,
+          "sha256": "eb610195ff2c3b1bfbc4f20e5b179c330f588f6291b748588864aeb79be5fcf9"
+        }
+      ]
+    },
+    {
+      "exerciseId": "hammer-curl",
+      "title": "Hammer Curls",
+      "url": "media/exercise-human/hammer-curl.mp4",
+      "poster": "media/exercise-human/hammer-curl.jpg",
+      "bytes": 1145474,
+      "seconds": 13.08,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "b11e6c6f-b2e8-44ca-95dc-adf0dcd34426",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/hammer-curl.mp4",
+          "bytes": 1145474,
+          "sha256": "f75af638089352a4de0cfd3ad39de36350b894f8555d4f16404655a769ab12b9"
+        },
+        {
+          "file": "media/exercise-human/hammer-curl.jpg",
+          "bytes": 39026,
+          "sha256": "dac4206bcc81f1d9b5a50caf8b6594d724fab6204bff08aa2e10a9aa142bb2e2"
+        }
+      ]
+    },
+    {
+      "exerciseId": "kettlebell-goblet",
+      "title": "Goblet Squat with Kettlebell",
+      "url": "media/exercise-human/kettlebell-goblet.mp4",
+      "poster": "media/exercise-human/kettlebell-goblet.jpg",
+      "bytes": 1702959,
+      "seconds": 17.2,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "198d4a7d-bc23-41f8-ad67-4fe9ab876b89",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/kettlebell-goblet.mp4",
+          "bytes": 1702959,
+          "sha256": "c161fa1de4a9a03d51d0561d54b2a43964e187b6b99b5c6865f768c4ce56051b"
+        },
+        {
+          "file": "media/exercise-human/kettlebell-goblet.jpg",
+          "bytes": 35486,
+          "sha256": "ca560b6a5cc03db008a15d10910a4b05b2cd01a134518886ae08638a764b0d50"
+        }
+      ]
+    },
+    {
+      "exerciseId": "kettlebell-push-press",
+      "title": "Kettlebell Push Press",
+      "url": "media/exercise-human/kettlebell-push-press.mp4",
+      "poster": "media/exercise-human/kettlebell-push-press.jpg",
+      "bytes": 1823922,
+      "seconds": 16.68,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "3880aaa4-e1c0-4153-95d0-da44ea01e099",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/kettlebell-push-press.mp4",
+          "bytes": 1823922,
+          "sha256": "965d071a2b27b941ff8a2f0ef789400ca2d2cea7d8aca6ebfce59142f705d3c7"
+        },
+        {
+          "file": "media/exercise-human/kettlebell-push-press.jpg",
+          "bytes": 36091,
+          "sha256": "48a5e727f5fade87757d96f189efc77232dbc64d82bf1dac437d146eead0087b"
+        }
+      ]
+    },
+    {
+      "exerciseId": "kettlebell-rdl",
+      "title": "Kettlebell Romanian Deadlift",
+      "url": "media/exercise-human/kettlebell-rdl.mp4",
+      "poster": "media/exercise-human/kettlebell-rdl.jpg",
+      "bytes": 2311948,
+      "seconds": 25.16,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "e7175536-9d7d-4f5d-8d49-26c3411eac80",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/kettlebell-rdl.mp4",
+          "bytes": 2311948,
+          "sha256": "2d8e525c88a6901a7cbd50312b23bfb906639dd35c506e4c5ebb266052dbd552"
+        },
+        {
+          "file": "media/exercise-human/kettlebell-rdl.jpg",
+          "bytes": 37868,
+          "sha256": "a54da177337bae6cf99826fe558dc41d6bda5c85356d1646926a2bd6c70e2758"
+        }
+      ]
+    },
+    {
+      "exerciseId": "kettlebell-swing",
+      "title": "Kettlebell swing",
+      "url": "media/exercise-human/kettlebell-swing.mp4",
+      "poster": "media/exercise-human/kettlebell-swing.jpg",
+      "bytes": 1041986,
+      "seconds": 8.84,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "13263f92-5fe2-4d92-bec0-808f8b315620",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/kettlebell-swing.mp4",
+          "bytes": 1041986,
+          "sha256": "874b0f5c5fd1b1eb486a43bafee3a8317d88ea58b13a1a9e394196b04e1544b3"
+        },
+        {
+          "file": "media/exercise-human/kettlebell-swing.jpg",
+          "bytes": 33782,
+          "sha256": "ea04a36a319e815edcd7e03d00f1c3c429c1fec541caaee017057f2af7a7ff5a"
+        }
+      ]
+    },
+    {
+      "exerciseId": "lat-pulldown",
+      "title": "Lat Pulldown",
+      "url": "media/exercise-human/lat-pulldown.mp4",
+      "poster": "media/exercise-human/lat-pulldown.jpg",
+      "bytes": 3013920,
+      "seconds": 18.3,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "5971eaa2-5264-49cc-99c2-1310305c5342",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/lat-pulldown.mp4",
+          "bytes": 3013920,
+          "sha256": "99a3bdac9f7a271eaaf64ddfddf3983b08c1397b0a4328403bece0ef3feed954"
+        },
+        {
+          "file": "media/exercise-human/lat-pulldown.jpg",
+          "bytes": 79671,
+          "sha256": "b6f235e3261dd244b0b5e0fc780675dd8e6111fa570a4b3aa491b23ca534e897"
+        }
+      ]
+    },
+    {
+      "exerciseId": "lateral-raise",
+      "title": "Dumbbell Lateral Raise",
+      "url": "media/exercise-human/lateral-raise.mp4",
+      "poster": "media/exercise-human/lateral-raise.jpg",
+      "bytes": 1545671,
+      "seconds": 23,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "a16f0235-20eb-4306-b9cc-c01ae51b3b9b",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/lateral-raise.mp4",
+          "bytes": 1545671,
+          "sha256": "cae960bb14f10381de0cc3e29a12c69230df754c713a8a4cc75d438621995896"
+        },
+        {
+          "file": "media/exercise-human/lateral-raise.jpg",
+          "bytes": 34490,
+          "sha256": "aa84b462dc8b900f7b798102c6d47c73da5e00aaa9fc4f018eb8ab8a951c98ba"
+        }
+      ]
+    },
+    {
+      "exerciseId": "leg-extension",
+      "title": "Leg Extension",
+      "url": "media/exercise-human/leg-extension.mp4",
+      "poster": "media/exercise-human/leg-extension.jpg",
+      "bytes": 3802381,
+      "seconds": 18.52,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "af0c3d19-5ee2-4a19-8688-f8504bb33e3c",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/leg-extension.mp4",
+          "bytes": 3802381,
+          "sha256": "df8c0b1adc8747be425cc13374aed0a34c0417d1d342bc6d2f77999502f3ce8d"
+        },
+        {
+          "file": "media/exercise-human/leg-extension.jpg",
+          "bytes": 100325,
+          "sha256": "ad6ecda1928587fb2ef490e34b144ccb6b1522f17f62623347012caf8807b166"
+        }
+      ]
+    },
+    {
+      "exerciseId": "leg-press",
+      "title": "Leg Press",
+      "url": "media/exercise-human/leg-press.mp4",
+      "poster": "media/exercise-human/leg-press.jpg",
+      "bytes": 2005204,
+      "seconds": 13.16,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "d0bc669e-0d78-46f0-95f1-86503ab746e1",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/leg-press.mp4",
+          "bytes": 2005204,
+          "sha256": "8acd0424f96c5303494ffb85ae8fc8aa2a09702131a4a34a1b27a2b512466aee"
+        },
+        {
+          "file": "media/exercise-human/leg-press.jpg",
+          "bytes": 71971,
+          "sha256": "c4a7ae6d050a86d4fcbcbb9244b4772fae69835bb7e89237f6606b772cd054f3"
+        }
+      ]
+    },
+    {
+      "exerciseId": "machine-chest-press",
+      "title": "Seated Machine Chest Press",
+      "url": "media/exercise-human/machine-chest-press.mp4",
+      "poster": "media/exercise-human/machine-chest-press.jpg",
+      "bytes": 3607641,
+      "seconds": 20.84,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "20cc4825-dd52-4887-99db-c492546741dc",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-human/machine-chest-press.mp4",
+          "bytes": 3607641,
+          "sha256": "4c742fea509ded9c4e4d3cefce8f753a156e7063471fa6146526267053296e1a"
+        },
+        {
+          "file": "media/exercise-human/machine-chest-press.jpg",
+          "bytes": 88345,
+          "sha256": "9d8bd28a9a18ad27bd0e6d3ed5e06a4d1ba8932655d858795ffaad006058ea0f"
+        }
+      ]
+    },
+    {
+      "exerciseId": "row",
+      "title": "Single Arm Dumbbell Row - Legs apart",
+      "url": "media/exercise-pilot/row.mp4",
+      "poster": "media/exercise-pilot/row.jpg",
+      "bytes": 1074064,
+      "seconds": 12.84,
+      "source": "https://ymove.app/free-exercise-videos",
+      "creditURL": "https://ymove.app/exercise-api",
+      "publisherId": "d3fece95-c7e2-4794-ba8f-65a5b3e30a28",
+      "kind": "human-footage",
+      "width": 720,
+      "height": 1280,
+      "files": [
+        {
+          "file": "media/exercise-pilot/row.mp4",
+          "bytes": 1074064,
+          "sha256": "66ecd9675d6d07657fdbc74b32155a20def240a2f235503cc1df0b283c586e6c"
+        },
+        {
+          "file": "media/exercise-pilot/row.jpg",
+          "bytes": 37114,
+          "sha256": "50c30a17ce07b1d9a079897781527d4926b834429436912c28aba331e9c59592"
+        }
+      ]
+    }
+  ]
+}

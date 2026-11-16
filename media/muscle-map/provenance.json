@@ -1,0 +1,29 @@
+{
+  "created": "2026-11-15",
+  "purpose": "Original neutral front/back orientation views; labeled buttons drive filtering. No claimed activation map.",
+  "model": {
+    "source": "https://github.com/mortensams/freefitness/blob/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae/dist/opengym3d-exercise-pack-v1.zip",
+    "packSha256": "5ca8389789a63cd5eee7115392c66fcd2a4b945f2a495cbe334cb355441065e3",
+    "packLicense": "MIT",
+    "copyright": "Copyright (c) 2026 SylvesterAssiamahGK",
+    "meshLicense": "CC0-1.0",
+    "meshTerms": "https://download.makehumancommunity.org/about/license.html",
+    "originalFile": "models/squat.glb",
+    "sha256": "191f78106bf4d7d1f23a2f9cf694f83ae347b887a5c3268b7cf6eff68aba71f5",
+    "changes": "Reset to bind pose; original animation not played. New authored joint-direction motion, inverse limb placement, neutral material and exercise-specific equipment. Isometric plank is a static hold, not fabricated movement."
+  },
+  "sourceMesh": "tools/trainer-render/trainer-source.glb",
+  "sourceMeshSHA256": "191f78106bf4d7d1f23a2f9cf694f83ae347b887a5c3268b7cf6eff68aba71f5",
+  "render": "Neutral bind-reset pose from MacroPulse trainer renderer, camera front/back; no external image/map copied.",
+  "assets": [
+    {
+      "file": "media/muscle-map/front.jpg",
+      "sha256": "9964e97b6679c593b999162bba7765585220d3ded3a4509dc899f3b33494f5ea"
+    },
+    {
+      "file": "media/muscle-map/back.jpg",
+      "sha256": "ad7317c041dbd965ffddc96afec8d71da24ad49ef2f232085a255c7e1579fe46"
+    }
+  ],
+  "rendererSHA256": "98ffb42c2899dea57e2fd7e2617b512a70182dc0d15fdc66338bbcd435d9f55e"
+}
