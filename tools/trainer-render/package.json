@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "scripts": {
+    "render": "node render.cjs"
+  },
+  "dependencies": {
+    "esbuild": "0.27.0",
+    "macropulse-pwa": "file:../..",
+    "three": "0.182.0"
+  },
+  "optionalDependencies": {
+    "@ffmpeg-installer/win32-x64": "4.1.0"
+  }
+}

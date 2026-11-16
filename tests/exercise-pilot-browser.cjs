@@ -4,6 +4,13 @@ const seed={settings:{cal:2000,p:150,c:180,f:65,goal:180},weight:200,weights:[],
 run(seed,async({page,ctx,key,read,screenshot})=>{
  const media=[];ctx.on('request',r=>{if(/exercise-pilot\/.*mp4/.test(r.url()))media.push(r.url());});await ctx.route(/^https:\/\//,r=>r.abort());
  await page.locator('.nav [data-page=fitness]').click();a.equal(media.length,0);a.equal(await page.locator('#templateList [data-exercise-category]').count(),5);
+ // The exercise example itself now plays a real person directly on the card.
+ a.equal(await page.locator('#templateList .schematic-fallback[open]').count(),0);
+ const inline=page.locator('#templateList [data-inline-exercise=goblet]');await inline.click();const inlineVideo=page.locator('#templateList [data-demonstration=goblet] > video');
+ await page.waitForFunction(()=>[...document.querySelectorAll('[data-inline-video]')].some(v=>v.currentTime>.3));a.equal(await inlineVideo.isVisible(),true);a.equal(await inlineVideo.evaluate(v=>v.videoWidth),720);
+ await page.locator('#templateList [data-demonstration=goblet]').screenshot({path:require('node:path').join(__dirname,'../test-results/pilot-inline.png')});
+ await page.locator('#templateList [data-inline-exercise=row]').first().click();a.equal(await inlineVideo.getAttribute('src'),null);
+ await page.locator('#templateList [data-exercise-category=Core]').click();a.equal(await page.locator('[data-inline-video][src]').count(),0);
  for(const category of ['Upper Body','Lower Body','Full Body','Core','Resistance Bands']){
   await page.locator('#templateList [data-exercise-category="'+category+'"]').click();a.equal(await page.locator('#exerciseCategory').inputValue(),category);a.equal(await page.locator('#exerciseAvailable').isChecked(),false);a.equal(await page.locator('[data-exercise-card]').count(),4);a.equal(await page.locator('#exerciseLibraryTitle').evaluate(e=>e===document.activeElement),true);
  }
@@ -26,6 +33,13 @@ run(seed,async({page,ctx,key,read,screenshot})=>{
   }
   for(const control of ['rmVoice','rmCaptions','rmRep','rmLoop'])a.equal(await page.locator('#'+control).isDisabled(),true);
   if(id==='goblet')await screenshot('pilot-player.png');await page.keyboard.press('Escape');a.equal(await page.locator('#rmVideo').getAttribute('src'),null);a.equal(await page.locator('#rmVideo').evaluate(v=>v.loop),false);
+ }
+ for(const id of ['leg-raise','dead-bug','band-row']){
+  const figure=page.locator('#templateList [data-demonstration="'+id+'"]').first();a.equal(await figure.locator('svg').count(),0);a.match(await figure.innerText(),/Generated motion by MacroPulse/);
+  await figure.locator('[data-inline-exercise]').click();const v=figure.locator('video');await page.waitForFunction(id=>[...document.querySelectorAll('#templateList [data-demonstration="'+id+'"] video')].some(v=>v.currentTime>.3),id);a.equal(await v.evaluate(v=>v.videoWidth),800);
+  const digest=()=>v.evaluate(async v=>{const c=document.createElement('canvas');c.width=v.videoWidth;c.height=v.videoHeight;const x=c.getContext('2d');x.drawImage(v,0,0);return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',x.getImageData(0,0,c.width,c.height).data))).join(',');});
+  await v.evaluate(v=>v.pause());const first=await digest();await v.evaluate(v=>{v.currentTime=2.5;return v.play();});await page.waitForFunction(id=>document.querySelector('#templateList [data-demonstration="'+id+'"] video').currentTime>2.8,id);await v.evaluate(v=>v.pause());a.notEqual(await digest(),first,'3D clip must contain changing decoded poses');
+  await figure.screenshot({path:require('node:path').join(__dirname,'../test-results/3d-'+id+'-card.png')});await figure.locator('[data-realmotion]').click();await page.locator('[data-rm-reference]').click();await page.waitForFunction(()=>document.getElementById('rmVideo').readyState>=2);a.match(await page.locator('#rmCredit').innerText(),/Generated 3D reference/);await page.keyboard.press('Escape');
  }
  // Local media failure restores original offline artwork and written cues.
  await ctx.route('**/media/exercise-pilot/*.mp4',r=>r.abort());await page.locator('#templateList [data-realmotion=goblet]').click();await page.locator('[data-rm-reference]').click();await page.waitForFunction(()=>document.getElementById('rmStatus').textContent.includes('unavailable'));a.equal(await page.locator('#rmFallback [data-demonstration=goblet]').isVisible(),true);await page.keyboard.press('Escape');

@@ -1,0 +1,93 @@
+{
+  "checked": "2026-11-15",
+  "origin": "generated-3d-motion",
+  "professionalFormReview": false,
+  "model": {
+    "source": "https://github.com/mortensams/freefitness/blob/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae/dist/opengym3d-exercise-pack-v1.zip",
+    "packSha256": "5ca8389789a63cd5eee7115392c66fcd2a4b945f2a495cbe334cb355441065e3",
+    "packLicense": "MIT",
+    "copyright": "Copyright (c) 2026 SylvesterAssiamahGK",
+    "meshLicense": "CC0-1.0",
+    "meshTerms": "https://download.makehumancommunity.org/about/license.html",
+    "originalFile": "models/squat.glb",
+    "sha256": "191f78106bf4d7d1f23a2f9cf694f83ae347b887a5c3268b7cf6eff68aba71f5",
+    "changes": "Reset to bind pose; original animation not played. New joint-direction keyframes, neutral material, mat, anchor and band geometry rendered with Three.js."
+  },
+  "assets": [
+    {
+      "exerciseId": "leg-raise",
+      "title": "Leg Raise",
+      "bytes": 55787,
+      "seconds": 6,
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "url": "media/exercise-3d/leg-raise.mp4",
+      "poster": "media/exercise-3d/leg-raise.jpg",
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/leg-raise.mp4",
+          "bytes": 55787,
+          "sha256": "9df5f8efdf91b24e471eb98ef66ee940845fa42ff126c77ce1244116d5df387b"
+        },
+        {
+          "file": "media/exercise-3d/leg-raise.jpg",
+          "bytes": 18478,
+          "sha256": "6c3b1463bae9762d8f20207e6b812cd83edac1261a15a58aea190c836ca9508b"
+        }
+      ]
+    },
+    {
+      "exerciseId": "dead-bug",
+      "title": "Dead Bug",
+      "bytes": 100922,
+      "seconds": 12,
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "url": "media/exercise-3d/dead-bug.mp4",
+      "poster": "media/exercise-3d/dead-bug.jpg",
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/dead-bug.mp4",
+          "bytes": 100922,
+          "sha256": "d92feba98574943a81ad341a4b36d8ccb48597b73ade15f032733d65796520eb"
+        },
+        {
+          "file": "media/exercise-3d/dead-bug.jpg",
+          "bytes": 19259,
+          "sha256": "4f1dcf86eea67e4ce276c4254c39adca18e6925dc7407c0e68670a739e3dcfea"
+        }
+      ]
+    },
+    {
+      "exerciseId": "band-row",
+      "title": "Band Row",
+      "bytes": 53186,
+      "seconds": 6,
+      "kind": "3d-motion",
+      "width": 800,
+      "height": 600,
+      "url": "media/exercise-3d/band-row.mp4",
+      "poster": "media/exercise-3d/band-row.jpg",
+      "source": "https://github.com/mortensams/freefitness/tree/ea3a60130fdcfb3c4771e44d09f84ebab4ee9bae",
+      "creditURL": "https://download.makehumancommunity.org/about/license.html",
+      "files": [
+        {
+          "file": "media/exercise-3d/band-row.mp4",
+          "bytes": 53186,
+          "sha256": "a2f36b5e5641f2e91c859f43151bf851fea9e6df70d4450ce0be45f4caf3ca9a"
+        },
+        {
+          "file": "media/exercise-3d/band-row.jpg",
+          "bytes": 20256,
+          "sha256": "8538cfc26aa9eb158ed00d779b6a31645db732d34763f2e23f97c5ed1a1b1965"
+        }
+      ]
+    }
+  ]
+}
