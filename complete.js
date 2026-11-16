@@ -6,6 +6,9 @@
  const U=typeof module!=='undefined'&&module.exports?require('./upgrade.js'):root.MacroUpgrade;
  const muscleFor={Push:'Chest',Pull:'Back',Legs:'Quads',Hinge:'Glutes',Core:'Core',Cardio:'Cardio'};
  const muscles=['Chest','Back','Quads','Glutes','Core'];
+ // This legacy volume view has five groups. Do not relabel shoulder or isolated
+ // hamstring work as chest/glutes just because it shares a planning pattern.
+ const volumeGroup=e=>['shoulder-press','lateral-raise','cable-lateral-raise','kettlebell-push-press','cable-leg-curl'].includes(e?.id)?null:muscleFor[e?.group]||null;
  const identify=name=>T.library.find(e=>e.name.toLowerCase()===String(name).trim().toLowerCase()||e.id===name);
  const days=(a,b)=>(Date.parse(b+'T12:00:00Z')-Date.parse(a+'T12:00:00Z'))/86400000;
  function trend(points){
@@ -30,7 +33,7 @@
  }
  function volume(workouts,from,to){
    const result=Object.fromEntries(muscles.map(x=>[x,{sets:0,reps:0,load:0}]));let unknown=0;
-   for(const w of workouts.filter(w=>w.date>=from&&w.date<=to)){const e=identify(w.exercise);if(!e){unknown++;continue;}const m=muscleFor[e.group];if(!result[m])continue;result[m].sets+=w.sets;result[m].reps+=w.sets*w.reps;result[m].load+=w.sets*w.reps*w.weight;}
+   for(const w of workouts.filter(w=>w.date>=from&&w.date<=to)){const e=identify(w.exercise);if(!e){unknown++;continue;}const m=volumeGroup(e);if(m==='Cardio')continue;if(!result[m]){unknown++;continue;}result[m].sets+=w.sets;result[m].reps+=w.sets*w.reps;result[m].load+=w.sets*w.reps*w.weight;}
    return {groups:result,unknown};
  }
  function predictor(workouts,exercise,target,today){
@@ -52,6 +55,6 @@
 
  function restaurantSearch(rows,query,max){return rows.filter(x=>(x.restaurant+' '+x.name).toLowerCase().includes(query.trim().toLowerCase())&&(!Number.isFinite(max)||x.cal<=max));}
  function workoutCommand(text){const t=String(text).trim().toLowerCase();if(t==='stop rest')return {action:'stop'};const m=t.match(/^(sets|reps|rest) (\d+)(?: seconds?)?$/);if(!m)throw Error('Use: sets 3, reps 10, rest 60 seconds, or stop rest.');const n=Number(m[2]),max={sets:20,reps:100,rest:600}[m[1]];if(n<1||n>max)throw Error(`Use ${m[1]} between 1 and ${max}.`);return {action:m[1],value:n};}
- const api={identify,muscleFor,muscles,trend,goalStatus,volume,predictor,replacements,programs,calendar,weekly,scale,mealDraft,nutritionQuality,restaurantSearch,workoutCommand};
+ const api={identify,muscleFor,muscles,volumeGroup,trend,goalStatus,volume,predictor,replacements,programs,calendar,weekly,scale,mealDraft,nutritionQuality,restaurantSearch,workoutCommand};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.MacroComplete=api;
 })(typeof window!=='undefined'?window:globalThis);

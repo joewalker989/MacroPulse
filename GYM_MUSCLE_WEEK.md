@@ -4,7 +4,7 @@ The Exercise Library now has 47 exact movement references: 25 real-person clips 
 
 ## Browse and play
 
-Fitness → Exercise Library has 10 muscle groups, primary/assisting labels, demo type, search, movement category and saved-equipment filters. These filters are read-only and compose. Original front/back trainer images orient the user; labeled keyboard-accessible buttons select a muscle. They are not a heatmap or an activation measurement. The old five-group volume accounting is deliberately retained separately so historical statistics do not change.
+Fitness → Exercise Library has 10 muscle groups, primary/assisting labels, demo type, search, movement category and saved-equipment filters. These filters are read-only and compose. Original front/back trainer images orient the user; labeled keyboard-accessible buttons select a muscle. They are not a heatmap or an activation measurement. The old five-group volume accounting is retained separately. New shoulder, arm, calf and hamstring-isolation movements are explicitly outside that view, rather than being mislabeled by their planning pattern. Existing original-catalog classifications are preserved.
 
 Cards show equipment, target muscles, cues, local preview and demo controls. Videos load on demand; only one inline video stays active. Playback speed and clip looping work. Existing cue read-aloud is available when the browser supports speech. All 47 posters, anatomy views, muscle metadata and programs are cached for offline use; video playback still requires connectivity. No videos are precached or downloaded automatically. There is no invented alternate angle, rep synchronization, specialist certification or timed caption track.
 
@@ -37,4 +37,4 @@ Pending: qualified independent mechanics review, additional freely licensed real
 
 ## Validation
 
-214 unit checks and all 30 browser suites passed locally, including all 47 MP4 decodes/posters, changing generated poses, no startup video requests, 320/390px large-text layout, offline references and plan, exact equipment/exclusion gates, preview without writes, cancel/apply/archive/restore, quota and stale-tab failure safety, backup round-trip, existing live sessions/schedules/history and unknown fields. GitHub checks and final live verification are also required before release.
+215 unit checks and all 30 browser suites passed locally, including all 47 MP4 decodes/posters, changing generated poses, no startup video requests, 320/390px large-text layout, offline references and plan, exact equipment/exclusion gates, preview without writes, cancel/apply/archive/restore, quota and stale-tab failure safety, backup round-trip, existing live sessions/schedules/history and unknown fields. GitHub checks and final live verification are also required before release.
