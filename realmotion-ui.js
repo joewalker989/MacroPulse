@@ -4,7 +4,7 @@ window.mountRealMotion=function({escapeHTML:esc,getEquipment}){
  const R=MacroRealMotion,dialog=document.createElement('dialog');dialog.id='realMotion';dialog.setAttribute('aria-labelledby','rmTitle');
  dialog.innerHTML=`<div class="rm-heading"><div><p class="notice">Workouts › Exercise › Watch Demonstration</p><h2 id="rmTitle">RealMotion Studio</h2></div><button type="button" id="rmClose" aria-label="Close RealMotion Studio">Close</button></div>
  <h3 id="rmExercise"></h3><p id="rmEquipment"></p><p id="rmNotice" class="notice"></p><p id="rmGuidance"></p>
- <details id="rmFallbackPanel" open><summary>Existing offline demonstration</summary><div id="rmFallback"></div></details>
+ <details id="rmFallbackPanel" open><summary>Offline preview and written cues</summary><div id="rmFallback"></div></details>
  <div class="rm-angles" role="group" aria-label="Camera angle">${R.angles.map(a=>`<button type="button" data-rm-angle="${a}" disabled>${a==='45'?'45°':a[0].toUpperCase()+a.slice(1)} · unavailable</button>`).join('')}</div>
  <div id="rmChoices"></div><div id="rmCredit" class="notice"></div>
  <video id="rmVideo" controls playsinline preload="none" muted hidden aria-label="Exercise demonstration"></video>
@@ -42,8 +42,8 @@ window.mountRealMotion=function({escapeHTML:esc,getEquipment}){
   const rep=R.reps(selected,video.duration);$('rmRep').disabled=!rep.length;$('rmLoop').disabled=!rep.length;$('rmRep').innerHTML=rep.length?rep.map((r,i)=>`<option value="${i}">Rep ${i+1} · ${r.start}–${r.end}s</option>`).join(''):'<option value="">Reviewed rep timing unavailable</option>';
  }
  function load(clip,reviewed){
-  release();if(navigator.onLine===false){status('Offline: publisher footage unavailable. Use the existing demonstration pictures and written cues in this player.');return;}
-  if(clip.codec==='hevc'&&!video.canPlayType('video/mp4; codecs="hvc1"')){status('HEVC is unsupported on this device. Existing offline pictures remain available.');return;}
+  release();if(navigator.onLine===false){status('Offline: publisher footage unavailable. Use the existing realistic still previews and written cues in this player.');return;}
+  if(clip.codec==='hevc'&&!video.canPlayType('video/mp4; codecs="hvc1"')){status('HEVC is unsupported on this device. Realistic offline previews remain available.');return;}
   selected=reviewed?clip:null;
   $('rmCredit').innerHTML=`<strong>${esc(reviewed?current.name:clip.name)}</strong> · ${esc(clip.author)} · <a href="${esc(clip.licenseURL)}" target="_blank" rel="noopener noreferrer">${esc(clip.license)}</a> · <a href="${esc(reviewed?clip.rights.source:clip.source)}" target="_blank" rel="noopener noreferrer">Source / rights record</a><p>${reviewed?'Reviewed human footage · camera '+esc(clip.angle)+' · reviewer '+esc(clip.mechanics.by)+' · '+esc(clip.mechanics.date):'Existing community reference. Camera angle and mechanics are not reviewed.'} Original file unchanged; playback speed is a player setting.</p>${reviewed?'':`<p>Exercise-name metadata: ${esc(clip.exerciseAuthor)} (${esc(clip.exerciseLicenseName)}).</p>`}`;
   const coaching=R.coaching(selected),muscles=R.muscles(selected),form=R.form(selected);
@@ -64,14 +64,14 @@ window.mountRealMotion=function({escapeHTML:esc,getEquipment}){
   const clips=R.clips(e.id),legacy=R.candidates(e.id),reference=MacroExercisePreviews.reference(e.id);$('rmNotice').textContent=clips.length?'Select reviewed footage below. Stop if a movement causes pain.':'Verified trainer footage is not available for this exercise. Existing demos remain available; no AI motion is presented as anatomically verified.';
   for(const b of dialog.querySelectorAll('[data-rm-angle]')){const found=clips.some(c=>c.angle===b.dataset.rmAngle);b.disabled=!found;b.textContent=(b.dataset.rmAngle==='45'?'45°':b.dataset.rmAngle[0].toUpperCase()+b.dataset.rmAngle.slice(1))+(found?'':' · unavailable');}
   $('rmChoices').innerHTML=[...(reference?['<button type="button" data-rm-reference>Load '+(reference.kind==='3d-motion'?'3D':'real-human')+' pilot · '+Math.max(.1,reference.bytes/1e6).toFixed(1)+' MB · '+esc(reference.title)+'</button>']:[]),...clips.map((c,i)=>`<button type="button" data-rm-clip="${i}">Load reviewed ${esc(c.angle)} · ${(c.bytes/1e6).toFixed(1)} MB · ${esc(c.codec)}</button>`),...legacy.map((c,i)=>`<button type="button" data-rm-legacy="${i}">Load existing community demo · ${(c.bytes/1e6).toFixed(1)} MB · ${esc(c.codec)}</button>`)].join('')||'<p>No equipment-matched filmed clip. Use the existing offline demonstration.</p>';
-  $('rmFallback').innerHTML=MacroWorkoutVisuals.illustration(e.id).replace(/<button[^>]*data-realmotion[^>]*>.*?<\/button>/g,'')+`<p>${esc(e.cue||'Use the existing exercise coaching card for setup guidance.')}</p><p class="notice">Existing guidance; specialist review pending. This player does not assess your form.</p>`;
-  status(navigator.onLine===false?'Offline: existing demonstration pictures available.':'No video loaded. Loading a publisher clip uses mobile data and contacts wger; no workout or health records are sent.');
+  $('rmFallback').innerHTML=MacroWorkoutVisuals.illustration(e.id,{controls:false}).replace(/<button[^>]*data-realmotion[^>]*>.*?<\/button>/g,'')+`<p>${esc(e.cue||'Use the existing exercise coaching card for setup guidance.')}</p><p class="notice">Existing guidance; specialist review pending. This player does not assess your form.</p>`;
+  status(navigator.onLine===false?'Offline: existing realistic still previews available.':'No video loaded. Loading a publisher clip uses mobile data and contacts wger; no workout or health records are sent.');
   if(!dialog.open)dialog.showModal();$('rmClose').focus();
  }
  dialog.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.hasAttribute('data-rm-reference'))loadReference();if(b.dataset.rmClip!==undefined)load(R.clips(current.id)[Number(b.dataset.rmClip)],true);if(b.dataset.rmLegacy!==undefined)load(R.candidates(current.id)[Number(b.dataset.rmLegacy)],false);if(b.dataset.rmAngle)load(R.clips(current.id).filter(c=>c.angle===b.dataset.rmAngle).sort((a,b)=>a.bytes-b.bytes)[0],true);});
  document.addEventListener('click',e=>{const b=e.target.closest('[data-realmotion]');if(b)open(b.dataset.realmotion,b);const nav=e.target.closest('[data-page]');if(nav||e.target.closest('[data-five=focus]'))close();});
  $('rmClose').onclick=close;dialog.addEventListener('cancel',e=>{e.preventDefault();close();});dialog.addEventListener('close',()=>release());
- $('rmStop').onclick=()=>{release();$('rmFallbackPanel').open=true;status('Video stopped. Stream released; existing pictures remain available.');};
+ $('rmStop').onclick=()=>{release();$('rmFallbackPanel').open=true;status('Video stopped. Stream released; realistic previews remain available.');};
  $('rmClipLoop').onchange=()=>{video.loop=$('rmClipLoop').checked;if(video.loop)$('rmLoop').checked=false;};
  $('rmReadCues').onclick=()=>{pause();const utterance=new SpeechSynthesisUtterance(MacroExercisePreviews.cue(current));utterance.lang='en';utterance.onerror=()=>status('Speech unavailable. Read the written cue above.');speechSynthesis.speak(utterance);status('Reading general written cue. Video paused; this is not synchronized coaching.');};$('rmStopReading').onclick=stopReading;
  $('rmSpeed').onchange=()=>{video.playbackRate=Number($('rmSpeed').value);syncVoice();};
@@ -82,6 +82,6 @@ window.mountRealMotion=function({escapeHTML:esc,getEquipment}){
  video.onvolumechange=()=>{if($('rmVoice').checked){if(!video.muted)video.muted=true;}else $('rmMute').checked=video.muted;};
  video.onended=()=>{if(range()){video.currentTime=range().start;video.play().catch(()=>status('Press Play to continue the selected rep.'));}else audio.pause();};
  audio.onerror=()=>{if(!selected||!audio.getAttribute('src'))return;voiceFailed=true;audio.pause();$('rmVoice').checked=false;status('Voice file unavailable. Captions and transcript remain available.');};
- document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});window.addEventListener('hashchange',close);window.addEventListener('pagehide',close);window.addEventListener('offline',()=>{if(dialog.open){release();$('rmFallbackPanel').open=true;status('Offline: footage stopped. Existing demonstration pictures and cues remain available.');}});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});window.addEventListener('hashchange',close);window.addEventListener('pagehide',close);window.addEventListener('offline',()=>{if(dialog.open){release();$('rmFallbackPanel').open=true;status('Offline: footage stopped. Existing realistic still previews and cues remain available.');}});
  return {open,close};
 };
